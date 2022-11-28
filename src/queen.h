@@ -1,10 +1,9 @@
-#ifndef _PAWN_H
-#define _PAWN_H
+#ifndef _QUEEN_H
+#define _QUEEN_H
 
 #include "piece.h"
 
-class Pawn : public Piece {
-    bool first_move = true;
+class Queen : public Piece {
     public:
         int getX () override;
         int getY () override;

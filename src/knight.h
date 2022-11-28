@@ -1,9 +1,9 @@
-#ifndef _PAWN_H
-#define _PAWN_H
+#ifndef _KNIGHT_H
+#define _KNIGHT_H
 
 #include "piece.h"
 
-class Pawn : public Piece {
+class Knight : public Piece {
     bool first_move = true;
     public:
         int getX () override;

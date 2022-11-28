@@ -1,19 +1,24 @@
 #ifndef _PIECE_H
 #define _PIECE_H
 
-#include <utility>
+class Board;
 
-class Piece {
+class Piece : public Board {
+    Board &b;
+    Piece *next;
     int x, y;
     char team;
+    bool alive;
     public:
         virtual int getX () = 0;
         virtual int getY () = 0;
         virtual char getTeam () = 0;
         virtual char getType () = 0;
-        virtual std::pair getPos () = 0;
         virtual bool validMove () = 0;
-        Piece (int x, int y, char team);
+        virtual void setDead (int x, int y) = 0;
+        virtual void setAlive (int x, int y) = 0;
+        virtual char getTile (int x, int y) = 0;
+        Piece (Board &b, Piece *next, int x, int y, char team);
         ~Piece () = default;
 };
 

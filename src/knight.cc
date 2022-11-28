@@ -1,28 +1,28 @@
-#include "pawn.h"
+#include "knight.h"
 
-Pawn::Pawn (Board &b, int x, int y, char team):
+Knight::Knight (Board &b, int x, int y, char team):
     piece{b, next, x, y, team}, first_move{true} {}
 
-int Pawn::getX () { return x; }
-int Pawn::getY () { return y; }
-char Pawn::getTeam () { return team; }
-char Pawn::getType () {
+int Knight::getX () { return x; }
+int Knight::getY () { return y; }
+char Knight::getTeam () { return team; }
+char Knight::getType () {
     if (team == 'w') return 'p';
     else return 'P'
 }
-void Pawn::setDead (int x1, int y1) {
+void Knight::setDead (int x1, int y1) {
     if (x1 == x && y1 == y) alive = false;
     else { next->setAlive(x1, y1) }
 }
-void Pawn::setAlive (int x1, int y1) {
+void Knight::setAlive (int x1, int y1) {
     if (x1 == x && y1 == y) alive = true;
     else { next->setAlive(x1, y1) }
 }
-char Pawn::getTile (int x1, int y1) {
+char Knight::getTile (int x1, int y1) {
     if (x1 == x && y1 == y && team == 'w') return 'p';
     else if (x1 == x && y1 == y) return 'P';
     else return next->getTile(x1, y1);
 }
-bool Pawn::validMove (int x1, int y1) {
+bool Knight::validMove (int x1, int y1) {
     
 }
