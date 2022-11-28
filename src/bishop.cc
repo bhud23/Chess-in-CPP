@@ -7,8 +7,8 @@ int Bishop::getX () { return x; }
 int Bishop::getY () { return y; }
 char Bishop::getTeam () { return team; }
 char Bishop::getType () {
-    if (team == 'w') return 'p';
-    else return 'P'
+    if (team == 'w') return 'b';
+    else return 'B'
 }
 void Bishop::setDead (int x1, int y1) {
     if (x1 == x && y1 == y) alive = false;
@@ -19,8 +19,8 @@ void Bishop::setAlive (int x1, int y1) {
     else { next->setAlive(x1, y1) }
 }
 char Bishop::getTile (int x1, int y1) {
-    if (x1 == x && y1 == y && team == 'w') return 'p';
-    else if (x1 == x && y1 == y) return 'P';
+    if (x1 == x && y1 == y && team == 'w') return 'b';
+    else if (x1 == x && y1 == y) return 'B';
     else return next->getTile(x1, y1);
 }
 bool Bishop::validMove (int x1, int y1) {

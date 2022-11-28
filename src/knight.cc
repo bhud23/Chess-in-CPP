@@ -7,8 +7,8 @@ int Knight::getX () { return x; }
 int Knight::getY () { return y; }
 char Knight::getTeam () { return team; }
 char Knight::getType () {
-    if (team == 'w') return 'p';
-    else return 'P'
+    if (team == 'w') return 'n';
+    else return 'N'
 }
 void Knight::setDead (int x1, int y1) {
     if (x1 == x && y1 == y) alive = false;
@@ -19,8 +19,8 @@ void Knight::setAlive (int x1, int y1) {
     else { next->setAlive(x1, y1) }
 }
 char Knight::getTile (int x1, int y1) {
-    if (x1 == x && y1 == y && team == 'w') return 'p';
-    else if (x1 == x && y1 == y) return 'P';
+    if (x1 == x && y1 == y && team == 'w') return 'n';
+    else if (x1 == x && y1 == y) return 'N';
     else return next->getTile(x1, y1);
 }
 bool Knight::validMove (int x1, int y1) {

@@ -7,8 +7,8 @@ int Rook::getX () { return x; }
 int Rook::getY () { return y; }
 char Rook::getTeam () { return team; }
 char Rook::getType () {
-    if (team == 'w') return 'p';
-    else return 'P'
+    if (team == 'w') return 'r';
+    else return 'R'
 }
 void Rook::setDead (int x1, int y1) {
     if (x1 == x && y1 == y) alive = false;
@@ -19,8 +19,8 @@ void Rook::setAlive (int x1, int y1) {
     else { next->setAlive(x1, y1) }
 }
 char Rook::getTile (int x1, int y1) {
-    if (x1 == x && y1 == y && team == 'w') return 'p';
-    else if (x1 == x && y1 == y) return 'P';
+    if (x1 == x && y1 == y && team == 'w') return 'r';
+    else if (x1 == x && y1 == y) return 'R';
     else return next->getTile(x1, y1);
 }
 bool Rook::validMove (int x1, int y1) {
