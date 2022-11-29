@@ -3,8 +3,9 @@
 
 
 #include "board.h"
+#include "subject.h"
 
-class GameManager {
+class GameManager : public Subject {
     Board **theBoard;
     public:
         explicit GameManager (Board **board): theBoard{board} {}
