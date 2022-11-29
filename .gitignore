@@ -8,5 +8,5 @@ project_guidelines.pdf
 
 # Ignore files that are a result of compiling/linking #
 #######################################################
-*.0
+*.o
 *.d
