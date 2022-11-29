@@ -1,26 +1,13 @@
 #include "gamemanager.h"
 
-void GameManager::attach (Observer *ob) {
-    observers.push_back(ob);
+char GameManager::getTitle (int x1, int y1) {
+    return (*theBoard)->getPiece(x1, y1);
 }
 
-void GameManager::detach (Observer *ob) {
-    int i = 0;
-    for (auto o : observers) {
-        if (ob == o) break;
-        i++;
-    }
-    observers.erase(observers.begin() + i);
-}
-
-void GameManager::displayBoard () {
-    for (auto o : observers) {
-        o->display();
-    }
+Board **GameManager::board () {
+    return theBoard;
 }
 
 GameManager::~GameManager () {
-    for (auto o : observers) {
-        delete o;
-    }
+    delete *theBoard;
 }

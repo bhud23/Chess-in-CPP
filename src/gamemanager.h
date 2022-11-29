@@ -1,17 +1,17 @@
 #ifndef _GAMEMANAGER_H
 #define _GAMEMANAGER_H
 
-#include <vector>
+#include "subject.h"
 
-class Observer;
+class Board;
 
-class GameManager {
-    vector <Observer *> observers;
-    public:
-        void attach (Observer *ob);
-        void detach (Observer *ob);
-        void displayBoard (); // like notify() function
-        virtual void getTile (int x1, int y1) = 0; 
+class GameManager : public Subject {
+    Board **theBoard;
+    private:
+        explicit ~GameManager (Board **board): theBoard{board} {}
+        char getTitle(int x1, int y1);
+        Board **board();
+        ~GameManager ();
 };
 
 #endif
