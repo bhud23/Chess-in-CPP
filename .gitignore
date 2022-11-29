@@ -1,6 +1,12 @@
-# boring pdfs and stufff #
+# boring pdfs and stuff to ignore #
 ##########################
 uml.pdf
 plan.pdf
 chess.pdf
 project_guidelines.pdf
+
+
+# Ignore files that are a result of compiling/linking #
+#######################################################
+*.0
+*.d

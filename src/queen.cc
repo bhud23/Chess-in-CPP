@@ -1,22 +1,22 @@
 #include "queen.h"
 
-Queen::Queen (Board &b, int x, int y, char team):
-    piece{b, next, x, y, team}, first_move{true} {}
+Queen::Queen (Board &b, Piece *next, int x, int y, char team):
+    b{b}, next{next}, x{x}, y{y}, team{team}, alive{true} {}
 
 int Queen::getX () { return x; }
 int Queen::getY () { return y; }
 char Queen::getTeam () { return team; }
 char Queen::getType () {
     if (team == 'w') return 'q';
-    else return 'Q'
+    else return 'Q';
 }
 void Queen::setDead (int x1, int y1) {
     if (x1 == x && y1 == y) alive = false;
-    else { next->setAlive(x1, y1) }
+    else { next->setAlive(x1, y1); }
 }
 void Queen::setAlive (int x1, int y1) {
     if (x1 == x && y1 == y) alive = true;
-    else { next->setAlive(x1, y1) }
+    else { next->setAlive(x1, y1); }
 }
 char Queen::getTile (int x1, int y1) {
     if (x1 == x && y1 == y && team == 'w') return 'q';

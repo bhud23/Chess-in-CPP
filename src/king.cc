@@ -1,22 +1,22 @@
 #include "king.h"
 
-King::King (Board &b, int x, int y, char team):
-    piece{b, next, x, y, team}, first_move{true} {}
+King::King (Board &b, Piece *next, int x, int y, char team):
+    b{b}, next{next}, x{x}, y{y}, team{team}, alive{true} {}
 
 int King::getX () { return x; }
 int King::getY () { return y; }
 char King::getTeam () { return team; }
 char King::getType () {
     if (team == 'w') return 'k';
-    else return 'K'
+    else return 'K';
 }
 void King::setDead (int x1, int y1) {
     if (x1 == x && y1 == y) alive = false;
-    else { next->setAlive(x1, y1) }
+    else { next->setAlive(x1, y1); }
 }
 void King::setAlive (int x1, int y1) {
     if (x1 == x && y1 == y) alive = true;
-    else { next->setAlive(x1, y1) }
+    else { next->setAlive(x1, y1); }
 }
 char King::getTile (int x1, int y1) {
     if (x1 == x && y1 == y && team == 'w') return 'k';

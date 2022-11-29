@@ -1,22 +1,22 @@
 #include "rook.h"
 
-Rook::Rook (Board &b, int x, int y, char team):
-    piece{b, next, x, y, team}, first_move{true} {}
+Rook::Rook (Board &b, Piece *next, int x, int y, char team):
+    b{b}, next{next}, x{x}, y{y}, team{team}, alive{true} {}
 
 int Rook::getX () { return x; }
 int Rook::getY () { return y; }
 char Rook::getTeam () { return team; }
 char Rook::getType () {
     if (team == 'w') return 'r';
-    else return 'R'
+    else return 'R';
 }
 void Rook::setDead (int x1, int y1) {
     if (x1 == x && y1 == y) alive = false;
-    else { next->setAlive(x1, y1) }
+    else { next->setAlive(x1, y1); }
 }
 void Rook::setAlive (int x1, int y1) {
     if (x1 == x && y1 == y) alive = true;
-    else { next->setAlive(x1, y1) }
+    else { next->setAlive(x1, y1); }
 }
 char Rook::getTile (int x1, int y1) {
     if (x1 == x && y1 == y && team == 'w') return 'r';

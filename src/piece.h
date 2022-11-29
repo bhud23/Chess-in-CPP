@@ -1,7 +1,7 @@
 #ifndef _PIECE_H
 #define _PIECE_H
 
-class Board;
+#include "board.h"
 
 class Piece : public Board {
     public:
@@ -11,7 +11,7 @@ class Piece : public Board {
         virtual char getType () = 0;
         virtual void setDead (int x, int y) = 0;
         virtual void setAlive (int x, int y) = 0;
-        Piece (Board &b, Piece *next, int x, int y, char team);
+        Piece ();
         ~Piece () = default;
 };
 

@@ -3,7 +3,7 @@
 
 #include <vector>
 
-class Observer;
+#include "observer.h"
 
 class Subject {
     std::vector <Observer *> observers;

@@ -1,7 +1,8 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -Werror=vla -MMD
-EXEC = a4q4
-OBJECTS = bishop.o 
+EXEC = chess
+# --> include all of the object files here, make sure to add them as you go
+OBJECTS = bishop.o  blank.o gamemanager.o king.o knight.o pawn.o piece.o queen.o rook.o
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

@@ -17,6 +17,8 @@ class King : public Piece {
         void setDead (int x, int y) override;
         void setAlive (int x, int y) override;
         virtual char getTile (int x, int y) override;
-        bool validMove () override;
-        Pawn(int x, int y, char team);
+        bool validMove (int x1, int y1, int x2, int y2) override;
+        King (Board &b, Piece *next, int x, int y, char team);
 };
+
+#endif
