@@ -17,7 +17,6 @@ class Piece : public Board {
         virtual bool validMove () = 0;
         virtual void setDead (int x, int y) = 0;
         virtual void setAlive (int x, int y) = 0;
-        virtual char getTile (int x, int y) = 0;
         Piece (Board &b, Piece *next, int x, int y, char team);
         ~Piece () = default;
 };
