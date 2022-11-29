@@ -4,7 +4,8 @@
 #include "board.h"
 
 class Blank : public Board {
-    virtual char getTile (int x, int y);
+    char getTile (int x, int y);
+    bool validMove (int x1, int y1, int x2, int y2);
 };
 
 #endif

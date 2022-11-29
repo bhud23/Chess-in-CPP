@@ -4,6 +4,11 @@
 #include "piece.h"
 
 class Rook : public Piece {
+    Board &b;
+    Piece *next;
+    int x, y;
+    char team;
+    bool alive;
     public:
         int getX () override;
         int getY () override;

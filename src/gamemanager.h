@@ -3,15 +3,12 @@
 
 #include "subject.h"
 
-class Board;
-
-class GameManager : public Subject {
+class GameManager {
     Board **theBoard;
     private:
         explicit ~GameManager (Board **board): theBoard{board} {}
-        char getTitle(int x1, int y1);
+        char getTile(int x1, int y1);
         Board **board();
         ~GameManager ();
 };
-
 #endif

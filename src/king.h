@@ -4,7 +4,11 @@
 #include "piece.h"
 
 class King : public Piece {
-    bool first_move = true;
+    Board &b;
+    Piece *next;
+    int x, y;
+    char team;
+    bool alive;
     public:
         int getX () override;
         int getY () override;
