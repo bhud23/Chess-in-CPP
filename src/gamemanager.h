@@ -13,4 +13,5 @@ class GameManager : public Subject {
         Board **board();
         ~GameManager ();
 };
+
 #endif
