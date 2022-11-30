@@ -7,6 +7,7 @@
 // one "block" is a 10x10 pixel square
  void GraphicDisplay::display() {
     // draw column and row coordinates
+    // need to see what Bhavya wrote before doing this
     // draw the board and pieces
     for (int i = 1; i < height; i++) {
         for (int j = 1; j < width; j++) {

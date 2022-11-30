@@ -5,7 +5,6 @@
 #include "observer.h"
 #include "gamemanager.h"
 #include <string>
-#include <sstream>
 
 class graphicDisplay : public Observer {
     GameManager &game;
