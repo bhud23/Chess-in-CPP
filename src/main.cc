@@ -22,10 +22,15 @@ int main (int arc, char **argv) {
     int white_score = 0;
     int black_score = 0;
 
-    std::unique_ptr<Board> board = std::make_unique<Blank>();
-    std::unique_ptr<GameManger> gm = std::make_unique<GameManager>(&board);
-    std::unique_ptr<Subject> s = std::make_unique<Subject>(GameManager);
+    std::unique_ptr<Board> head = std::make_unique<Blank>(); // like the canvas
+    std::unique_ptr<GameManger> gm = std::make_unique<GameManager>(&board); // like the studio
     std::string inp;
+
+    Observer *graph = new GraphicDisplay{gm};
+    gm.attach(graph);
+    //Observer *txt = new TextDisplay{gm};
+    //gm.attach(txt);
+
     while (std::cin >> inp) {
         // if move % 2 == 1, then it is whites turn, blacks turn otherwise
         if (inp == "game") {
@@ -47,7 +52,7 @@ int main (int arc, char **argv) {
         else {
             std::cout << "Invalid Input\n";
         }
-        s->displayBoard();
+        gm->displayBoard();
         move++;
     }
     return 0;

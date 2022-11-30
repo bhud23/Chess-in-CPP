@@ -13,7 +13,7 @@ class graphicDisplay : public Observer {
     const height = 900;
     public:
         GraphicDisplay (GameManager &game);
-        void display () override;
+        ~GraphicDisplay () = default;
 };
 
 #endif
