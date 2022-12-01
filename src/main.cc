@@ -26,14 +26,14 @@ int main (int arc, char **argv) {
     int black_score = 0;
 
     std::unique_ptr<Board> head = std::make_unique<Blank>(); // like the canvas
-    std::unique_ptr<GameManager> gm = std::make_unique<GameManager>(&board); // like the studio
+    std::unique_ptr<GameManager> gm = std::make_unique<GameManager>(&head); // like the studio
     std::string inp;
 
     Observer *graph = new GraphicDisplay{gm};
     gm.attach(graph);
     Observer *txt = new TextDisplay{gm};
     gm.attach(txt);
-
+    
     while (std::cin >> inp) {
         // if move % 2 == 1, then it is whites turn, blacks turn otherwise
         if (inp == "game") {
