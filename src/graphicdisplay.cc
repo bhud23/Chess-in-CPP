@@ -26,7 +26,7 @@
     	for (int j = 1; j < width; j++) {
 		int row = j * 20;
 		int col = i * 20;
-		char tile = game.getTile(j, i);
+		char tile = game.getTile(j - 1, i - 1);
 		if ((i + j) % 2 == 0) {
 			win.fillRectangle(row, col, 20, 20, 0);
 		}

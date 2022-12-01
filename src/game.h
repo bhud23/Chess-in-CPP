@@ -12,11 +12,11 @@
 #include <utility>
 
 class Game {
-    Board &head;
+    Board *head;
     std::pair<int, int> white_king;
     std::pair<int, int> black_king;
     public:
-        Game (Board &b);
+        Game (Board *b);
         ~Game () = default;
         char pieceAt (int x, int y);
         void defaultSetup (Board **head);

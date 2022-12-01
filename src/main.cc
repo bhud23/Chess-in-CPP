@@ -14,6 +14,7 @@
 #include "observer.h"
 #include "graphicdisplay.h"
 #include "textdisplay.h"
+#include "game.h"
 
 #include <utility>
 #include <memory>
@@ -27,6 +28,7 @@ int main (int arc, char **argv) {
 
     Board *head = new Blank{}; // like the canvas
     GameManager *gm = new GameManager{&head}; // like the studio
+    Game game {head};
     std::string inp;
 
 
@@ -36,6 +38,7 @@ int main (int arc, char **argv) {
     gm->attach(graph);
     
     std::cout << "Welcome to Chess - the CS246 orignal game" << std::endl;
+    game.defaultSetup(&head);
     gm->displayBoard();
     while (std::cin >> inp) {
         // if move % 2 == 1, then it is whites turn, blacks turn otherwise
@@ -50,7 +53,7 @@ int main (int arc, char **argv) {
             std::pair<int, int> end;
         }
         else if (inp == "setup") {
-		std::cin >> inp;            
+	//	std::cin >> inp;	
         }
         else {
             std::cout << "Invalid Input\n";
