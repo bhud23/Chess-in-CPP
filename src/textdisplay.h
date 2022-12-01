@@ -13,10 +13,16 @@ class TextDisplay : public Observer {
     std::ostream &out = std::cout;
 
     public:
+<<<<<<< HEAD
     	TextDisplay (GameManager &game);
     	~TextDisplay () = default;
     private:
 	void display () override;
+=======
+    TextDisplay (GameManager &game);
+    ~TextDisplay () = default;
+    void display() override;
+>>>>>>> daaa7cd09337e60175f8fb14b1558f8fb66394bc
 };
 
 
