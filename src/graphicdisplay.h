@@ -6,7 +6,7 @@
 #include "gamemanager.h"
 #include <string>
 
-class graphicDisplay : public Observer {
+class GraphicDisplay : public Observer {
     GameManager &game;
     Xwindow win;
     const int width = 900;
