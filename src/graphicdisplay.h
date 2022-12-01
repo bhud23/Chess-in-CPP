@@ -10,7 +10,7 @@ class GraphicDisplay : public Observer {
     GameManager &game;
     Xwindow win;
     const int width;
-    const int heigh;
+    const int height;
     public:
         GraphicDisplay (GameManager &game, int width, int height);
         ~GraphicDisplay () = default;
