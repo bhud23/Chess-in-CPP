@@ -38,7 +38,9 @@ int main (int arc, char **argv) {
     gm->attach(graph);
     
     std::cout << "Welcome to Chess - the CS246 orignal game" << std::endl;
-    game.defaultSetup(&head);
+    std::cout << "Here is what a default game board looks like"std::endl;
+    std::cout << "use --help for a list of commands" << std::endl;
+    //game.defaultSetup(&head);
     gm->displayBoard();
     while (std::cin >> inp) {
         // if move % 2 == 1, then it is whites turn, blacks turn otherwise
@@ -54,6 +56,9 @@ int main (int arc, char **argv) {
         }
         else if (inp == "setup") {
 	//	std::cin >> inp;	
+        }
+        else if (inp == "--help") {
+            std::cout << "move" << std::endl;
         }
         else {
             std::cout << "Invalid Input\n";
