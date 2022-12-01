@@ -9,12 +9,13 @@
 class GraphicDisplay : public Observer {
     GameManager &game;
     Xwindow win;
-    const int width = 900;
-    const int height = 900;
+    const int width;
+    const int heigh;
     public:
-        GraphicDisplay (GameManager &game);
+        GraphicDisplay (GameManager &game, int width, int height);
         ~GraphicDisplay () = default;
-	void display () override;
+    private:
+	    void display () override;
 };
 
 #endif

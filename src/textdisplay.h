@@ -7,14 +7,15 @@
 
 class TextDisplay : public Observer {
     GameManager &game;
-    int row = 8, col = 8, sidenums = 8;
+    int row, col, sidenums;
     char bottomletters = 'a';
     
     std::ostream &out = std::cout;
 
     public:
-    TextDisplay (GameManager &game);
+    TextDisplay (GameManager &game, int row, int col, int sidenums);
     ~TextDisplay () = default;
+    private:
     void display() override;
 };
 

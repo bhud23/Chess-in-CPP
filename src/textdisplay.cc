@@ -1,8 +1,8 @@
 #include "textdisplay.h"
 #include "observer.h"
 
-TextDisplay::TextDisplay (GameManager &game):
-    game{game} {}
+TextDisplay::TextDisplay (GameManager &game, int row, int col, int sidenums):
+    game{game}, row{row}, col{col}, sidenums{sidenums} {}
 
 
 void TextDisplay::display () {
