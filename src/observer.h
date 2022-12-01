@@ -1,9 +1,11 @@
 #ifndef OBSERVER_H
 #define OBSERVER_H
 
+class Subject;
 
-class observer{
-    virtual void display();
+class Observer {
+    virtual void display() = 0;
+    virtual ~Observer () = default;
 };
 
-#endif OBSERVER_H
+#endif
