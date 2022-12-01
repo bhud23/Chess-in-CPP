@@ -16,7 +16,7 @@ void TextDisplay::display () {
 	for (int i = 0; i < row; i++) {
 		out << i + 1 << ' ';
 		for (int j = 0; j < col; j++) {
-			out << game.getTile(j ,i);
+			out << game.getTile(j, i);
 		}
 		out << std::endl;;
 	}
