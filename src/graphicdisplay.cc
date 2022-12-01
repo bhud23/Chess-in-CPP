@@ -15,14 +15,14 @@
             int x = j * 10;
             int y = i * 10;
             if (i + j % 2 == 0) {
-                win.drawRectangle(x, y, 10, 10, 3);
+                win.fillRectangle(x, y, 10, 10, 3);
             }
             else {
-                win.drawRectangle(x, y, 10, 10, 0);
+                win.fillRectangle(x, y, 10, 10, 0);
             }
             if (tile != ' ' && tile != '_') {
-                std::string msg = (1, tile);
-                win.drawString(x + 5, y + 5, msg);
+                //std::string msg = (1, tile);
+                win.drawString(x + 5, y + 5, "e");
             }
         }
     }

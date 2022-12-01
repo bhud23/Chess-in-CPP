@@ -10,6 +10,7 @@ class Subject {
         void attach (Observer *ob);
         void detach (Observer *ob);
         void displayBoard (); // like notify() function
+	~Subject ();
 };
 
 #endif
