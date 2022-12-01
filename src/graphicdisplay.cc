@@ -1,16 +1,17 @@
  #include "graphicdisplay.h"
 
  GraphicDisplay::GraphicDisplay (GameManager &game):
-    game{game}, win{height, width} {}
+    game{game}, win{900, 900} {}
 
 
 // one "block" is a 10x10 pixel square
  void GraphicDisplay::display() {
+    win.fillRectangle (100, 100, 10, 10, 3);
     // draw column and row coordinates
     // need to see what Bhavya wrote before doing this
     // draw the board and pieces
-    for (int i = 1; i < height; i++) {
-        for (int j = 1; j < width; j++) {
+    for (int i = 1; i < 9; i++) {
+        for (int j = 1; j < 9; j++) {
             char tile = game.getTile(i - 1, j - 1);
             int x = j * 10;
             int y = i * 10;

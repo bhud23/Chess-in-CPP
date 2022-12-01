@@ -15,6 +15,7 @@ class TextDisplay : public Observer {
     public:
     	TextDisplay (GameManager &game);
     	~TextDisplay () = default;
+    private:
 	void display () override;
 };
 
