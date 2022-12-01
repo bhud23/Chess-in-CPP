@@ -16,3 +16,27 @@ char Blank::getTile (int x, int y) {
 bool Blank::validMove (int x1, int y1, int x2, int y2) {
     return false;
 }
+
+int Blank::getX () {
+    return -1;
+}
+
+int Blank::getY () {
+    return -1;
+}
+
+char Blank::getTeam () {
+    return ' ';
+}
+
+char Blank::getType () {
+    return ' ';
+}
+
+void Blank::setDead () {
+    return;
+}
+
+void Blank::setAlive () {
+    return;
+}
