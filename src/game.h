@@ -9,6 +9,8 @@
 #include "queen.h"
 #include "king.h"
 
+#include <utility>
+
 class Game {
     Board &head;
     std::pair<int, int> white_king;
@@ -17,7 +19,7 @@ class Game {
         Game (Board &b);
         ~Game () = default;
         char pieceAt (int x, int y);
-        void defaultSetup (Board &head);
+        void defaultSetup (Board **head);
         void movePiece (int x1, int y1, int x2, int y2);
         std::pair<int, int> kingCoords (char team);
         bool isCheck (char team);
