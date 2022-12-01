@@ -29,11 +29,12 @@ int main (int arc, char **argv) {
     GameManager *gm = new GameManager{&head}; // like the studio
     std::string inp;
 
-    //Observer *graph = new GraphicDisplay {*gm};
-    //gm->attach(graph);
     Observer *txt = new TextDisplay {*gm};
     gm->attach(txt);
+    Observer *graph = new GraphicDisplay {*gm};
+    gm->attach(graph);
     
+    std::cout << "Welcome to Chess - the original CS246 game" << std::endl; 
     while (std::cin >> inp) {
         // if move % 2 == 1, then it is whites turn, blacks turn otherwise
         if (inp == "game") {

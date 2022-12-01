@@ -1,4 +1,5 @@
 #include "subject.h"
+#include  <iostream>
 
 void Subject::attach (Observer *ob) {
     observers.push_back(ob);
@@ -14,8 +15,10 @@ void Subject::detach (Observer *ob) {
 }
 
 void Subject::displayBoard () {
+	std::cout << "running" << std::endl;
     for (auto o : observers) {
         o->display();
+	std::cout << "ran" << std::endl;
     }
 }
 
