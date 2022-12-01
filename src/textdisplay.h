@@ -7,7 +7,7 @@
 
 class TextDisplay : public Observer {
     GameManager &game;
-    int row = 10, col = 9, sidenums = 8;
+    int row = 8, col = 8, sidenums = 8;
     char bottomletters = 'a';
     
     std::ostream &out = std::cout;

@@ -4,28 +4,21 @@
 TextDisplay::TextDisplay (GameManager &game):
     game{game} {}
 
-void TextDisplay::display(){
-    for (int i = 0; i <= row; i++){
-        if (i == 9){ //prints blank line before printing column letters
-            out << std::endl;
-            continue;
-        }
 
-        for (int j = 0; j < col; j++){
-            if (j == 0 && sidenums > 0){ //prints the row numbers
-                out << sidenums << " ";
-                sidenums -= 1;
-            } else if (j == 0 && sidenums == 0){ // special case when printing column letters
-                out << "  ";
-            }else if (j == 8){ // prints the column letters
-                out << bottomletters;
-                bottomletters += 1;            
-            } else{
-                //out << getTile();
-            }
-        }
-        out << std::endl; //prints new line to go to next row
-    }
+void TextDisplay::display () {
+	out << ' ' << ' ';
+	for (int i = 0; i < sidenums; i++) {
+		out << bottomletters;
+		bottomletters++;
+	}
+	bottomletters = 'a';
+	out << std::endl;
+	for (int i = 0; i < row; i++) {
+		out << i + 1 << ' ';
+		for (int j = 0; j < col; j++) {
+			out << game.getTile(j ,i);
+		}
+		out << std::endl;;
+	}
 }
-
 
