@@ -29,8 +29,8 @@ int main (int arc, char **argv) {
     GameManager *gm = new GameManager{&head}; // like the studio
     std::string inp;
 
-    Observer *graph = new GraphicDisplay {*gm};
-    gm->attach(graph);
+    //Observer *graph = new GraphicDisplay {*gm};
+    //gm->attach(graph);
     Observer *txt = new TextDisplay {*gm};
     gm->attach(txt);
     
