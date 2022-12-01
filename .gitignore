@@ -8,5 +8,6 @@ project_guidelines.pdf
 
 # Ignore files that are a result of compiling/linking #
 #######################################################
-*.o
-*.d
+src/*.o
+src/*.d
+src/chess
