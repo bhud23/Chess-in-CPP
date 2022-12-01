@@ -18,6 +18,7 @@ class Queen : public Piece {
         virtual char getTile (int x, int y) override;
         bool validMove (int x1, int y1, int x2, int y2) override;
         Queen (Board *next, int x, int y, char team);
+	~Queen ();
 };
 
 #endif

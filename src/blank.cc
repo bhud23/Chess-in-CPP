@@ -33,10 +33,10 @@ char Blank::getType () {
     return ' ';
 }
 
-void Blank::setDead () {
+void Blank::setDead (int x, int y) {
     return;
 }
 
-void Blank::setAlive () {
+void Blank::setAlive (int x, int y) {
     return;
 }

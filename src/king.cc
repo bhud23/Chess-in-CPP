@@ -1,7 +1,7 @@
 #include "king.h"
 
-King::King (Board &b, Piece *next, int x, int y, char team):
-    b{b}, next{next}, x{x}, y{y}, team{team}, alive{true} {}
+King::King (Board *next, int x, int y, char team):
+    next{next}, x{x}, y{y}, team{team}, alive{true} {}
 
 King::~King () {
     delete next;

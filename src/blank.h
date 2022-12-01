@@ -3,12 +3,18 @@
 
 #include "board.h"
 
-class Blank : public Piece {
+class Blank : public Board {
     char getTile (int x, int y);
     bool validMove (int x1, int y1, int x2, int y2);
-	public:
+    public:
     Blank ();
     ~Blank ();
+    int getX () override;
+    int getY () override;
+    char getTeam () override;
+    char getType () override;
+    void setAlive (int x, int y) override;
+    void setDead (int x, int y) override;
 };
 
 #endif
