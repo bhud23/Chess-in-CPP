@@ -2,7 +2,7 @@
 #include "observer.h"
 
 TextDisplay::TextDisplay (GameManager &game):
-    game{game}, win{height, width} {}
+    game{game} {}
 
 void TextDisplay::display(){
     for (int i = 0; i <= row; i++){

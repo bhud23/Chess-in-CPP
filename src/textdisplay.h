@@ -1,6 +1,7 @@
 #ifndef TEXTDISPLAY_H
 #define TEXTDISPLAY_H
 #include "observer.h"
+#include "gamemanager.h"
 #include <iostream>
 
 
@@ -12,7 +13,9 @@ class TextDisplay : public Observer {
     std::ostream &out = std::cout;
 
     public:
-    void display() override;
+    	TextDisplay (GameManager &game);
+    	~TextDisplay () = default;
+	void display () override;
 };
 
 

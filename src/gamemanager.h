@@ -8,7 +8,7 @@
 class GameManager : public Subject {
     Board **theBoard;
     public:
-        explicit GameManager (Board **board): theBoard{board} {}
+        explicit GameManager (Board **board);
         char getTile(int x1, int y1);
         Board **board();
         ~GameManager ();
