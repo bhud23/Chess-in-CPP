@@ -1,5 +1,13 @@
 #include "blank.h"
 
+Blank::Blank () {
+    return;
+}
+
+Blank::~Blank () {
+    return;
+}
+
 char Blank::getTile (int x, int y) {
     if ((x + y) % 2 == 1) return '_';
     return ' ';

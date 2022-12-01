@@ -4,8 +4,7 @@
 #include "piece.h"
 
 class Queen : public Piece {
-    Board &b;
-    Piece *next;
+    Board *next;
     int x, y;
     char team;
     bool alive;
@@ -18,7 +17,7 @@ class Queen : public Piece {
         void setAlive (int x, int y) override;
         virtual char getTile (int x, int y) override;
         bool validMove (int x1, int y1, int x2, int y2) override;
-        Queen (Board &b, Piece *next, int x, int y, char team);
+        Queen (Board *next, int x, int y, char team);
 };
 
 #endif

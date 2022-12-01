@@ -3,6 +3,10 @@
 King::King (Board &b, Piece *next, int x, int y, char team):
     b{b}, next{next}, x{x}, y{y}, team{team}, alive{true} {}
 
+King::~King () {
+    delete next;
+}
+
 int King::getX () { return x; }
 int King::getY () { return y; }
 char King::getTeam () { return team; }

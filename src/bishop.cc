@@ -1,7 +1,11 @@
 #include "bishop.h"
 
-Bishop::Bishop (Board &b, Piece *next, int x, int y, char team):
-    b{b}, next{next}, x{x}, y{y}, team{team}, alive{true} {}
+Bishop::Bishop (Board *next, int x, int y, char team):
+    next{next}, x{x}, y{y}, team{team}, alive{true} {}
+
+Bishop::~Bishop () {
+    delete next;
+}
 
 int Bishop::getX () { return x; }
 int Bishop::getY () { return y; }

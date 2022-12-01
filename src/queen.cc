@@ -1,7 +1,11 @@
 #include "queen.h"
 
-Queen::Queen (Board &b, Piece *next, int x, int y, char team):
-    b{b}, next{next}, x{x}, y{y}, team{team}, alive{true} {}
+Queen::Queen (Board *next, int x, int y, char team):
+    next{next}, x{x}, y{y}, team{team}, alive{true} {}
+
+Queen::~Queen () {
+    delete next;
+}
 
 int Queen::getX () { return x; }
 int Queen::getY () { return y; }

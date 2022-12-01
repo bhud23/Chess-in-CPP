@@ -1,7 +1,11 @@
 #include "pawn.h"
 
-Pawn::Pawn (Board &b, Piece *next, int x, int y, char team):
-    b{b}, next{next}, x{x}, y{y}, team{team}, alive{true} {}
+Pawn::Pawn (Board *next, int x, int y, char team):
+    next{next}, x{x}, y{y}, team{team}, alive{true} {}
+
+Pawn::~Pawn () {
+    delete next;
+}
 
 int Pawn::getX () { return x; }
 int Pawn::getY () { return y; }

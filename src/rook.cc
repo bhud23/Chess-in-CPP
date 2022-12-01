@@ -1,7 +1,11 @@
 #include "rook.h"
 
-Rook::Rook (Board &b, Piece *next, int x, int y, char team):
-    b{b}, next{next}, x{x}, y{y}, team{team}, alive{true} {}
+Rook::Rook (Board *next, int x, int y, char team):
+    next{next}, x{x}, y{y}, team{team}, alive{true} {}
+
+Rook::~Rook () {
+    delete next;
+}
 
 int Rook::getX () { return x; }
 int Rook::getY () { return y; }
