@@ -15,5 +15,5 @@ class textdisplay: public observer{
 };
 
 
-#endif TEXTDISPLAY_H
+#endif
 
