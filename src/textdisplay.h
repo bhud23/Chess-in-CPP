@@ -4,7 +4,8 @@
 #include <iostream>
 
 
-class textdisplay: public observer{
+class TextDisplay : public Observer {
+    GameManager &game;
     int row = 10, col = 9, sidenums = 8;
     char bottomletters = 'a';
     

@@ -1,8 +1,10 @@
 #include "textdisplay.h"
 #include "observer.h"
 
+TextDisplay::TextDisplay (GameManager &game):
+    game{game}, win{height, width} {}
 
-void textdisplay::display(){
+void TextDisplay::display(){
     for (int i = 0; i <= row; i++){
         if (i == 9){ //prints blank line before printing column letters
             out << std::endl;
