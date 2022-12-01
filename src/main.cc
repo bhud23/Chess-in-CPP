@@ -39,26 +39,25 @@ int main (int arc, char **argv) {
     
     std::cout << "Welcome to Chess - the CS246 orignal game" << std::endl;
     std::cout << "Here is what a default game board looks like"std::endl;
-    std::cout << "use --help for a list of commands" << std::endl;
     //game.defaultSetup(&head);
     gm->displayBoard();
+    std::cout << "use --help for a list of commands" << std::endl;
     while (std::cin >> inp) {
         // if move % 2 == 1, then it is whites turn, blacks turn otherwise
         if (inp == "game") {
-		std::cin >> inp;
-        }
-        else if (inp == "resign") {
-
-        }
-        else if ("move") {
-            std::pair<int, int> start;
-            std::pair<int, int> end;
+		    std::cin >> inp;
+            if (inp == "human") {}
+            else if (inp == "computer[1]") {}
         }
         else if (inp == "setup") {
-	//	std::cin >> inp;	
+	        std::cin >> inp;	
         }
         else if (inp == "--help") {
-            std::cout << "move" << std::endl;
+            std::cout << "Commands:" << std::endl;
+            std::cout << "- game <white-player> <black-player>" std::endl;
+            std::cout << "\twhere <white-player> or <black-player> can be <human> or <computer[x]\n" << std::endl;
+            std::cout << " - setup"<< std::endl;
+            std::cout << "\t followed by either <default> or <custom>" << std::endl;
         }
         else {
             std::cout << "Invalid Input\n";
@@ -66,5 +65,8 @@ int main (int arc, char **argv) {
         gm->displayBoard();
         move++;
     }
+    std::cout << "Final Score:" << std::endl;
+    std::cout << "White: " << white_score << std::endl;
+    std::cout << "Black: " << black_score << std::endl;
     return 0;
 }

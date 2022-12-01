@@ -26,6 +26,7 @@ class Game {
         bool isCheckMate (char team);
         bool isStalemate ();
         void printScore ();
+        bool playGame ();
 };
 
 #endif
