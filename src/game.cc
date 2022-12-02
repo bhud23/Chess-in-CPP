@@ -10,23 +10,23 @@ char Game::pieceAt (int x, int y) {
 std::pair<int, int> Game::getCoords(std::string inp) {
     std::pair<int, int> res {-1, -1};
     if (inp.length() != 2) return res;
-    if (inp[0] == "a") res.first = 0;
-    if (inp[0] == "b") res.first = 1;
-    if (inp[0] == "c") res.first = 2;
-    if (inp[0] == "d") res.first = 3;
-    if (inp[0] == "e") res.first = 4;
-    if (inp[0] == "f") res.first = 5;
-    if (inp[0] == "g") res.first = 6;
-    if (inp[0] == "g") res.first = 7;
+    else if (inp[0] == "a") res.first = 0;
+    else if (inp[0] == "b") res.first = 1;
+    else if (inp[0] == "c") res.first = 2;
+    else if (inp[0] == "d") res.first = 3;
+    else if (inp[0] == "e") res.first = 4;
+    else if (inp[0] == "f") res.first = 5;
+    else if (inp[0] == "g") res.first = 6;
+    else if (inp[0] == "g") res.first = 7;
 
-    if (inp[0] == "1") res.second = 0;
-    if (inp[0] == "2") res.second = 1;
-    if (inp[0] == "3") res.second = 2;
-    if (inp[0] == "4") res.second = 3;
-    if (inp[0] == "5") res.second = 4;
-    if (inp[0] == "6") res.second = 5;
-    if (inp[0] == "7") res.second = 6;
-    if (inp[0] == "8") res.second = 7;
+    if (inp[1] == "1") res.second = 0;
+    else if (inp[1] == "2") res.second = 1;
+    else if (inp[1] == "3") res.second = 2;
+    else if (inp[1] == "4") res.second = 3;
+    else if (inp[1] == "5") res.second = 4;
+    else if (inp[1] == "6") res.second = 5;
+    else if (inp[1] == "7") res.second = 6;
+    else if (inp[1] == "8") res.second = 7;
     return res;
 }
 
@@ -34,11 +34,16 @@ void Game::removePiece () {
     std::string inp;
     (if cin >> inp) {
                 std::pair<int, int> coords = getCoords(inp);
-                if (coords.first != -1 && coords.second != -1) head->setDead(coords.first, coords.second);
+                if (coords.first != -1 && coords.second != -1) {
+                    head->setDead(coords.first, coords.second);
+                    char tile = this->pieceAt(coords.first, coords.second);
+                    if ('a' <= tile && tile <= 'z' && this->isCheck('b')) head->setAlive (coords.first, coords.second)
+                    else if ('A' <= tile && tile <= 'Z' this->isCheck('w')) head->setAlive (coords.first, coords.second)
+                }
                 else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
             }
-            else {
-                std::cout "Fatal error" << std::endl;
+    else {
+        std::cout "Fatal error" << std::endl;
     }
 }
 
@@ -51,46 +56,182 @@ void Game::placePiece () {
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_')
-                    *head = new King {*head, 3, 7, 'b'};
+                    *head = new King {*head, coords.first, coords.second 'b'};
                     // if in check undo this
+                    if (this->isCheck('b')) {
+                        (*head)->setDead(coords.first, coords.second);
+                        std::cout << "The king cannot be placed in check" << std::endl;
+                    }
                 else std::cout << "A piece already occupies " << inp << std::endl;
             }
             else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
         }
-        if (inp == "k") {
+        else if (inp == "k") {
             std::pair<int, int> coords = getCoords(inp);
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_')
-                    *head = new King {*head, 3, 7, 'b'};
+                    *head = new King {*head, coords.first, coords.second 'w'};
                     // if in check undo this
+                    if (this->isCheck('w')) {
+                        (*head)->setDead(coords.first, coords.second);
+                        std::cout << "The king cannot be placed in check" << std::endl;
+                    }
                 else std::cout << "A piece already occupies " << inp << std::endl;
             }
             else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
         }
         // queen case
-        // bishop case
-        // knight case
-        // rook case
-        // pawn case
-        if (inp == "P") {
+        else if (inp == "Q") {
             std::pair<int, int> coords = getCoords(inp);
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_')
-                    *head = new Pawn {*head, coords.first, 7, 'b'};
+                    *head = new Queen {*head, coords.first, coords.second, 'b'};
                     // if in check undo this
+                    if (this->isCheck('w')) {
+                        (*head)->setDead(coords.first, coords.second);
+                        std::cout << "Cannot place piece that would put the king in check" << std::endl;
+                    }
                 else std::cout << "A piece already occupies " << inp << std::endl;
             }
             else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
         }
-        if (inp == "p") {
+        else if (inp == "q") {
             std::pair<int, int> coords = getCoords(inp);
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_')
-                    *head = new Pawn {*head, 3, 7, 'b'};
+                    *head = new Queen {*head, coords.first, coords.second, 'w'};
                     // if in check undo this
+                    if (this->isCheck('b')) {
+                        (*head)->setDead(coords.first, coords.second);
+                        std::cout << "Cannot place piece that would put the king in check" << std::endl;
+                    }
+                else std::cout << "A piece already occupies " << inp << std::endl;
+            }
+            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+        }
+        // bishop case
+        else if (inp == "B") {
+            std::pair<int, int> coords = getCoords(inp);
+            if (coords.first != -1 && coords.second != -1) {
+                char tile = this->pieceAt(coords.first, coords.second);
+                if (tile == ' ' || tile == '_')
+                    *head = new Bishop {*head, coords.first, coords.second, 'b'};
+                    // if in check undo this
+                    if (this->isCheck('w')) {
+                        (*head)->setDead(coords.first, coords.second);
+                        std::cout << "Cannot place piece that would put the king in check" << std::endl;
+                    }
+                else std::cout << "A piece already occupies " << inp << std::endl;
+            }
+            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+        }
+        else if (inp == "b") {
+            std::pair<int, int> coords = getCoords(inp);
+            if (coords.first != -1 && coords.second != -1) {
+                char tile = this->pieceAt(coords.first, coords.second);
+                if (tile == ' ' || tile == '_')
+                    *head = new Bishop {*head, coords.first, coords.second, 'w'};
+                    // if in check undo this
+                    if (this->isCheck('b')) {
+                        (*head)->setDead(coords.first, coords.second);
+                        std::cout << "Cannot place piece that would put the king in check" << std::endl;
+                    }
+                else std::cout << "A piece already occupies " << inp << std::endl;
+            }
+            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+        }
+        // knight case
+        else if (inp == "N") {
+            std::pair<int, int> coords = getCoords(inp);
+            if (coords.first != -1 && coords.second != -1) {
+                char tile = this->pieceAt(coords.first, coords.second);
+                if (tile == ' ' || tile == '_')
+                    *head = new Knight {*head, coords.first, coords.second, 'b'};
+                    // if in check undo this
+                    if (this->isCheck('w')) {
+                        (*head)->setDead(coords.first, coords.second);
+                        std::cout << "Cannot place piece that would put the king in check" << std::endl;
+                    }
+                else std::cout << "A piece already occupies " << inp << std::endl;
+            }
+            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+        }
+        else if (inp == "n") {
+            std::pair<int, int> coords = getCoords(inp);
+            if (coords.first != -1 && coords.second != -1) {
+                char tile = this->pieceAt(coords.first, coords.second);
+                if (tile == ' ' || tile == '_')
+                    *head = new Knight {*head, coords.first, coords.second, 'w'};
+                    // if in check undo this
+                    if (this->isCheck('b')) {
+                        (*head)->setDead(coords.first, coords.second);
+                        std::cout << "Cannot place piece that would put the king in check" << std::endl;
+                    }
+                else std::cout << "A piece already occupies " << inp << std::endl;
+            }
+            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+        }
+        // rook case
+        else if (inp == "R") {
+            std::pair<int, int> coords = getCoords(inp);
+            if (coords.first != -1 && coords.second != -1) {
+                char tile = this->pieceAt(coords.first, coords.second);
+                if (tile == ' ' || tile == '_')
+                    *head = new Rook {*head, coords.first, coords.second, 'b'};
+                    // if in check undo this
+                    if (this->isCheck('w')) {
+                        (*head)->setDead(coords.first, coords.second);
+                        std::cout << "Cannot place piece that would put the king in check" << std::endl;
+                    }
+                else std::cout << "A piece already occupies " << inp << std::endl;
+            }
+            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+        }
+        else if (inp == "r") {
+            std::pair<int, int> coords = getCoords(inp);
+            if (coords.first != -1 && coords.second != -1) {
+                char tile = this->pieceAt(coords.first, coords.second);
+                if (tile == ' ' || tile == '_')
+                    *head = new Rook {*head, coords.first, coords.second, 'w'};
+                    // if in check undo this
+                    if (this->isCheck('b')) {
+                        (*head)->setDead(coords.first, coords.second);
+                        std::cout << "Cannot place piece that would put the king in check" << std::endl;
+                    }
+                else std::cout << "A piece already occupies " << inp << std::endl;
+            }
+            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+        }
+        // pawn case
+        else if (inp == "P") {
+            std::pair<int, int> coords = getCoords(inp);
+            if (coords.first != -1 && coords.second != -1 && coords.second != 0) {
+                char tile = this->pieceAt(coords.first, coords.second);
+                if (tile == ' ' || tile == '_')
+                    *head = new Pawn {*head, coords.first, coords.second, 'b'};
+                    // if in check undo this
+                    if (this->isCheck('w')) {
+                        (*head)->setDead(coords.first, coords.second);
+                        std::cout << "Cannot place piece that would put the king in check" << std::endl;
+                    }
+                else std::cout << "A piece already occupies " << inp << std::endl;
+            }
+            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+        }
+        else if (inp == "p") {
+            std::pair<int, int> coords = getCoords(inp);
+            if (coords.first != -1 && coords.second != -1 && coords.second != 7) {
+                char tile = this->pieceAt(coords.first, coords.second);
+                if (tile == ' ' || tile == '_')
+                    *head = new Pawn {*head, coords.first, coords.second 'w'};
+                    // if in check undo this
+                    if (this->isCheck('b')) {
+                        (*head)->setDead(coords.first, coords.second);
+                        std::cout << "Cannot place piece that would put the king in check" << std::endl;
+                    }
                 else std::cout << "A piece already occupies " << inp << std::endl;
             }
             else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
@@ -148,7 +289,7 @@ void Game::customSetup () {
             }
         }
         else if (inp == "-"){
-            this->removePiece();
+            this->removePiece(); // ensure removing a piece doesn't put the king in check
         }
         else if (inp == "=") {
             move++;
