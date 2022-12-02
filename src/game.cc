@@ -47,9 +47,9 @@ void Game::placePiece () {
                         (*head)->setDead(coords.first, coords.second);
                         std::cout << "The king cannot be placed in check" << std::endl;
                     }
-                else std::cout << "A piece already occupies " << inp << std::endl;
+                else {std::cout << "A piece already occupies " << inp << std::endl;}
             }
-            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+            else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         else if (inp == "k") {
             std::pair<int, int> coords = getCoords(inp);
@@ -62,9 +62,9 @@ void Game::placePiece () {
                         (*head)->setDead(coords.first, coords.second);
                         std::cout << "The king cannot be placed in check" << std::endl;
                     }
-                else std::cout << "A piece already occupies " << inp << std::endl;
+                else {std::cout << "A piece already occupies " << inp << std::endl;}
             }
-            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+            else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         // queen case
         else if (inp == "Q") {
@@ -78,9 +78,9 @@ void Game::placePiece () {
                         (*head)->setDead(coords.first, coords.second);
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
-                else std::cout << "A piece already occupies " << inp << std::endl;
+                else {std::cout << "A piece already occupies " << inp << std::endl;}
             }
-            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+            else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         else if (inp == "q") {
             std::pair<int, int> coords = getCoords(inp);
@@ -93,9 +93,9 @@ void Game::placePiece () {
                         (*head)->setDead(coords.first, coords.second);
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
-                else std::cout << "A piece already occupies " << inp << std::endl;
+                else {std::cout << "A piece already occupies " << inp << std::endl;}
             }
-            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+            else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         // bishop case
         else if (inp == "B") {
@@ -109,9 +109,9 @@ void Game::placePiece () {
                         (*head)->setDead(coords.first, coords.second);
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
-                else std::cout << "A piece already occupies " << inp << std::endl;
+                else {std::cout << "A piece already occupies " << inp << std::endl;}
             }
-            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+            else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         else if (inp == "b") {
             std::pair<int, int> coords = getCoords(inp);
@@ -124,9 +124,9 @@ void Game::placePiece () {
                         (*head)->setDead(coords.first, coords.second);
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
-                else std::cout << "A piece already occupies " << inp << std::endl;
+                else {std::cout << "A piece already occupies " << inp << std::endl;}
             }
-            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+            else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         // knight case
         else if (inp == "N") {
@@ -140,9 +140,9 @@ void Game::placePiece () {
                         (*head)->setDead(coords.first, coords.second);
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
-                else std::cout << "A piece already occupies " << inp << std::endl;
+                else {std::cout << "A piece already occupies " << inp << std::endl;}
             }
-            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+            else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         else if (inp == "n") {
             std::pair<int, int> coords = getCoords(inp);
@@ -155,9 +155,9 @@ void Game::placePiece () {
                         (*head)->setDead(coords.first, coords.second);
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
-                else std::cout << "A piece already occupies " << inp << std::endl;
+                else {std::cout << "A piece already occupies " << inp << std::endl;}
             }
-            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+            else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         // rook case
         else if (inp == "R") {
@@ -171,9 +171,9 @@ void Game::placePiece () {
                         (*head)->setDead(coords.first, coords.second);
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
-                else std::cout << "A piece already occupies " << inp << std::endl;
+                else {std::cout << "A piece already occupies " << inp << std::endl;}
             }
-            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+            else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         else if (inp == "r") {
             std::pair<int, int> coords = getCoords(inp);
@@ -186,9 +186,9 @@ void Game::placePiece () {
                         (*head)->setDead(coords.first, coords.second);
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
-                else std::cout << "A piece already occupies " << inp << std::endl;
+                else {std::cout << "A piece already occupies " << inp << std::endl;}
             }
-            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+            else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         // pawn case
         else if (inp == "P") {
@@ -202,9 +202,9 @@ void Game::placePiece () {
                         (*head)->setDead(coords.first, coords.second);
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
-                else std::cout << "A piece already occupies " << inp << std::endl;
+                else {std::cout << "A piece already occupies " << inp << std::endl;}
             }
-            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+            else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         else if (inp == "p") {
             std::pair<int, int> coords = getCoords(inp);
@@ -217,9 +217,9 @@ void Game::placePiece () {
                         (*head)->setDead(coords.first, coords.second);
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
-                else std::cout << "A piece already occupies " << inp << std::endl;
+                else {std::cout << "A piece already occupies " << inp << std::endl;}
             }
-            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+            else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
     }
     else {
