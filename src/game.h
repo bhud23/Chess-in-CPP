@@ -10,16 +10,23 @@
 #include "king.h"
 
 #include <utility>
+#include <iostream>
+#include <string>
 
 class Game {
+    int move;
     Board *head;
     std::pair<int, int> white_king;
     std::pair<int, int> black_king;
+    std::par<int, int> getCoords(std::string inp);
+    void placePiece ();
+    void removePiece ();
     public:
         Game (Board *b);
         ~Game () = default;
         char pieceAt (int x, int y);
-        void defaultSetup (Board **head);
+        void defaultSetup ();
+        void customSetup();
         void movePiece (int x1, int y1, int x2, int y2);
         std::pair<int, int> kingCoords (char team);
         bool isCheck (char team);

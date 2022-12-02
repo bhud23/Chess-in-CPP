@@ -23,8 +23,8 @@ void King::setAlive (int x1, int y1) {
     else { next->setAlive(x1, y1); }
 }
 char King::getTile (int x1, int y1) {
-    if (x1 == x && y1 == y && team == 'w') return 'k';
-    else if (x1 == x && y1 == y) return 'K';
+    if (x1 == x && y1 == y && team == 'w' && alive) return 'k';
+    else if (x1 == x && y1 == y && alive) return 'K';
     else return next->getTile(x1, y1);
 }
 bool King::validMove (int x1, int y1, int x2, int y2) {

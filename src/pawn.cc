@@ -23,8 +23,8 @@ void Pawn::setAlive (int x1, int y1) {
     else { next->setAlive(x1, y1); }
 }
 char Pawn::getTile (int x1, int y1) {
-    if (x1 == x && y1 == y && team == 'w') return 'p';
-    else if (x1 == x && y1 == y) return 'P';
+    if (x1 == x && y1 == y && team == 'w' && alive) return 'p';
+    else if (x1 == x && y1 == y && alive) return 'P';
     else return next->getTile(x1, y1);
 }
 bool Pawn::validMove (int x1, int y1, int x2, int y2) {

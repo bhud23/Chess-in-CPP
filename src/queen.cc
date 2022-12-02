@@ -22,9 +22,9 @@ void Queen::setAlive (int x1, int y1) {
     if (x1 == x && y1 == y) alive = true;
     else { next->setAlive(x1, y1); }
 }
-char Queen::getTile (int x1, int y1) {
-    if (x1 == x && y1 == y && team == 'w') return 'q';
-    else if (x1 == x && y1 == y) return 'Q';
+char Queen::getTile (int x1, int y1 ) {
+    if (x1 == x && y1 == y && team == 'w' && alive) return 'q';
+    else if (x1 == x && y1 == y && alive) return 'Q';
     else return next->getTile(x1, y1);
 }
 bool Queen::validMove (int x1, int y1, int x2, int y2) {

@@ -23,8 +23,8 @@ void Knight::setAlive (int x1, int y1) {
     else { next->setAlive(x1, y1); }
 }
 char Knight::getTile (int x1, int y1) {
-    if (x1 == x && y1 == y && team == 'w') return 'n';
-    else if (x1 == x && y1 == y) return 'N';
+    if (x1 == x && y1 == y && team == 'w' && alive) return 'n';
+    else if (x1 == x && y1 == y && alive) return 'N';
     else return next->getTile(x1, y1);
 }
 bool Knight::validMove (int x1, int y1, int x2, int y2) {

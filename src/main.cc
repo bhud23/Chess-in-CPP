@@ -28,7 +28,7 @@ int main (int arc, char **argv) {
 
     Board *head = new Blank{}; // like the canvas
     GameManager *gm = new GameManager{&head}; // like the studio
-    Game game {head};
+    Game game {&head};
     std::string inp;
 
 
@@ -38,10 +38,10 @@ int main (int arc, char **argv) {
     gm->attach(graph);
     
     std::cout << "Welcome to Chess - the CS246 orignal game" << std::endl;
+    std::cout << "use --help for a list of commands" << std::endl;
     std::cout << "Here is what a default game board looks like"std::endl;
     //game.defaultSetup(&head);
     gm->displayBoard();
-    std::cout << "use --help for a list of commands" << std::endl;
     while (std::cin >> inp) {
         // if move % 2 == 1, then it is whites turn, blacks turn otherwise
         if (inp == "game") {
@@ -50,7 +50,10 @@ int main (int arc, char **argv) {
             else if (inp == "computer[1]") {}
         }
         else if (inp == "setup") {
-	        std::cin >> inp;	
+	        std::cin >> inp;
+            if  (inp == "default") game->defaultSetup ();
+            else if (inp == "custom") game->customSetup(); 
+            else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
         }
         else if (inp == "--help") {
             std::cout << "Commands:" << std::endl;
