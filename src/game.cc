@@ -10,23 +10,8 @@ char Game::pieceAt (int x, int y) {
 std::pair<int, int> Game::getCoords(std::string inp) {
     std::pair<int, int> res {-1, -1};
     if (inp.length() != 2) return res;
-    else if (inp[0] == 'a') res.first = 0;
-    else if (inp[0] == "b") res.first = 1;
-    else if (inp[0] == "c") res.first = 2;
-    else if (inp[0] == "d") res.first = 3;
-    else if (inp[0] == "e") res.first = 4;
-    else if (inp[0] == "f") res.first = 5;
-    else if (inp[0] == "g") res.first = 6;
-    else if (inp[0] == "g") res.first = 7;
-
-    if (inp[1] == "1") res.second = 0;
-    else if (inp[1] == "2") res.second = 1;
-    else if (inp[1] == "3") res.second = 2;
-    else if (inp[1] == "4") res.second = 3;
-    else if (inp[1] == "5") res.second = 4;
-    else if (inp[1] == "6") res.second = 5;
-    else if (inp[1] == "7") res.second = 6;
-    else if (inp[1] == "8") res.second = 7;
+    res.first = inp[0];
+    res.second = inp[1];
     return res;
 }
 
@@ -50,7 +35,7 @@ void Game::removePiece () {
 void Game::placePiece () {
     // big fat ugly function to create pieces
     std::string inp;
-    if (cin >> inp;) {
+    if (cin >> inp) {
         if (inp == "K") {
             std::pair<int, int> coords = getCoords(inp);
             if (coords.first != -1 && coords.second != -1) {
