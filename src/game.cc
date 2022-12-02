@@ -17,31 +17,31 @@ std::pair<int, int> Game::getCoords(std::string inp) {
 
 void Game::removePiece () {
     std::string inp;
-    (if cin >> inp) {
+    if (std::cin >> inp) {
                 std::pair<int, int> coords = getCoords(inp);
                 if (coords.first != -1 && coords.second != -1) {
-                    head->setDead(coords.first, coords.second);
+                    (*head)->setDead(coords.first, coords.second);
                     char tile = this->pieceAt(coords.first, coords.second);
-                    if ('a' <= tile && tile <= 'z' && this->isCheck('b')) head->setAlive (coords.first, coords.second)
-                    else if ('A' <= tile && tile <= 'Z' this->isCheck('w')) head->setAlive (coords.first, coords.second)
+                    if ('a' <= tile && tile <= 'z' && this->isCheck('b')) (*head)->setAlive (coords.first, coords.second);
+                    else if ('A' <= tile && tile <= 'Z' && this->isCheck('w')) (*head)->setAlive (coords.first, coords.second);
                 }
                 else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
             }
     else {
-        std::cout "Fatal error" << std::endl;
+        std::cout << "Fatal error" << std::endl;
     }
 }
 
 void Game::placePiece () {
     // big fat ugly function to create pieces
     std::string inp;
-    if (cin >> inp) {
+    if (std::cin >> inp) {
         if (inp == "K") {
             std::pair<int, int> coords = getCoords(inp);
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_')
-                    *head = new King {*head, coords.first, coords.second 'b'};
+                    *head = new King {*head, coords.first, coords.second, 'b'};
                     // if in check undo this
                     if (this->isCheck('b')) {
                         (*head)->setDead(coords.first, coords.second);
@@ -56,7 +56,7 @@ void Game::placePiece () {
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_')
-                    *head = new King {*head, coords.first, coords.second 'w'};
+                    *head = new King {*head, coords.first, coords.second, 'w'};
                     // if in check undo this
                     if (this->isCheck('w')) {
                         (*head)->setDead(coords.first, coords.second);
@@ -211,7 +211,7 @@ void Game::placePiece () {
             if (coords.first != -1 && coords.second != -1 && coords.second != 7) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_')
-                    *head = new Pawn {*head, coords.first, coords.second 'w'};
+                    *head = new Pawn {*head, coords.first, coords.second, 'w'};
                     // if in check undo this
                     if (this->isCheck('b')) {
                         (*head)->setDead(coords.first, coords.second);
@@ -223,7 +223,7 @@ void Game::placePiece () {
         }
     }
     else {
-        std::cout "Fatal error" << std::endl;
+        std::cout << "Fatal error" << std::endl;
     }
 }
 
@@ -261,15 +261,15 @@ void Game::defaultSetup () {
 void Game::customSetup () {
     std::string inp;
     bool valid_white_king = false;
-    bool valid_black_king == false;
-    while (cin >> inp) {
+    bool valid_black_king = false;
+    while (std::cin >> inp) {
         if (inp == "--help") {
             std::cout << "<piece> <coordinate>" << std::endl;
             std::cout << "\t - <piece> is one of K, k, Q, q, B, b, N, n, R, r, P, p" << std::endl;
             std::cout << "\t - <coordinate> takes the form <letter><number>" << std::endl;
         }
         else if (inp == "+") {
-            if (cin >> inp) {
+            if (std::cin >> inp) {
                 this->placePiece();
             }
         }
