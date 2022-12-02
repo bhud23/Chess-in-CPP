@@ -50,7 +50,16 @@ int main (int arc, char **argv) {
             else if (inp == "computer[1]") {}
         }
         else if (inp == "setup") {
-	        std::cin >> inp;	
+	        std::cin >> inp;
+		if (inp == "default") {
+			game.defaultSetup(&head);
+		}
+		else if (inp == "custom") {
+		
+		}
+		else {
+			std::cout << inp << " is not a command. use --help at anytime for more for more options" << std::endl;
+		}
         }
         else if (inp == "--help") {
             std::cout << "Commands:" << std::endl;
@@ -62,8 +71,6 @@ int main (int arc, char **argv) {
         else {
             std::cout << "Invalid Input\n";
         }
-        gm->displayBoard();
-        move++;
     }
     std::cout << "Final Score:" << std::endl;
     std::cout << "White: " << white_score << std::endl;
