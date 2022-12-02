@@ -10,7 +10,7 @@ char Game::pieceAt (int x, int y) {
 std::pair<int, int> Game::getCoords(std::string inp) {
     std::pair<int, int> res {-1, -1};
     if (inp.length() != 2) return res;
-    else if (inp[0] == "a") res.first = 0;
+    else if (inp[0] == 'a') res.first = 0;
     else if (inp[0] == "b") res.first = 1;
     else if (inp[0] == "c") res.first = 2;
     else if (inp[0] == "d") res.first = 3;

@@ -15,14 +15,14 @@
 
 class Game {
     int move;
-    Board *head;
+    Board **head;
     std::pair<int, int> white_king;
     std::pair<int, int> black_king;
-    std::par<int, int> getCoords(std::string inp);
+    std::pair<int, int> getCoords(std::string inp);
     void placePiece ();
     void removePiece ();
     public:
-        Game (Board *b);
+        Game (Board **b);
         ~Game () = default;
         char pieceAt (int x, int y);
         void defaultSetup ();
