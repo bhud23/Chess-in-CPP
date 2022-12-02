@@ -38,7 +38,7 @@ int main (int arc, char **argv) {
     gm->attach(graph);
     
     std::cout << "Welcome to Chess - the CS246 orignal game" << std::endl;
-    std::cout << "Here is what a default game board looks like"std::endl;
+    std::cout << "Here is what a default game board looks like" << std::endl;
     //game.defaultSetup(&head);
     gm->displayBoard();
     std::cout << "use --help for a list of commands" << std::endl;
@@ -54,7 +54,7 @@ int main (int arc, char **argv) {
         }
         else if (inp == "--help") {
             std::cout << "Commands:" << std::endl;
-            std::cout << "- game <white-player> <black-player>" std::endl;
+            std::cout << "- game <white-player> <black-player>" << std::endl;
             std::cout << "\twhere <white-player> or <black-player> can be <human> or <computer[x]\n" << std::endl;
             std::cout << " - setup"<< std::endl;
             std::cout << "\t followed by either <default> or <custom>" << std::endl;
