@@ -386,36 +386,61 @@ bool Game::isStalemate() {
 }
 
 char Game::playGame () {
+    std::string inp;
     while (true) {
         if (this->isStalemate()) return 'd';
         else if (this->isCheckmate('w')) return 'b';
         else if (this->isCheckmate('b')) return 'w';
         // if not stalemate or checkmate
-        Player *player;
-        if (move % 2) {
-            player = player1;
+        if (!(std::cin >> inp)) {
+            std::cout << "Fatal Error" << std:endl;
+            return 'd';
         }
-        else {
-            player = player2;
+        if (inp == "move") {
+            if (inp == "move") {
+                Player *player;
+                if (move % 2) {
+                    player = player1;
+                }
+                else {
+                    player = player2;
+                }
+                std::pair<int, int> piece = player->getMove();
+                if ((piece.first == -1 || piece.second == -1) && move % 2 == 0) return 'b';
+                else if ((piece.first == -1 || piece.second == -1) && move % 2 == 1) return 'w';
+                else if (move % 2 == 0 && (*head)->getTeam(piece.first, piece.second) != 'w') {
+                    std::cout << "Cannot move black piece during white's turn" << std::endl;
+                }
+                else if (move % 2 == 1 && (*head)->getTeam(piece.first, piece.second) != 'b') {
+                    std::cout << "Cannot move white piece during black's turn" << std::endl;
+                }        
+                else {
+                    std::pair<int, int> newMove = player->getMove();
+                    if (!((*head)->validMove(piece.first, piece.second, newMove.first, newMove.second))) {
+                        std::cout << "Invalid move" << std::endl;
+                    }
+                    else {
+                        move++;
+                        gm->displayBoard();
+                    }
+                }
+            }
         }
-        std::pair<int, int> piece = player->getMove();
-        if (piece.first == -1 && piece.second == -1 && move % 2 == 0) return 'b';
-        else if (piece.first == -1 && piece.second == -1 && move % 2 == 1) return 'w';
-	else if (move % 2 == 0 && (*head)->getTeam(piece.first, piece.second) != 'w') {
-		std::cout << "Cannot move black piece during white's turn" << std::endl;
-	}
-	else if (move % 2 == 1 && (*head)->getTeam(piece.first, piece.second) != 'b') {
-		std::cout << "Cannot move white piece during black's turn" << std::endl;
-	}        
-	else {
-            std::pair<int, int> newMove = player->getMove();
-            if (!((*head)->validMove(piece.first, piece.second, newMove.first, newMove.second))) {
-                std::cout << "Invalid move" << std::endl;
+        else if (inp == "resign") {
+            if (move % 2 == 0) {
+                std::cout << "White has resigned" << std::endl;
+                return 'b';
             }
             else {
-                move++;
-                gm->displayBoard();
+                std::cout << "Black has resigned" << std::endl;
+                return 'w';
             }
+        }
+        else if (inp == "--help") {
+            std::cout "options <move> <resign>" << std::endl;
+        }
+        else {
+            std::cout << "Invalid input " << inp << " use --help for more options" << std::endl; 
         }
     }
 }
