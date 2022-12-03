@@ -20,7 +20,7 @@ class Game {
     GameManager *gm;
     std::pair<int, int> white_king;
     std::pair<int, int> black_king;
-    std::pair<int, int> getCoords(std::string inp);
+    std::pair<int, int> getCoords();
     void placePiece ();
     void removePiece ();
     public:

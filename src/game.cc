@@ -43,8 +43,9 @@ void Game::placePiece () {
     std::string inp;
     if (std::cin >> inp) {
         if (inp == "K") {
-            std::pair<int, int> coords = getCoords(inp);
+            std::pair<int, int> coords = getCoords();
             if (coords.first != -1 && coords.second != -1) {
+                std::cout << "x=" << coords.first << " y=" << coords.second << std::endl;
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_') {
                     *head = new King {*head, coords.first, coords.second, 'b'};
@@ -63,7 +64,7 @@ void Game::placePiece () {
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         else if (inp == "k") {
-            std::pair<int, int> coords = getCoords(inp);
+            std::pair<int, int> coords = getCoords();
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_') {
@@ -84,7 +85,7 @@ void Game::placePiece () {
         }
         // queen case
         else if (inp == "Q") {
-            std::pair<int, int> coords = getCoords(inp);
+            std::pair<int, int> coords = getCoords();
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_') {
@@ -100,7 +101,7 @@ void Game::placePiece () {
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         else if (inp == "q") {
-            std::pair<int, int> coords = getCoords(inp);
+            std::pair<int, int> coords = getCoords();
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_') {
@@ -117,7 +118,7 @@ void Game::placePiece () {
         }
         // bishop case
         else if (inp == "B") {
-            std::pair<int, int> coords = getCoords(inp);
+            std::pair<int, int> coords = getCoords();
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_') {
@@ -133,7 +134,7 @@ void Game::placePiece () {
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         else if (inp == "b") {
-            std::pair<int, int> coords = getCoords(inp);
+            std::pair<int, int> coords = getCoords();
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_') {
@@ -150,7 +151,7 @@ void Game::placePiece () {
         }
         // knight case
         else if (inp == "N") {
-            std::pair<int, int> coords = getCoords(inp);
+            std::pair<int, int> coords = getCoords();
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_') {
@@ -166,7 +167,7 @@ void Game::placePiece () {
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         else if (inp == "n") {
-            std::pair<int, int> coords = getCoords(inp);
+            std::pair<int, int> coords = getCoords();
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_') {
@@ -183,7 +184,7 @@ void Game::placePiece () {
         }
         // rook case
         else if (inp == "R") {
-            std::pair<int, int> coords = getCoords(inp);
+            std::pair<int, int> coords = getCoords();
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_') {
@@ -199,7 +200,7 @@ void Game::placePiece () {
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         else if (inp == "r") {
-            std::pair<int, int> coords = getCoords(inp);
+            std::pair<int, int> coords = getCoords();
             if (coords.first != -1 && coords.second != -1) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_') {
@@ -216,7 +217,7 @@ void Game::placePiece () {
         }
         // pawn case
         else if (inp == "P") {
-            std::pair<int, int> coords = getCoords(inp);
+            std::pair<int, int> coords = getCoords();
             if (coords.first != -1 && coords.second != -1 && coords.second != 0) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_') {
@@ -232,7 +233,7 @@ void Game::placePiece () {
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
         else if (inp == "p") {
-            std::pair<int, int> coords = getCoords(inp);
+            std::pair<int, int> coords = getCoords();
             if (coords.first != -1 && coords.second != -1 && coords.second != 7) {
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_') {
