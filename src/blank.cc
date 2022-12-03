@@ -44,3 +44,7 @@ void Blank::setDead (int x, int y) {
 void Blank::setAlive (int x, int y) {
     return;
 }
+
+void Blank::undoMove(int x1, int y1, int x2, int y2) {
+    return;
+}

@@ -12,6 +12,7 @@ class Board {
         virtual void setAlive (int x, int y) = 0;
         virtual char getTile (int x, int y) = 0;
         virtual bool validMove (int x1, int y1, int x2, int y2) = 0;
+        virtual void undoMove (int x2, int y2) = 0;
         virtual ~Board () = default;
 };
 

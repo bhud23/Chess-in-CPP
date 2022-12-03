@@ -6,6 +6,7 @@
 class Blank : public Board {
     char getTile (int x, int y);
     bool validMove (int x1, int y1, int x2, int y2);
+    void undoMove (int x2, int y2, int x2, int y2) override;
     public:
     Blank ();
     ~Blank ();
