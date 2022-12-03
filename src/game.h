@@ -8,6 +8,7 @@
 #include "knight.h"
 #include "queen.h"
 #include "king.h"
+#include "gamemanager.h"
 
 #include <utility>
 #include <iostream>
@@ -16,6 +17,7 @@
 class Game {
     int move;
     Board **head;
+    GameManager *gm;
     std::pair<int, int> white_king;
     std::pair<int, int> black_king;
     std::pair<int, int> getCoords(std::string inp);

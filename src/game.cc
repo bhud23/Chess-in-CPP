@@ -1,7 +1,7 @@
 #include "game.h"
 
-Game::Game (Board **b):
-    move{0}, head{b}, white_king{-1, -1}, black_king{-1, -1} {}
+Game::Game (Board **b, GameManager *gm):
+    move{0}, head{b}, gm{gm}, white_king{-1, -1}, black_king{-1, -1} {}
 
 char Game::pieceAt (int x, int y) {
     return (*head)->getTile(x, y);
@@ -47,6 +47,10 @@ void Game::placePiece () {
                         (*head)->setDead(coords.first, coords.second);
                         std::cout << "The king cannot be placed in check" << std::endl;
                     }
+                    else {
+                        this->black_king.first = coords.first;
+                        this->black_king.second = coords.second;
+                    }
                 }
                 else {std::cout << "A piece already occupies " << inp << std::endl;}
             }
@@ -62,6 +66,10 @@ void Game::placePiece () {
                     if (this->isCheck('w')) {
                         (*head)->setDead(coords.first, coords.second);
                         std::cout << "The king cannot be placed in check" << std::endl;
+                    }
+                    else {
+                        this->white_king.first = coords.first;
+                        this->white_king.second = coords.second;
                     }
                 }
                 else {std::cout << "A piece already occupies " << inp << std::endl;}
@@ -268,12 +276,11 @@ void Game::defaultSetup () {
     *head = new King {*head, 3, 7, 'b'};
     black_king.first = 3;
     black_king.second = 7;
+    gm->displayBoard();
 }
 
 void Game::customSetup () {
     std::string inp;
-    bool valid_white_king = false;
-    bool valid_black_king = false;
     while (std::cin >> inp) {
         if (inp == "--help") {
             std::cout << "<piece> <coordinate>" << std::endl;
@@ -283,17 +290,30 @@ void Game::customSetup () {
         else if (inp == "+") {
             if (std::cin >> inp) {
                 this->placePiece();
+                gm->displayBoard();
             }
         }
         else if (inp == "-"){
-            this->removePiece(); // ensure removing a piece doesn't put the king in check
+            this->removePiece();
+            gm->displayBoard();
         }
         else if (inp == "=") {
             move++;
         }
         else if (inp == "done") {
-            if (valid_black_king && valid_white_king) return;
-            else std::cout << "Invalid king placement" << std::endl;
+            if (black_king.first == -1 || black_king.second == -1) {
+                std::cout << "Cannot exit - Black King not placed" << std::endl;
+                gm->displayBoard();
+            }
+            else if (white_king.first == -1 || white_king.second == -1) {
+                std::cout << "Cannot exist - White King is not placed" << std::endl;
+                gm->displayBoard();
+            }
+            else return;
+        }
+        else {
+            std::cout << "Invalid king placement" << std::endl;
+            gm->displayBoard();
         }
     }
 }
