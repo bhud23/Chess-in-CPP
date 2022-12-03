@@ -387,7 +387,18 @@ bool Game::isStalemate() {
 }
 
 bool validMove (int x1, int y1, int x2, int y2) {
-    return false;
+    if (0 > x1 || x1 > col || 0 > y1 || y1 > row || 0 > x2 || x2 > 0 || x2 > col || 0 > y2 || y2 > row) return false;
+    if (!((*head)->validMove(x1, y1, x2, y2))) return false;
+    char team = (*head)->getTeam(x1, y1);
+    if ('a' <= team && team <= 'z' && this->isCheck('w')) {
+        // undo move
+        return false;
+    }
+    else if if ('A' <= team && team <= 'Z' && this->isCheck('b')) {
+        // undo move
+        return false;
+    }
+    return true;
 }
 
 char Game::playGame () {
