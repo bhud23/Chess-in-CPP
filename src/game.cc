@@ -7,11 +7,17 @@ char Game::pieceAt (int x, int y) {
     return (*head)->getTile(x, y);
 }
 
-std::pair<int, int> Game::getCoords(std::string inp) {
+std::pair<int, int> Game::getCoords(std::string s) {
+    std::string inp;
     std::pair<int, int> res {-1, -1};
+    if (std::cin >> inp) {
     if (inp.length() != 2) return res;
     res.first = inp[0];
     res.second = inp[1];
+    }
+    else {
+    	std::cout << "Could not interpret " << inp << std::endl;
+    }
     return res;
 }
 
@@ -276,6 +282,7 @@ void Game::defaultSetup () {
     *head = new King {*head, 3, 7, 'b'};
     black_king.first = 3;
     black_king.second = 7;
+    std::cout << "Board default constructed" << std::endl;
     gm->displayBoard();
 }
 
@@ -288,10 +295,8 @@ void Game::customSetup () {
             std::cout << "\t - <coordinate> takes the form <letter><number>" << std::endl;
         }
         else if (inp == "+") {
-            if (std::cin >> inp) {
                 this->placePiece();
                 gm->displayBoard();
-            }
         }
         else if (inp == "-"){
             this->removePiece();

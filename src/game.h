@@ -24,7 +24,7 @@ class Game {
     void placePiece ();
     void removePiece ();
     public:
-        Game (Board **b);
+        Game (Board **b, GameManager *gm);
         ~Game () = default;
         char pieceAt (int x, int y);
         void defaultSetup ();

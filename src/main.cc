@@ -48,7 +48,16 @@ int main (int arc, char **argv) {
             else if (inp == "computer[1]") {}
         }
         else if (inp == "setup") {
-	        std::cin >> inp;	
+	        std::cin >> inp;
+		if (inp == "default") {
+			game.defaultSetup();
+		}
+		else if (inp == "custom") {
+			game.customSetup();
+		}
+		else {
+			std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+		}	
         }
         else if (inp == "--help") {
             std::cout << "Commands:" << std::endl;
