@@ -346,8 +346,8 @@ bool Game::isCheck (char team) {
         x = black_king.first;
         y = black_king.second;
     }
-    for (int i = 0; i < 7; i++) {
-        for (int j = 0; j < 7; j++) {
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
             char tile = (*head)->getTeam(j, i);
             if (tile != ' ' && tile != team) {
                 if ((*head)->validMove(j, i, x, y)) return true;
@@ -357,14 +357,32 @@ bool Game::isCheck (char team) {
     return false;
 }
 
-bool Game::isCheckMate (char team) {
-    return false;
+bool Game::isCheckmate (char team) {
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            for (int k = 0; k < row; k++) {
+                for (int l = 0; l < col; l++) {
+                    char tile = (*head)->getTeam(j, i);
+                    if (tile != ' ' && tile != team && (*head)->validMove(j, i, l, k)) return false;
+                }
+            }
+        }
+    }
 }
 
 bool Game::isStalemate() {
-    return false;
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            for (int k = 0; k < row; k++) {
+                for (int l = 0; l < col; l++) {
+                    if ((*head)->validMove(j, i, l, k)) return false;
+                }
+            }
+        }
+    }
+    return true;
 }
 
-void Game::printScore () {
-    return;
+bool Game::playGame () {
+    return false;
 }

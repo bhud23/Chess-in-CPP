@@ -16,13 +16,16 @@
 
 class Game {
     int move;
+    int row = 7;
+    int col = 7;
     Board **head;
     GameManager *gm;
     std::pair<int, int> white_king;
     std::pair<int, int> black_king;
-    std::pair<int, int> getCoords();
-    void placePiece ();
-    void removePiece ();
+    private:
+        std::pair<int, int> getCoords();
+        void placePiece ();
+        void removePiece ();
     public:
         Game (Board **b, GameManager *gm);
         ~Game ();
@@ -32,7 +35,7 @@ class Game {
         void movePiece (int x1, int y1, int x2, int y2);
         std::pair<int, int> kingCoords (char team);
         bool isCheck (char team);
-        bool isCheckMate (char team);
+        bool isCheckmate (char team);
         bool isStalemate ();
         void printScore ();
         bool playGame ();

@@ -11,4 +11,5 @@ project_guidelines.pdf
 src/*.o
 src/*.d
 *.swp
-src/chess
+src/chess*
+
