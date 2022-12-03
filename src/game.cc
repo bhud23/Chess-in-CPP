@@ -1,7 +1,7 @@
 #include "game.h"
 
-Game::Game (Board **b, GameManager *gm):
-    move{0}, head{b}, gm{gm}, white_king{-1, -1}, black_king{-1, -1} {}
+Game::Game (Board **b, GameManager *gm, Player *player1, Player *player2):
+    move{0}, head{b}, gm{gm}, white_king{-1, -1}, black_king{-1, -1}, player1{player1}, player2{player2} {}
 
 
 Game::~Game () {
@@ -383,6 +383,31 @@ bool Game::isStalemate() {
     return true;
 }
 
-bool Game::playGame () {
-    return false;
+char Game::playGame () {
+    while (true) {
+        if (this->isStalemate()) return 'd';
+        else if (this->isCheckmate('w')) return 'b';
+        else if (this->isCheckmate('b')) return 'w';
+        // if not stalemate or checkmate
+        Player *player;
+        if (move % 2) {
+            player = player1;
+        }
+        else {
+            player = player2;
+        }
+        std::pair<int, int> piece = (*player)->getMove();
+        if (move.first == -1 && move.second == -1 && move % 2 == 0) return 'b';
+        else if (move.first == -1 && move.second == -1 && move % 2 == 1) return 'w';
+        else if {
+            std::pair<int, int> move = (*player)->getMove();
+            if (!(*head)->validMove(piece.first, piece.second, move.first, move.second)) {
+                std::cout << "Invalid move" << std::endl;
+            }
+            else {
+                move++;
+                gm->displayBoard();
+            }
+        }
+    }
 }

@@ -22,12 +22,14 @@ class Game {
     GameManager *gm;
     std::pair<int, int> white_king;
     std::pair<int, int> black_king;
+    Player *player1;
+    Player *player2;
     private:
         std::pair<int, int> getCoords();
         void placePiece ();
         void removePiece ();
     public:
-        Game (Board **b, GameManager *gm);
+        Game (Board **b, GameManager *gm, Player *player1, Player *player2);
         ~Game ();
         char pieceAt (int x, int y);
         void defaultSetup ();
@@ -38,7 +40,7 @@ class Game {
         bool isCheckmate (char team);
         bool isStalemate ();
         void printScore ();
-        bool playGame ();
+        char playGame ();
 };
 
 #endif
