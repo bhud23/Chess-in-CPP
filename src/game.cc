@@ -7,13 +7,15 @@ char Game::pieceAt (int x, int y) {
     return (*head)->getTile(x, y);
 }
 
-std::pair<int, int> Game::getCoords(std::string s) {
+std::pair<int, int> Game::getCoords() {
     std::string inp;
     std::pair<int, int> res {-1, -1};
     if (std::cin >> inp) {
-    if (inp.length() != 2) return res;
-    res.first = inp[0];
-    res.second = inp[1];
+   	 if (inp.length() != 2) return res;
+	 res.first = inp[0] - 'a';
+	 res.second = inp[1] - '1';
+	 if (0 > res.first || res.first > 7) res.first = -1;
+	 if (0 > res.second || res.second > 7) res.second = -1;
     }
     else {
     	std::cout << "Could not interpret " << inp << std::endl;
@@ -24,7 +26,7 @@ std::pair<int, int> Game::getCoords(std::string s) {
 void Game::removePiece () {
     std::string inp;
     if (std::cin >> inp) {
-                std::pair<int, int> coords = getCoords(inp);
+                std::pair<int, int> coords = getCoords();
                 if (coords.first != -1 && coords.second != -1) {
                     (*head)->setDead(coords.first, coords.second);
                     char tile = this->pieceAt(coords.first, coords.second);
