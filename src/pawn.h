@@ -12,6 +12,7 @@ class Pawn : public Piece {
         int getX () override;
         int getY () override;
         char getTeam () override;
+        char getTeam (int x1, int y1) override;
         char getType () override;
         void setDead (int x, int y) override;
         void setAlive (int x, int y) override;

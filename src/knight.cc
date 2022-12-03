@@ -10,6 +10,10 @@ Knight::~Knight () {
 int Knight::getX () { return x; }
 int Knight::getY () { return y; }
 char Knight::getTeam () { return team; }
+char Knight::getTeam (int x1, int y1) {
+    if (x == x1 && y == y1) return team;
+    else return next->getTeam(x1, y1);
+}
 char Knight::getType () {
     if (team == 'w') return 'n';
     else return 'N';

@@ -10,6 +10,10 @@ Pawn::~Pawn () {
 int Pawn::getX () { return x; }
 int Pawn::getY () { return y; }
 char Pawn::getTeam () { return team; }
+char Pawn::getTeam (int x1, int y1) {
+    if (x == x1 && y == y1) return team;
+    else return next->getTeam(x1, y1);
+}
 char Pawn::getType () {
     if (team == 'w') return 'p';
     else return 'P';

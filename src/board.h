@@ -7,6 +7,7 @@ class Board {
         virtual int getX () = 0;
         virtual int getY () = 0;
         virtual char getTeam () = 0;
+        virtual char getTeam (int x1, int y1) = 0;
         virtual char getType () = 0;
         virtual void setDead (int x, int y) = 0;
         virtual void setAlive (int x, int y) = 0;

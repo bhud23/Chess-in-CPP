@@ -10,6 +10,10 @@ Queen::~Queen () {
 int Queen::getX () { return x; }
 int Queen::getY () { return y; }
 char Queen::getTeam () { return team; }
+char Queen::getTeam (int x1, int y1) {
+    if (x == x1 && y == y1) return team;
+    else return next->getTeam(x1, y1);
+}
 char Queen::getType () {
     if (team == 'w') return 'q';
     else return 'Q';

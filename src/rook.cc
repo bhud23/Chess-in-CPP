@@ -10,6 +10,10 @@ Rook::~Rook () {
 int Rook::getX () { return x; }
 int Rook::getY () { return y; }
 char Rook::getTeam () { return team; }
+char Rook::getTeam (int x1, int y1) {
+    if (x == x1 && y == y1) return team;
+    else return next->getTeam(x1, y1);
+}
 char Rook::getType () {
     if (team == 'w') return 'r';
     else return 'R';

@@ -10,6 +10,10 @@ Bishop::~Bishop () {
 int Bishop::getX () { return x; }
 int Bishop::getY () { return y; }
 char Bishop::getTeam () { return team; }
+char Bishop::getTeam (int x1, int y1) {
+    if (x == x1 && y == y1) return team;
+    else return next->getTeam(x1, y1);
+}
 char Bishop::getType () {
     if (team == 'w') return 'b';
     else return 'B';

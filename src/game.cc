@@ -331,6 +331,24 @@ void Game::movePiece (int x1, int y1, int x2, int y2) {
 }
 
 bool Game::isCheck (char team) {
+    int x = -1;
+    int y = -1;
+    if (team == 'w') {
+        x = white_king.first;
+        y = white_king.second;
+    }
+    else {
+        x = black_king.first;
+        y = black_king.second;
+    }
+    for (int i = 0; i < 7; i++) {
+        for (int j = 0; j < 7; j++) {
+            char tile = (*head)->getTeam(j, i);
+            if (tile != ' ' && tile != team) {
+                if ((*head)->validMove(j, i, x, y)) return true;
+            }
+        }
+    }
     return false;
 }
 

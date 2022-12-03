@@ -22,7 +22,7 @@
 #include <string>
 
 int main (int arc, char **argv) {
-    int move = 1;
+    bool setup = false;
     int white_score = 0;
     int black_score = 0;
 
@@ -38,22 +38,26 @@ int main (int arc, char **argv) {
     gm->attach(graph);
     
     std::cout << "Welcome to Chess - the CS246 orignal game" << std::endl;
-    std::cout << "Here is what a default game board looks like" << std::endl;
-    gm->displayBoard();
+    std::cout << "Use the command --help at any time to display your current options" << std::endl;
     while (std::cin >> inp) {
         // if move % 2 == 1, then it is whites turn, blacks turn otherwise
         if (inp == "game") {
-		    std::cin >> inp;
-            if (inp == "human") {}
-            else if (inp == "computer[1]") {}
+            if (!setup) {
+                std::cout << "The game must be setup before continuing. Use --help to display your current options" << std::endl;
+            }
+            else {
+                std::cin >> inp;
+            }
         }
         else if (inp == "setup") {
 	        std::cin >> inp;
 		if (inp == "default") {
 			game.defaultSetup();
+            setup = true;
 		}
 		else if (inp == "custom") {
 			game.customSetup();
+            setup = true;
 		}
 		else {
 			std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;

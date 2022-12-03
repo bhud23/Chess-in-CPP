@@ -10,6 +10,10 @@ King::~King () {
 int King::getX () { return x; }
 int King::getY () { return y; }
 char King::getTeam () { return team; }
+char King::getTeam (int x1, int y1) {
+    if (x == x1 && y == y1) return team;
+    else return next->getTeam(x1, y1);
+}
 char King::getType () {
     if (team == 'w') return 'k';
     else return 'K';
