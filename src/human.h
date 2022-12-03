@@ -3,6 +3,7 @@
 
 #include "player.h"
 #include <string>
+#include <iostream>
 
 class Human : public Player {
     std::istream &in = std::cin;

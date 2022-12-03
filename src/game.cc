@@ -396,12 +396,18 @@ char Game::playGame () {
         else {
             player = player2;
         }
-        std::pair<int, int> piece = (*player)->getMove();
-        if (move.first == -1 && move.second == -1 && move % 2 == 0) return 'b';
-        else if (move.first == -1 && move.second == -1 && move % 2 == 1) return 'w';
-        else if {
-            std::pair<int, int> move = (*player)->getMove();
-            if (!(*head)->validMove(piece.first, piece.second, move.first, move.second)) {
+        std::pair<int, int> piece = player->getMove();
+        if (piece.first == -1 && piece.second == -1 && move % 2 == 0) return 'b';
+        else if (piece.first == -1 && piece.second == -1 && move % 2 == 1) return 'w';
+	else if (move % 2 == 0 && (*head)->getTeam(piece.first, piece.second) != 'w') {
+		std::cout << "Cannot move black piece during white's turn" << std::endl;
+	}
+	else if (move % 2 == 1 && (*head)->getTeam(piece.first, piece.second) != 'b') {
+		std::cout << "Cannot move white piece during black's turn" << std::endl;
+	}        
+	else {
+            std::pair<int, int> newMove = player->getMove();
+            if (!((*head)->validMove(piece.first, piece.second, newMove.first, newMove.second))) {
                 std::cout << "Invalid move" << std::endl;
             }
             else {

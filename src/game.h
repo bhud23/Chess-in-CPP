@@ -9,6 +9,7 @@
 #include "queen.h"
 #include "king.h"
 #include "gamemanager.h"
+#include "player.h"
 
 #include <utility>
 #include <iostream>

@@ -6,7 +6,7 @@
 class Player {
     public:
         virtual ~Player () = default;
-        std::pair<int, int> getMove () = 0;
+        virtual std::pair<int, int> getMove () = 0;
 };
 
 #endif

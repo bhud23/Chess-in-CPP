@@ -14,6 +14,8 @@
 #include "observer.h"
 #include "graphicdisplay.h"
 #include "textdisplay.h"
+#include "player.h"
+#include "human.h"
 #include "game.h"
 
 #include <utility>
@@ -46,7 +48,7 @@ int main (int arc, char **argv) {
                 std::cout << "The game must be setup before continuing. Use --help to display your current options" << std::endl;
             }
             else {
-                Player *p1, p2;
+                Player *p1, *p2;
                 std::cin >> inp;
                 if (inp == "human") {
                     Player *p1 = new Human {};
