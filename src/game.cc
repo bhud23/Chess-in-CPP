@@ -6,6 +6,8 @@ Game::Game (Board **b, GameManager *gm, Player *player1, Player *player2):
 
 Game::~Game () {
 	delete gm;
+    delete player1;
+    delete player2;
 }
 
 char Game::pieceAt (int x, int y) {

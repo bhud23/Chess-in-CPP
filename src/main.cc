@@ -31,6 +31,7 @@ int main (int arc, char **argv) {
     Board *head = new Blank{}; // like the canvas
     GameManager *gm = new GameManager{&head}; // like the studio
     Game game {&head, gm, nullptr, nullptr};
+    head->setGame(&game);
     std::string inp;
 
 
