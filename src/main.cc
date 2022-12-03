@@ -28,7 +28,7 @@ int main (int arc, char **argv) {
 
     Board *head = new Blank{}; // like the canvas
     GameManager *gm = new GameManager{&head}; // like the studio
-    Game game {&head, gm};
+    Game game {&head, gm, nullptr, nullptr};
     std::string inp;
 
 
@@ -46,7 +46,18 @@ int main (int arc, char **argv) {
                 std::cout << "The game must be setup before continuing. Use --help to display your current options" << std::endl;
             }
             else {
+                Player *p1, p2;
                 std::cin >> inp;
+                if (inp == "human") {
+                    Player *p1 = new Human {};
+                    game.setPlayer1(p1);
+                }
+                std::cin >> inp;
+                if (inp == "human") {
+                    Player *p2 = new Human {};
+                    game.setPlayer2(p2);
+                }
+
             }
         }
         else if (inp == "setup") {

@@ -41,6 +41,8 @@ class Game {
         bool isStalemate ();
         void printScore ();
         char playGame ();
+        void setPlayer1 (Player *p);
+        void setPlayer2 (Player *p);
 };
 
 #endif

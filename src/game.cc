@@ -411,3 +411,12 @@ char Game::playGame () {
         }
     }
 }
+
+
+void Game::setPlayer1 (Player *p){
+    player1 = p;
+}
+
+void Game::setPlayer2 (Player *p) {
+    player2 = p;
+}
