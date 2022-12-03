@@ -1,8 +1,6 @@
 #ifndef _BOARD_H
 #define _BOARD_H
 
-#include "game.h"
-
 class Board {
     public:
         virtual int getX () = 0;

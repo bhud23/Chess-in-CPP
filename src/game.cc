@@ -370,6 +370,7 @@ bool Game::isCheckmate (char team) {
             }
         }
     }
+    return true;
 }
 
 bool Game::isStalemate() {
