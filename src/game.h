@@ -40,7 +40,7 @@ class Game {
         bool isCheck (char team);
         bool isCheckmate (char team);
         bool isStalemate ();
-        void printScore ();
+        bool validMove(int x1, int y1, int x2, int y2);
         char playGame ();
         void setPlayer1 (Player *p);
         void setPlayer2 (Player *p);
