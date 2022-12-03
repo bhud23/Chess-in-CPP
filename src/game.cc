@@ -3,6 +3,11 @@
 Game::Game (Board **b, GameManager *gm):
     move{0}, head{b}, gm{gm}, white_king{-1, -1}, black_king{-1, -1} {}
 
+
+Game::~Game () {
+	delete gm;
+}
+
 char Game::pieceAt (int x, int y) {
     return (*head)->getTile(x, y);
 }

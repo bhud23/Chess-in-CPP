@@ -25,7 +25,7 @@ class Game {
     void removePiece ();
     public:
         Game (Board **b, GameManager *gm);
-        ~Game () = default;
+        ~Game ();
         char pieceAt (int x, int y);
         void defaultSetup ();
         void customSetup();
