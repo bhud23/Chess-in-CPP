@@ -12,7 +12,7 @@ void King::move (int x1, int y1, int x2, int y2) {
         x = x2;
         y = y2;
     }
-    else return next->setX(x1, y2, x2, y2);
+    else return next->move(x1, y2, x2, y2);
 }
 
 char King::getTeam () { return team; }
