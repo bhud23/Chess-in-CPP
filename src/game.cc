@@ -403,31 +403,32 @@ bool Game::validMove (int x1, int y1, int x2, int y2) {
 
 char Game::playGame () {
     std::cout << "The game has started. Use  --help to display options" << std::endl;
+    std::cout << "White's turn" << std::endl;
     std::string inp;
     while (std::cin >> inp) {
         //if (this->isStalemate()) return 'w';
         //else if (this->isCheckmate('w')) return 'b';
         //else if (this->isCheckmate('b')) return 'w';
         // if not stalemate or checkmate
+	gm->displayBoard();
+	Player *player;
+	if (move % 2 == 0 && move != 0) {
+        	player = player1;
+                std::cout << "White's turn" << std::endl;
+        }
+        else if (move % 2 == 1) {
+        	player = player2;
+                std::cout << "Black's turn" << std::endl;
+        }
         if (inp == "move") {
-                Player *player;
-                if (move % 2) {
-                    player = player1;
-                    std::cout << "White's turn" << std::endl;
+       	        std::pair<int, int> piece = player->getMove();
+              	std::pair<int, int> newMove = player->getMove();
+       	        if (!(this->validMove(piece.first, piece.second, newMove.first, newMove.second))) {
+       	            std::cout << "Invalid move" << std::endl;
                 }
                 else {
-                    player = player2;
-                    std::cout << "Black's turn" << std::endl;
-                }
-                std::pair<int, int> piece = player->getMove();
-                std::pair<int, int> newMove = player->getMove();
-                if (!(this->validMove(piece.first, piece.second, newMove.first, newMove.second))) {
-                    std::cout << "Invalid move" << std::endl;
-                }
-                else {
-                    move++;
-                    gm->displayBoard();
-                }
+       	            move++;
+      	       }
         }
         else if (inp == "resign") {
             if (move % 2 == 0) {
