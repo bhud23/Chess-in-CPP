@@ -350,7 +350,6 @@ void Game::setDead (int x1, int y1) {
 }
 
 bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
-	std::cout << "made it here\n";
     char team = (*head)->getTeam(x1, y1);
     int dir = 1;
     if (team == 'b') dir = -1; 
@@ -362,9 +361,10 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
             (*head)->setX(x2, y2, x1, y1);
             (*head)->setY(x1, y2, x1, y1);
             this->setAlive(x2, y2);
+	    std::cout <<"move failed\n";
             return false;
         }
-	    std::cout << "Also made it here\n";
+	std::cout << "piece has been moved\n";
     }
     if ((team == 'B' && y2 == 0) || (team == 'w' && y2 == 7)) {
         std::string inp;
@@ -585,7 +585,7 @@ char Game::playGame () {
     std::cout << "The game has started. Use  --help to display options" << std::endl;
     std::string inp;
     while (true) {
-	    Player *player;
+	Player *player;
         if (move % 2 == 0) {
             player = player1;
             std::cout << "White's turn" << std::endl;
@@ -614,6 +614,7 @@ char Game::playGame () {
                 bool res = this->validMove(piece.first, piece.second, newMove.first, newMove.second);
                 if (!res) {
                     std::cout << "Invalid move" << std::endl;
+		    continue;
                 }
                 else {
                     move++;
@@ -636,9 +637,11 @@ char Game::playGame () {
             else if (inp == "undo") {
                 if (move % 2 == 0) {
                     std::cout << "undoing White's move" << std::endl;
+		    continue;
                 }
                 else {
                     std::cout << "undoing Black's move" << std::endl;
+		    continue;
                 }
                 gm->displayBoard();
                 // undo the move
@@ -648,14 +651,17 @@ char Game::playGame () {
                 std::cout << "- move <coordinate> <coordinate>" << std::endl;
                 std::cout << "\twhere <coordinate> is composed of a letter a-h and number 1-8" << std::endl;
                 std::cout << " - resign" << std::endl;
+		continue;
             }
             else {
                 std::cout << " Invalid input " << inp << " use --help for more options" << std::endl; 
             }
         }
-        std::cout << "Fatal Error" << std::endl;
-        move = 0;
-        return 'd';
+	else {
+		std::cout << "Fatal Error" << std::endl;
+      		move = 0;
+        	return 'd';
+	}
     }
 }
 
