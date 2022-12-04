@@ -405,9 +405,9 @@ char Game::playGame () {
     std::cout << "The game has started. Use  --help to display options" << std::endl;
     std::string inp;
     while (std::cin >> inp) {
-        if (this->isStalemate()) return 'd';
-        else if (this->isCheckmate('w')) return 'b';
-        else if (this->isCheckmate('b')) return 'w';
+        //if (this->isStalemate()) return 'w';
+        //else if (this->isCheckmate('w')) return 'b';
+        //else if (this->isCheckmate('b')) return 'w';
         // if not stalemate or checkmate
         if (inp == "move") {
                 Player *player;
