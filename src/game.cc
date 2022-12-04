@@ -355,11 +355,9 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
     if (team == 'b') dir = -1; 
     if ((x2 - x1 == 0 || x2 - x1 == 1 || x2 - x1 == -1) && (y1 + dir == y2)) {
         this->setDead(x2, y2);
-        (*head)->setX(x1, y1, x2, y2);
-        (*head)->setY(x2, y1, x2, y2);
+        (*head)->move(x1, y1, x2, y2);
         if (this->isCheck(team)) {
-            (*head)->setX(x2, y2, x1, y1);
-            (*head)->setY(x1, y2, x1, y1);
+            (*head)->move(x2, y2, x1, y1);
             this->setAlive(x2, y2);
 	    std::cout <<"move failed\n";
             return false;
@@ -414,12 +412,11 @@ bool Game::rookValidMove(int x1, int y1, int x2, int y2) {
             }
         }
         this->setDead(x2, y2);
-        (*head)->setX(x1, y1, x2, y2);
-        (*head)->setY(x2, y1, x2, y2);
+        (*head)->move(x1, y1, x2, y2);
         if (this->isCheck(team)) {
-            (*head)->setX(x2, y2, x1, y1);
-            (*head)->setY(x1, y2, x1, y1);
+            (*head)->move(x2, y2, x1, y1);
             this->setAlive(x2, y2);
+	    std::cout <<"move failed\n";
             return false;
         }
         return true;
@@ -432,24 +429,22 @@ bool Game::knightValidMove(int x1, int y1, int x2, int y2) {
     int newY = y2 - y1;
     if ((newX == 1 || newX == -1) && (newY == 2 || newY == -2)) {
         this->setDead(x2, y2);
-        (*head)->setX(x1, y1, x2, y2);
-        (*head)->setY(x2, y1, x2, y2);
+        (*head)->move(x1, y1, x2, y2);
         if (this->isCheck(team)) {
-            (*head)->setX(x2, y2, x1, y1);
-            (*head)->setY(x1, y2, x1, y1);
+            (*head)->move(x2, y2, x1, y1);
             this->setAlive(x2, y2);
+	    std::cout <<"move failed\n";
             return false;
         }
         return true;
     }
     else if ((newX == 2 || newX == -2) && (newY == 1 || newY == -1)) {
         this->setDead(x2, y2);
-        (*head)->setX(x1, y1, x2, y2);
-        (*head)->setY(x2, y1, x2, y2);
+        (*head)->move(x1, y1, x2, y2);
         if (this->isCheck(team)) {
-            (*head)->setX(x2, y2, x1, y1);
-            (*head)->setY(x1, y2, x1, y1);
+            (*head)->move(x2, y2, x1, y1);
             this->setAlive(x2, y2);
+	    std::cout <<"move failed\n";
             return false;
         }
         return true;
@@ -478,12 +473,11 @@ bool Game::bishopValidMove(int x1, int y1, int x2, int y2) {
             }
         }
         this->setDead(x2, y2);
-        (*head)->setX(x1, y1, x2, y2);
-        (*head)->setY(x2, y1, x2, y2);
+        (*head)->move(x1, y1, x2, y2);
         if (this->isCheck(team)) {
-            (*head)->setX(x2, y2, x1, y1);
-            (*head)->setY(x1, y2, x1, y1);
+            (*head)->move(x2, y2, x1, y1);
             this->setAlive(x2, y2);
+	    std::cout <<"move failed\n";
             return false;
         }
         return true;
@@ -504,12 +498,11 @@ bool Game::kingValidMove(int x1, int y1, int x2, int y2) {
 
     if ((newX == 0 || newX == 1) && (newY == 0 || newY == 1)) {
         this->setDead(x2, y2);
-        (*head)->setX(x1, y1, x2, y2);
-        (*head)->setY(x2, y1, x2, y2);
+        (*head)->move(x1, y1, x2, y2);
         if (this->isCheck(team)) {
-            (*head)->setX(x2, y2, x1, y1);
-            (*head)->setY(x1, y2, x1, y1);
+            (*head)->move(x2, y2, x1, y1);
             this->setAlive(x2, y2);
+	    std::cout <<"move failed\n";
             return false;
         }
 	return true;

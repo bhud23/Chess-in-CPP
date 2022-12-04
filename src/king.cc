@@ -7,14 +7,14 @@ King::~King () {
     delete next;
 }
 
-void King::setX (int x1, int y1, int x2, int y2) {
-    if (x == x1 && y == y1) x = x2;
+void King::move (int x1, int y1, int x2, int y2) {
+    if (x == x1 && y == y1) {
+        x = x2;
+        y = y2;
+    }
     else return next->setX(x1, y2, x2, y2);
 }
-void King::setY (int x1, int y1, int x2, int y2) {
-    if (x == x1 && y == y1) y = y2;
-    else return next->setX(x1, y2, x2, y2);
-}
+
 char King::getTeam () { return team; }
 char King::getTeam (int x1, int y1) {
     if (x == x1 && y == y1) return team;

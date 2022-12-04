@@ -8,15 +8,12 @@ Pawn::~Pawn () {
     delete next;
 }
 
-void Pawn::setX (int x1, int y1, int x2, int y2) {
+void Pawn::move (int x1, int y1, int x2, int y2) {
+    std::cout "Pawn move called" << std::endl;
     if (x == x1 && y == y1) {
-	    x = x2;
-	    std::cout << "here" << std::endl;
+        x = x2;
+        y = y2;
     }
-    else return next->setX(x1, y2, x2, y2);
-}
-void Pawn::setY (int x1, int y1, int x2, int y2) {
-    if (x == x1 && y == y1) y = y2;
     else return next->setX(x1, y2, x2, y2);
 }
 

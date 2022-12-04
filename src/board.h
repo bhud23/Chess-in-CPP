@@ -3,8 +3,7 @@
 
 class Board {
     public:
-        virtual void setX (int x1, int y1, int x2, int y2) = 0;
-        virtual void setY (int x1, int y1, int x2, int y2) = 0;
+        virtual void move (int x1, int y1, int x2, int y2) = 0;
         virtual char getTeam () = 0; // remove
         virtual char getTeam (int x1, int y1) = 0;
         virtual char getType () = 0; // remove
