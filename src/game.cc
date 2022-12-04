@@ -318,7 +318,10 @@ void Game::customSetup () {
             gm->displayBoard();
         }
         else if (inp == "=") {
-            move++;
+            if (std::cin >> inp) {
+                if (inp == 'white') move = 0;
+                else move = 1;
+            }
         }
         else if (inp == "done") {
             if (black_king.first == -1 || black_king.second == -1) {
@@ -350,7 +353,30 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
 
 }
 bool Game::rookValidMove(int x1, int y1, int x2, int y2) {
-    
+    char team = (*head)->getTeam(x1, y1);
+    int newX = x2 - x1;
+    int newY = y2 - y1;
+
+    if ((newX == 0 && newY != 0) || (newY == 0 && newX != 0)) {
+        int delta_x = 1;
+        int delta_y = 1;
+        if (newX == 0) delta_x = 0;
+        if (newY == 0) delta_y = 0;
+        for (int i = newX + delta_x, int j = newY + delta_y; i != newX && j != newY; i += delta_x, j += delta_y) {
+            char tile = (*head)->getTile(i, j);
+            if (tile != ' ' || tile != '_') return false
+        }
+        this->setDead(x2, y2);
+        (*head)->setX(x1, y1, x2, y2);
+        (*head)->setY(x2, y1, x2, y2);
+        if (this->isCheck(team)) {
+            (*head)->setX(x2, y2, x1, y1);
+            (*head)->setY(x1, y2, x1, y1);
+            this->setAlive(x2, y2);
+            return false;
+        }
+        return true;
+    }
 }
 bool Game::knightValidMove(int x1, int y1, int x2, int y2) {
     char team = (*head)->getTeam(x1, y1);
@@ -359,10 +385,10 @@ bool Game::knightValidMove(int x1, int y1, int x2, int y2) {
     if ((newX == 1 || newX == -1) && (newY == 2 || newY == -2)) {
         this->setDead(x2, y2);
         (*head)->setX(x1, y1, x2, y2);
-        (*head)->setX(x1, y1, x2, y2);
+        (*head)->setY(x2, y1, x2, y2);
         if (this->isCheck(team)) {
             (*head)->setX(x2, y2, x1, y1);
-            (*head)->setX(x2, y2, x1, y1);
+            (*head)->setY(x1, y2, x1, y1);
             this->setAlive(x2, y2);
             return false;
         }
@@ -371,10 +397,10 @@ bool Game::knightValidMove(int x1, int y1, int x2, int y2) {
     else if ((newX == 2 || newX == -2) && (newY == 1 || newY == -1)) {
         this->setDead(x2, y2);
         (*head)->setX(x1, y1, x2, y2);
-        (*head)->setX(x1, y1, x2, y2);
+        (*head)->setY(x2, y1, x2, y2);
         if (this->isCheck(team)) {
             (*head)->setX(x2, y2, x1, y1);
-            (*head)->setX(x2, y2, x1, y1);
+            (*head)->setY(x1, y2, x1, y1);
             this->setAlive(x2, y2);
             return false;
         }
@@ -402,10 +428,10 @@ bool Game::bishopValidMove(int x1, int y1, int x2, int y2) {
         }
         this->setDead(x2, y2);
         (*head)->setX(x1, y1, x2, y2);
-        (*head)->setX(x1, y1, x2, y2);
+        (*head)->setY(x2, y1, x2, y2);
         if (this->isCheck(team)) {
             (*head)->setX(x2, y2, x1, y1);
-            (*head)->setX(x2, y2, x1, y1);
+            (*head)->setY(x1, y2, x1, y1);
             this->setAlive(x2, y2);
             return false;
         }
@@ -419,7 +445,25 @@ bool Game::queenValidMove(int x1, int y1, int x2, int y2) {
     
 }
 bool Game::kingValidMove(int x1, int y1, int x2, int y2) {
-    
+    char team = (*head)->getTeam(x1, y1);
+    int newX = x2 - x1;
+    int newY = y2 - y1;
+
+    if (newX < 0) newX *= -1;
+    if (newY < 0) newY *= -1;
+
+    if ((newX == 0 || newX == 1) && (newY == 0 || newY == 1)) {
+        this->setDead(x2, y2);
+        (*head)->setX(x1, y1, x2, y2);
+        (*head)->setY(x2, y1, x2, y2);
+        if (this->isCheck(team)) {
+            (*head)->setX(x2, y2, x1, y1);
+            (*head)->setY(x1, y2, x1, y1);
+            this->setAlive(x2, y2);
+            return false;
+        }
+    }
+    else return false;
 }
 
 bool Game::validMove (int x1, int y1, int x2, int y2) {
