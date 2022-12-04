@@ -350,8 +350,50 @@ void Game::setDead (int x1, int y1) {
 }
 
 bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
-    return false;
+    char team = (*head)->getTeam(x1, y1);
+    int dir = -1;
+    if (team == 'b') dir = -1; 
+    if ((x2 - x1 == 0 || x2 - x1 == 1 || x2 - x1 == -1) && y1 + dir = y2) {
+        this->setDead(x2, y2);
+        (*head)->setX(x1, y1, x2, y2);
+        (*head)->setY(x2, y1, x2, y2);
+        if (this->isCheck(team)) {
+            (*head)->setX(x2, y2, x1, y1);
+            (*head)->setY(x1, y2, x1, y1);
+            this->setAlive(x2, y2);
+            return false;
+        }
+    }
+    if ((team == 'B' && y2 == 0) || (team == 'w' && y2 == 7)) {
+        std::string inp;
+        while (std::cin << inp) {
+            if (inp == "Q") {
+                this->setDead(x2, y2);
+                *head = new Queen {*head, x2, y2, team};
+                break;
+            }
+            else if (inp == "R") {
+                this->setDead(x2, y2);
+                *head = new Queen {*head, x2, y2, team};
+                break;
+            }
+            else if (inp == "B") {
+                this->setDead(x2, y2);
+                *head = new Queen {*head, x2, y2, team};
+                break;
+            }
+            else if (inp == "N") {
+                this->setDead(x2, y2);
+                *head = new Queen {*head, x2, y2, team};
+                break;
+            }
+            else {
+                std::cout << "Invalid piece " << inp << " ensure the piece you enter is capitalized" << std::endl;
+            }
+        }
+    }
 }
+
 bool Game::rookValidMove(int x1, int y1, int x2, int y2) {
     char team = (*head)->getTeam(x1, y1);
     int newX = x2 - x1;
