@@ -17,12 +17,12 @@ bool Blank::validMove (int x1, int y1, int x2, int y2) {
     return false;
 }
 
-int Blank::getX () {
-    return -1;
+void Blank::setX (int x1, int y1, int x2, int y2) {
+    return;
 }
 
-int Blank::getY () {
-    return -1;
+void Blank::setY (int x1, int y1, int x2, int y2) {
+    return;
 }
 
 char Blank::getTeam () {
