@@ -45,7 +45,7 @@ int main (int arc, char **argv) {
         // if move % 2 == 1, then it is whites turn, blacks turn otherwise
         if (inp == "game") {
             if (!setup) {
-                std::cout << "The game must be setup before continuing. Use --help to display your current options" << std::endl;
+                std::cout << "The game must be setup before continuing." << std::endl;
             }
 	    else {
 		game.setPlayer1(new Human{});
@@ -81,7 +81,7 @@ int main (int arc, char **argv) {
         else if (inp == "--help") {
             std::cout << "Commands:" << std::endl;
             std::cout << "- game <white-player> <black-player>" << std::endl;
-            std::cout << "\twhere <white-player> or <black-player> can be <human> or <computer[x]>\n" << std::endl;
+            std::cout << "\twhere <white-player> or <black-player> can be <human> or <computer[x]>" << std::endl;
             std::cout << " - setup" << std::endl;
             std::cout << "\t followed by either <default> or <custom>" << std::endl;
         }

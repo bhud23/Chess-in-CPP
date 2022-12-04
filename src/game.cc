@@ -300,9 +300,14 @@ void Game::customSetup () {
     std::string inp;
     while (std::cin >> inp) {
         if (inp == "--help") {
-            std::cout << "<piece> <coordinate>" << std::endl;
+            std::cout << " + <piece> <coordinate>" << std::endl;
             std::cout << "\t - <piece> is one of K, k, Q, q, B, b, N, n, R, r, P, p" << std::endl;
-            std::cout << "\t - <coordinate> takes the form <letter><number>" << std::endl;
+            std::cout << "\t - <coordinate> is composed of a letter a-h and number 1-8" << std::endl;
+            std::cout << " - <piece> <coordinate>" << std::endl;
+            std::cout << " = <colour>" << std::endl;
+            std::cout << "\t - where <colour> is either <white> or <black>" << std::endl;
+            std::cout << "done" << std::endl;
+            std::cout << "\t - to leave setup mode (can only be performed if setup is valid" << std::endl;
         }
         else if (inp == "+") {
                 this->placePiece();
@@ -327,7 +332,7 @@ void Game::customSetup () {
             else return;
         }
         else {
-            std::cout << "Invalid king placement" << std::endl;
+            std::cout << "Invalid command " << inp << " use --help to display options." << std::endl;
             gm->displayBoard();
         }
     }
@@ -376,6 +381,8 @@ bool Game::isCheckmate (char team) {
 bool Game::isStalemate() {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
+            char tile = (*head)->getTile(j, i);
+            if (tile == ' ' || tile == '_') continue;
             for (int k = 0; k < row; k++) {
                 for (int l = 0; l < col; l++) {
                     if ((*head)->validMove(j, i, l, k)) return false;
@@ -406,15 +413,15 @@ char Game::playGame () {
     std::cout << "White's turn" << std::endl;
     std::string inp;
     while (std::cin >> inp) {
-        //if (this->isStalemate()) return 'w';
-        //else if (this->isCheckmate('w')) return 'b';
-        //else if (this->isCheckmate('b')) return 'w';
-        // if not stalemate or checkmate
-	gm->displayBoard();
-	Player *player;
-	if (move % 2 == 0 && move != 0) {
-        	player = player1;
-                std::cout << "White's turn" << std::endl;
+        if (this->isStalemate()) return 'd';
+        else if (this->isCheckmate('w')) return 'b';
+        else if (this->isCheckmate('b')) return 'w';
+        
+	    gm->displayBoard();
+	    Player *player;
+        if (move % 2 == 0 && move != 0) {
+                player = player1;
+                    std::cout << "White's turn" << std::endl;
         }
         else if (move % 2 == 1) {
         	player = player2;
@@ -441,7 +448,10 @@ char Game::playGame () {
             }
         }
         else if (inp == "--help") {
-            std::cout << "options <move> <resign>" << std::endl;
+            std::cout << "Commands:" << std::endl;
+            std::cout << "- move <coordinate> <coordinate>" << std::endl;
+            std::cout << "\twhere <coordinate> is composed of a letter a-h and number 1-8" << std::endl;
+            std::cout << " - resign" << std::endl;
         }
         else {
             std::cout << " Invalid input " << inp << " use --help for more options" << std::endl; 
