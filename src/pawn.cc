@@ -1,4 +1,5 @@
 #include "pawn.h"
+#include <iostream>
 
 Pawn::Pawn (Board *next, int x, int y, char team):
     next{next}, x{x}, y{y}, team{team}, alive{true} {}
@@ -8,7 +9,10 @@ Pawn::~Pawn () {
 }
 
 void Pawn::setX (int x1, int y1, int x2, int y2) {
-    if (x == x1 && y == y1) x = x2;
+    if (x == x1 && y == y1) {
+	    x = x2;
+	    std::cout << "here" << std::endl;
+    }
     else return next->setX(x1, y2, x2, y2);
 }
 void Pawn::setY (int x1, int y1, int x2, int y2) {
