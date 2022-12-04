@@ -7,8 +7,14 @@ Bishop::~Bishop () {
     delete next;
 }
 
-int Bishop::getX () { return x; }
-int Bishop::getY () { return y; }
+void Bishop::setX (int x1, int y1, int x2, int y2) {
+    if (x == x1 && y == y1) x = x2;
+    else return next->setX(x1, y2, x2, y2);
+}
+void Bishop::setY (int x1, int y1, int x2, int y2) {
+    if (x == x1 && y == y1) y = y2;
+    else return next->setX(x1, y2, x2, y2);
+}
 char Bishop::getTeam () { return team; }
 char Bishop::getTeam (int x1, int y1) {
     if (x == x1 && y == y1) return team;

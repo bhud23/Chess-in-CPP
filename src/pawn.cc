@@ -7,8 +7,15 @@ Pawn::~Pawn () {
     delete next;
 }
 
-int Pawn::getX () { return x; }
-int Pawn::getY () { return y; }
+void Pawn::setX (int x1, int y1, int x2, int y2) {
+    if (x == x1 && y == y1) x = x2;
+    else return next->setX(x1, y2, x2, y2);
+}
+void Pawn::setY (int x1, int y1, int x2, int y2) {
+    if (x == x1 && y == y1) y = y2;
+    else return next->setX(x1, y2, x2, y2);
+}
+
 char Pawn::getTeam () { return team; }
 char Pawn::getTeam (int x1, int y1) {
     if (x == x1 && y == y1) return team;

@@ -7,8 +7,14 @@ Knight::~Knight () {
     delete next;
 }
 
-int Knight::getX () { return x; }
-int Knight::getY () { return y; }
+void Knight::setX (int x1, int y1, int x2, int y2) {
+    if (x == x1 && y == y1) x = x2;
+    else return next->setX(x1, y2, x2, y2);
+}
+void Knight::setY (int x1, int y1, int x2, int y2) {
+    if (x == x1 && y == y1) y = y2;
+    else return next->setX(x1, y2, x2, y2);
+}
 char Knight::getTeam () { return team; }
 char Knight::getTeam (int x1, int y1) {
     if (x == x1 && y == y1) return team;

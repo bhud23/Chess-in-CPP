@@ -338,23 +338,37 @@ void Game::customSetup () {
     }
 }
 
-void Game::movePiece (int x1, int y1, int x2, int y2) {
-    return;
+void Game::setAlive (int x1, int y1) {
+    return (*head)->setAlive(x1, y1);
+}
+
+void Game::setDead (int x1, int y1) {
+    return (*head)->setDead(x1, x2);
+}
+
+bool Game::pawnValidMove(int x1, int y1, int x2, int y2){
+
+}
+bool Game::rookValidMove(int x1, int y1, int x2, int y2){
+    
+}
+bool Game::knightValidMove(int x1, int y1, int x2, int y2){
+    
+}
+bool Game::bishopValidMove(int x1, int y1, int x2, int y2){
+    
+}
+bool Game::queenValidMove(int x1, int y1, int x2, int y2){
+    
+}
+bool Game::kingValidMove(int x1, int y1, int x2, int y2){
+    
 }
 
 bool Game::validMove (int x1, int y1, int x2, int y2) {
     if (0 > x1 || x1 > col || 0 > y1 || y1 > row || 0 > x2 || x2 > 0 || x2 > col || 0 > y2 || y2 > row) return false;
-    if (!((*head)->validMove(x1, y1, x2, y2))) return false;
     char team = (*head)->getTeam(x1, y1);
-    if ('a' <= team && team <= 'z' && this->isCheck('w')) {
-        (*head)->undoMove(x2, y2, x1, y1);
-        return false;
-    }
-    else if ('A' <= team && team <= 'Z' && this->isCheck('b')) {
-        (*head)->undoMove(x2, y2, x1, y1);
-        return false;
-    }
-    return true;
+    
 }
 
 bool Game::isCheck (char team) {
@@ -446,6 +460,15 @@ char Game::playGame () {
                 std::cout << "Black has resigned" << std::endl;
                 return 'w';
             }
+        }
+        else if (inp == "undo") {
+            if (move % 2 == 0) {
+                std::cout << "undoing White's move" << std::endl;
+            }
+            else {
+                std::cout << "undoing Black's move" << std::endl;
+            }
+            // undo the move
         }
         else if (inp == "--help") {
             std::cout << "Commands:" << std::endl;

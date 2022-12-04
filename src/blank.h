@@ -10,8 +10,8 @@ class Blank : public Board {
     public:
     Blank ();
     ~Blank ();
-    int getX () override;
-    int getY () override;
+    void setX (int x1, int y1, int x2, int y2) override;
+    void setY (int x1, int y1, int x2, int y2) override;
     char getTeam () override;
     char getTeam (int x1, int y1) override;
     char getType () override;
