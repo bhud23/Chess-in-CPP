@@ -342,6 +342,21 @@ void Game::movePiece (int x1, int y1, int x2, int y2) {
     return;
 }
 
+bool Game::validMove (int x1, int y1, int x2, int y2) {
+    if (0 > x1 || x1 > col || 0 > y1 || y1 > row || 0 > x2 || x2 > 0 || x2 > col || 0 > y2 || y2 > row) return false;
+    if (!((*head)->validMove(x1, y1, x2, y2))) return false;
+    char team = (*head)->getTeam(x1, y1);
+    if ('a' <= team && team <= 'z' && this->isCheck('w')) {
+        (*head)->undoMove(x2, y2, x1, y1);
+        return false;
+    }
+    else if ('A' <= team && team <= 'Z' && this->isCheck('b')) {
+        (*head)->undoMove(x2, y2, x1, y1);
+        return false;
+    }
+    return true;
+}
+
 bool Game::isCheck (char team) {
     int x = -1;
     int y = -1;
@@ -357,7 +372,7 @@ bool Game::isCheck (char team) {
         for (int j = 0; j < col; j++) {
             char tile = (*head)->getTeam(j, i);
             if (tile != ' ' && tile != team) {
-                if ((*head)->validMove(j, i, x, y)) return true;
+                if (this->validMove(j, i, x, y)) return true;
             }
         }
     }
@@ -370,7 +385,7 @@ bool Game::isCheckmate (char team) {
             for (int k = 0; k < row; k++) {
                 for (int l = 0; l < col; l++) {
                     char tile = (*head)->getTeam(j, i);
-                    if (tile != ' ' && tile != team && (*head)->validMove(j, i, l, k)) return false;
+                    if (tile != ' ' && tile != team && this->validMove(j, i, l, k)) return false;
                 }
             }
         }
@@ -385,25 +400,10 @@ bool Game::isStalemate() {
             if (tile == ' ' || tile == '_') continue;
             for (int k = 0; k < row; k++) {
                 for (int l = 0; l < col; l++) {
-                    if ((*head)->validMove(j, i, l, k)) return false;
+                    if (this->validMove(j, i, l, k)) return false;
                 }
             }
         }
-    }
-    return true;
-}
-
-bool Game::validMove (int x1, int y1, int x2, int y2) {
-    if (0 > x1 || x1 > col || 0 > y1 || y1 > row || 0 > x2 || x2 > 0 || x2 > col || 0 > y2 || y2 > row) return false;
-    if (!((*head)->validMove(x1, y1, x2, y2))) return false;
-    char team = (*head)->getTeam(x1, y1);
-    if ('a' <= team && team <= 'z' && this->isCheck('w')) {
-        (*head)->undoMove(x2, y2, x1, y1);
-        return false;
-    }
-    else if ('A' <= team && team <= 'Z' && this->isCheck('b')) {
-        (*head)->undoMove(x2, y2, x1, y1);
-        return false;
     }
     return true;
 }
