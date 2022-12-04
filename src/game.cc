@@ -319,7 +319,7 @@ void Game::customSetup () {
         }
         else if (inp == "=") {
             if (std::cin >> inp) {
-                if (inp == "white") move = 0;
+                if (inp == 'white') move = 0;
                 else move = 1;
             }
         }
@@ -346,11 +346,11 @@ void Game::setAlive (int x1, int y1) {
 }
 
 void Game::setDead (int x1, int y1) {
-    return (*head)->setDead(x1, y1);
+    return (*head)->setDead(x1, x2);
 }
 
 bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
-	return false;
+    return false;
 }
 bool Game::rookValidMove(int x1, int y1, int x2, int y2) {
     char team = (*head)->getTeam(x1, y1);
@@ -362,9 +362,11 @@ bool Game::rookValidMove(int x1, int y1, int x2, int y2) {
         int delta_y = 1;
         if (newX == 0) delta_x = 0;
         if (newY == 0) delta_y = 0;
-        for (int i = newX + delta_x, int j = newY + delta_y; i != newX && j != newY; i += delta_x, j += delta_y) {
-            char tile = (*head)->getTile(i, j);
-            if (tile != ' ' || tile != '_') return false
+        for (int i = newX + delta_x; i != newX ; i += delta_x) {
+            for (int int j = newY + delta_y; j != newY; j += delta_y) {
+                char tile = (*head)->getTile(i, j);
+                if (tile != ' ' || tile != '_') return false
+            }
         }
         this->setDead(x2, y2);
         (*head)->setX(x1, y1, x2, y2);
@@ -422,9 +424,11 @@ bool Game::bishopValidMove(int x1, int y1, int x2, int y2) {
         if (newX < 0) delta_x = -1;
         int delta_y = 1;
         if (newY < 0) delta_y = -1;
-        for (int i = newX + delta_x, int j = newY + delta_y; i != newX && j != newY; i += delta_x, j += delta_y) {
-            char tile = (*head)->getTile(i, j);
-            if (tile != ' ' || tile != '_') return false
+        for (int i = newX + delta_x; i != newX ; i += delta_x) {
+            for (int int j = newY + delta_y; j != newY; j += delta_y) {
+                char tile = (*head)->getTile(i, j);
+                if (tile != ' ' || tile != '_') return false
+            }
         }
         this->setDead(x2, y2);
         (*head)->setX(x1, y1, x2, y2);
