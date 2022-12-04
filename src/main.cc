@@ -47,20 +47,22 @@ int main (int arc, char **argv) {
             if (!setup) {
                 std::cout << "The game must be setup before continuing. Use --help to display your current options" << std::endl;
             }
-            else {
-                Player *p1, *p2;
-                std::cin >> inp;
-                if (inp == "human") {
-                    Player *p1 = new Human {};
-                    game.setPlayer1(p1);
-                }
-                std::cin >> inp;
-                if (inp == "human") {
-                    Player *p2 = new Human {};
-                    game.setPlayer2(p2);
-                }
-
-            }
+	    else {
+		game.setPlayer1(new Human{});
+		game.setPlayer2(new Human{});
+		char res = game.playGame();
+		if (res == 'w') {
+			white_score++;
+			std::cout << "White wins" << std::endl;
+		}
+		else if (res == 'b') {
+			black_score++;
+			std::cout << "Black wins" << std::endl;
+		}
+		else {
+			std::cout << "Draw" << std::endl;
+		}
+	    }
         }
         else if (inp == "setup") {
 	        std::cin >> inp;
@@ -84,7 +86,7 @@ int main (int arc, char **argv) {
             std::cout << "\t followed by either <default> or <custom>" << std::endl;
         }
         else {
-            std::cout << "Invalid Input\n";
+            std::cout << "Invalid Input " << inp << " use --help to display options" << std::endl;;
         }
     }
     std::cout << "Final Score:" << std::endl;

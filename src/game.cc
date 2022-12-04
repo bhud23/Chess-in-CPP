@@ -386,42 +386,38 @@ bool Game::isStalemate() {
     return true;
 }
 
-bool validMove (int x1, int y1, int x2, int y2) {
+bool Game::validMove (int x1, int y1, int x2, int y2) {
     if (0 > x1 || x1 > col || 0 > y1 || y1 > row || 0 > x2 || x2 > 0 || x2 > col || 0 > y2 || y2 > row) return false;
     if (!((*head)->validMove(x1, y1, x2, y2))) return false;
     char team = (*head)->getTeam(x1, y1);
     if ('a' <= team && team <= 'z' && this->isCheck('w')) {
-        (*head)->undoMove(x1, y1, x2, y2);
+        (*head)->undoMove(x2, y2, x1, y1);
         return false;
     }
-    else if if ('A' <= team && team <= 'Z' && this->isCheck('b')) {
-        (*head)->undoMove(x1, y1, x2, y2);
+    else if ('A' <= team && team <= 'Z' && this->isCheck('b')) {
+        (*head)->undoMove(x2, y2, x1, y1);
         return false;
     }
     return true;
 }
 
 char Game::playGame () {
+    std::cout << "The game has started. Use  --help to display options" << std::endl;
     std::string inp;
-    while (true) {
+    while (std::cin >> inp) {
         if (this->isStalemate()) return 'd';
         else if (this->isCheckmate('w')) return 'b';
         else if (this->isCheckmate('b')) return 'w';
         // if not stalemate or checkmate
-        if (!(std::cin >> inp)) {
-            std::cout << "Fatal Error" << std:endl;
-            return 'd';
-        }
         if (inp == "move") {
-            if (inp == "move") {
                 Player *player;
                 if (move % 2) {
                     player = player1;
-                    std::cout "White's turn" << std::endl;
+                    std::cout << "White's turn" << std::endl;
                 }
                 else {
                     player = player2;
-                    std::cout "Black's turn" << std::endl;
+                    std::cout << "Black's turn" << std::endl;
                 }
                 std::pair<int, int> piece = player->getMove();
                 std::pair<int, int> newMove = player->getMove();
@@ -432,7 +428,6 @@ char Game::playGame () {
                     move++;
                     gm->displayBoard();
                 }
-            }
         }
         else if (inp == "resign") {
             if (move % 2 == 0) {
@@ -445,12 +440,14 @@ char Game::playGame () {
             }
         }
         else if (inp == "--help") {
-            std::cout "options <move> <resign>" << std::endl;
+            std::cout << "options <move> <resign>" << std::endl;
         }
         else {
-            std::cout << "Invalid input " << inp << " use --help for more options" << std::endl; 
+            std::cout << " Invalid input " << inp << " use --help for more options" << std::endl; 
         }
     }
+    std::cout << "Fatal Error" << std::endl;
+    return 'd';
 }
 
 
