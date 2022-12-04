@@ -364,7 +364,7 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
             this->setAlive(x2, y2);
             return false;
         }
-	std::cout << "Also made it here\n";
+	    std::cout << "Also made it here\n";
     }
     if ((team == 'B' && y2 == 0) || (team == 'w' && y2 == 7)) {
         std::string inp;
@@ -585,67 +585,78 @@ char Game::playGame () {
     std::cout << "The game has started. Use  --help to display options" << std::endl;
     std::string inp;
     while (true) {
-	Player *player;
+	    Player *player;
         if (move % 2 == 0) {
-                player = player1;
-                    std::cout << "White's turn" << std::endl;
+            player = player1;
+            std::cout << "White's turn" << std::endl;
         }
         else if (move % 2 == 1) {
         	player = player2;
-                std::cout << "Black's turn" << std::endl;
+            std::cout << "Black's turn" << std::endl;
         }
-    if (std::cin >> inp) {
-        if (this->isStalemate()) return 'd';
-        else if (this->isCheckmate('w')) return 'b';
-        else if (this->isCheckmate('b')) return 'w';
-	
-        if (inp == "move") {
-		std::pair<int, int> piece = player->getMove();
-              	std::pair<int, int> newMove = player->getMove();
-                std::cout << "---> x1=" << piece.first << " y1=" << piece.second << " x2=" << newMove.first << " y2=" << newMove.second << std::endl;
-                bool res = this->validMove(piece.first, piece.second, newMove.first, newMove.second);
-        if (!res) {
-                std::cout << "Invalid move" << std::endl;
-        }
-	else {
-            move++;
-            gm->displayBoard();
-	    continue;
-	}
-        }
-        else if (inp == "resign") {
-            if (move % 2 == 0) {
-                std::cout << "White has resigned" << std::endl;
+        if (std::cin >> inp) {
+            if (this->isStalemate()) {
+                move = 0;
+                return 'd';
+            }
+            else if (this->isCheckmate('w')) {
+                move = 0;
                 return 'b';
             }
-            else {
-                std::cout << "Black has resigned" << std::endl;
+            else if (this->isCheckmate('b')) {
+                move = 0;
                 return 'w';
             }
-        }
-        else if (inp == "undo") {
-            if (move % 2 == 0) {
-                std::cout << "undoing White's move" << std::endl;
+            if (inp == "move") {
+                std::pair<int, int> piece = player->getMove();
+                std::pair<int, int> newMove = player->getMove();
+                std::cout << "---> x1=" << piece.first << " y1=" << piece.second << " x2=" << newMove.first << " y2=" << newMove.second << std::endl;
+                bool res = this->validMove(piece.first, piece.second, newMove.first, newMove.second);
+                if (!res) {
+                    std::cout << "Invalid move" << std::endl;
+                }
+                else {
+                    move++;
+                    gm->displayBoard();
+                    continue;
+                }
+            }
+            else if (inp == "resign") {
+                if (move % 2 == 0) {
+                    std::cout << "White has resigned" << std::endl;
+                    move = 0;
+                    return 'b';
+                }
+                else {
+                    std::cout << "Black has resigned" << std::endl;
+                    move = 0;
+                    return 'w';
+                }
+            }
+            else if (inp == "undo") {
+                if (move % 2 == 0) {
+                    std::cout << "undoing White's move" << std::endl;
+                }
+                else {
+                    std::cout << "undoing Black's move" << std::endl;
+                }
+                gm->displayBoard();
+                // undo the move
+            }
+            else if (inp == "--help") {
+                std::cout << "Commands:" << std::endl;
+                std::cout << "- move <coordinate> <coordinate>" << std::endl;
+                std::cout << "\twhere <coordinate> is composed of a letter a-h and number 1-8" << std::endl;
+                std::cout << " - resign" << std::endl;
             }
             else {
-                std::cout << "undoing Black's move" << std::endl;
+                std::cout << " Invalid input " << inp << " use --help for more options" << std::endl; 
             }
-            gm->displayBoard();
-            // undo the move
         }
-        else if (inp == "--help") {
-            std::cout << "Commands:" << std::endl;
-            std::cout << "- move <coordinate> <coordinate>" << std::endl;
-            std::cout << "\twhere <coordinate> is composed of a letter a-h and number 1-8" << std::endl;
-            std::cout << " - resign" << std::endl;
-        }
-        else {
-            std::cout << " Invalid input " << inp << " use --help for more options" << std::endl; 
-        }
+        std::cout << "Fatal Error" << std::endl;
+        move = 0;
+        return 'd';
     }
-    std::cout << "Fatal Error" << std::endl;
-    return 'd';
-}
 }
 
 void Game::setPlayer1 (Player *p){
