@@ -444,8 +444,7 @@ bool Game::bishopValidMove(int x1, int y1, int x2, int y2) {
 }
 
 bool Game::queenValidMove(int x1, int y1, int x2, int y2) {
-    this->rookValidMove(x1, y1, x2, y2);
-    this->bishopValidMove(x1, y1, x2, y2);
+    return this->rookValidMove(x1, y1, x2, y2) || this->bishopValidMove(x1, y1, x2, y2);
     
 }
 bool Game::kingValidMove(int x1, int y1, int x2, int y2) {
