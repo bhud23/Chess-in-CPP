@@ -319,7 +319,7 @@ void Game::customSetup () {
         }
         else if (inp == "=") {
             if (std::cin >> inp) {
-                if (inp == 'white') move = 0;
+                if (inp == "white") move = 0;
                 else move = 1;
             }
         }
@@ -346,11 +346,11 @@ void Game::setAlive (int x1, int y1) {
 }
 
 void Game::setDead (int x1, int y1) {
-    return (*head)->setDead(x1, x2);
+    return (*head)->setDead(x1, y1);
 }
 
 bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
-
+	return false;
 }
 bool Game::rookValidMove(int x1, int y1, int x2, int y2) {
     char team = (*head)->getTeam(x1, y1);
