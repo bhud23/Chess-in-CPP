@@ -353,7 +353,7 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
     char team = (*head)->getTeam(x1, y1);
     int dir = -1;
     if (team == 'b') dir = -1; 
-    if ((x2 - x1 == 0 || x2 - x1 == 1 || x2 - x1 == -1) && y1 + dir = y2) {
+    if ((x2 - x1 == 0 || x2 - x1 == 1 || x2 - x1 == -1) && (y1 + dir == y2)) {
         this->setDead(x2, y2);
         (*head)->setX(x1, y1, x2, y2);
         (*head)->setY(x2, y1, x2, y2);
@@ -366,7 +366,7 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
     }
     if ((team == 'B' && y2 == 0) || (team == 'w' && y2 == 7)) {
         std::string inp;
-        while (std::cin << inp) {
+        while (std::cin >> inp) {
             if (inp == "Q") {
                 this->setDead(x2, y2);
                 *head = new Queen {*head, x2, y2, team};
@@ -392,6 +392,7 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
             }
         }
     }
+    return true;
 }
 
 bool Game::rookValidMove(int x1, int y1, int x2, int y2) {
@@ -421,6 +422,7 @@ bool Game::rookValidMove(int x1, int y1, int x2, int y2) {
         }
         return true;
     }
+    return false;
 }
 bool Game::knightValidMove(int x1, int y1, int x2, int y2) {
     char team = (*head)->getTeam(x1, y1);
@@ -452,6 +454,7 @@ bool Game::knightValidMove(int x1, int y1, int x2, int y2) {
     }
     else return false;
 }
+
 bool Game::bishopValidMove(int x1, int y1, int x2, int y2) {
     char team = (*head)->getTeam(x1, y1);
     int newX = x2 - x1;
@@ -507,6 +510,7 @@ bool Game::kingValidMove(int x1, int y1, int x2, int y2) {
             this->setAlive(x2, y2);
             return false;
         }
+	return true;
     }
     else return false;
 }
