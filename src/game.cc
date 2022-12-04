@@ -599,12 +599,14 @@ char Game::playGame () {
         if (inp == "move") {
        	        std::pair<int, int> piece = player->getMove();
               	std::pair<int, int> newMove = player->getMove();
-                std::cout << "For debugging x1=" << piece.first << " y1=" << piece.second << " x2=" << move.first << " y2=" << move.second << std::endl;
-       	        if (!(this->validMove(piece.first, piece.second, newMove.first, newMove.second))) {
+                std::cout << "For debugging x1=" << piece.first << " y1=" << piece.second << " x2=" << newMove.first << " y2=" << newMove.second << std::endl;
+                bool res = this->validMove(piece.first, piece.second, newMove.first, newMove.second);
+       	        if (!res) {
        	            std::cout << "Invalid move" << std::endl;
                 }
                 else {
        	            move++;
+                    gm->displayBoard();
       	       }
         }
         else if (inp == "resign") {
@@ -624,6 +626,7 @@ char Game::playGame () {
             else {
                 std::cout << "undoing Black's move" << std::endl;
             }
+            gm->displayBoard();
             // undo the move
         }
         else if (inp == "--help") {
