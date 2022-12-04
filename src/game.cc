@@ -581,16 +581,14 @@ bool Game::isStalemate() {
 
 char Game::playGame () {
     std::cout << "The game has started. Use  --help to display options" << std::endl;
-    std::cout << "White's turn" << std::endl;
     std::string inp;
+
     while (std::cin >> inp) {
         if (this->isStalemate()) return 'd';
         else if (this->isCheckmate('w')) return 'b';
         else if (this->isCheckmate('b')) return 'w';
-        
-	    gm->displayBoard();
 	    Player *player;
-        if (move % 2 == 0 && move != 0) {
+        if (move % 2 == 0) {
                 player = player1;
                     std::cout << "White's turn" << std::endl;
         }
@@ -601,6 +599,7 @@ char Game::playGame () {
         if (inp == "move") {
        	        std::pair<int, int> piece = player->getMove();
               	std::pair<int, int> newMove = player->getMove();
+                std::cout << "For debugging x1=" << piece.first << " y1=" << piece.second << " x2=" << move.first << " y2=" << move.second << std::endl;
        	        if (!(this->validMove(piece.first, piece.second, newMove.first, newMove.second))) {
        	            std::cout << "Invalid move" << std::endl;
                 }
