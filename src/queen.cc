@@ -8,11 +8,11 @@ Queen::~Queen () {
 }
 
 void Queen::move (int x1, int y1, int x2, int y2) {
-    if (x == x1 && y == y1) {
+    if (x == x1 && y == y1 && alive) {
         x = x2;
         y = y2;
     }
-    else return next->move(x1, y2, x2, y2);
+    else return next->move(x1, y1, x2, y2);
 }
 
 char Queen::getTeam () { return team; }
@@ -26,7 +26,7 @@ char Queen::getType () {
 }
 void Queen::setDead (int x1, int y1) {
     if (x1 == x && y1 == y) alive = false;
-    else { next->setAlive(x1, y1); }
+    else { next->setDead(x1, y1); }
 }
 void Queen::setAlive (int x1, int y1) {
     if (x1 == x && y1 == y) alive = true;

@@ -26,7 +26,7 @@ char Blank::getTeam () {
 }
 
 char Blank::getTeam (int x1, int y1) {
-    return ' ';
+    return ' '; 
 }
 
 char Blank::getType () {

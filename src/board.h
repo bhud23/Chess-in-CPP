@@ -1,6 +1,8 @@
 #ifndef _BOARD_H
 #define _BOARD_H
 
+#include <iostream>
+
 class Board {
     public:
         virtual void move (int x1, int y1, int x2, int y2) = 0;

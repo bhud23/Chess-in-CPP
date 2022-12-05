@@ -12,7 +12,7 @@
 #include "queen.h"
 #include "king.h"
 #include "observer.h"
-#include "graphicdisplay.h"
+//#include "graphicdisplay.h"
 #include "textdisplay.h"
 #include "player.h"
 #include "human.h"
@@ -36,8 +36,8 @@ int main (int arc, char **argv) {
 
     Observer *txt = new TextDisplay {*gm, 8, 8, 8};
     gm->attach(txt);
-    Observer *graph = new GraphicDisplay {*gm, 8, 8};
-    gm->attach(graph);
+    //Observer *graph = new GraphicDisplay {*gm, 8, 8};
+    //gm->attach(graph);
     
     std::cout << "Welcome to Chess - the CS246 orignal game" << std::endl;
     std::cout << "Use the command --help at any time to display your current options" << std::endl;
