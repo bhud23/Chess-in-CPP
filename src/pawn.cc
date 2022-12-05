@@ -9,12 +9,15 @@ Pawn::~Pawn () {
 }
 
 void Pawn::move (int x1, int y1, int x2, int y2) {
-    std::cout "Pawn move called" << std::endl;
-    if (x == x1 && y == y1) {
-        x = x2;
-        y = y2;
+    if (x == x1 && y == y1 && alive) {
+        this->x = x2;
+        this->y = y2;
+	return;
     }
-    else return next->move(x1, y2, x2, y2);
+    else {
+	 std::cout << "x=" << x << " y=" << y << " and x1=" << x << " y1=" << y << " -- " << (x == x1) << (y == y1) << std::endl;
+	 return next->move(x1, y2, x2, y2);
+    }
 }
 
 char Pawn::getTeam () { return team; }

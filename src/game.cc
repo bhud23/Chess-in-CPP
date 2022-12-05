@@ -359,10 +359,8 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
         if (this->isCheck(team)) {
             (*head)->move(x2, y2, x1, y1);
             this->setAlive(x2, y2);
-	    std::cout <<"move failed\n";
             return false;
         }
-	std::cout << "piece has been moved\n";
     }
     if ((team == 'B' && y2 == 0) || (team == 'w' && y2 == 7)) {
         std::string inp;

@@ -7,7 +7,7 @@ Rook::~Rook () {
     delete next;
 }
 
-void Queen::move (int x1, int y1, int x2, int y2) {
+void Rook::move (int x1, int y1, int x2, int y2) {
     if (x == x1 && y == y1) {
         x = x2;
         y = y2;
