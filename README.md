@@ -7,8 +7,6 @@ Still needing implementation:
     - pieces dont move
     - investigate = in custom setup
 
-
--cleanup
--make multiple games per run
 - debug
 - add enpassant/castling/pawn first move
+- fix move piece errors

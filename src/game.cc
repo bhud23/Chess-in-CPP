@@ -482,16 +482,21 @@ bool Game::bishopValidMove(int x1, int y1, int x2, int y2) {
     int dist = newX;
     if (dist < 0) dist *= -1;
 
-    if (newX != -1 * newY || newX != newY) return false;
+    if (newX != -newY && newX != newY) {
+        return false;
+    }
     else {
         int delta_x = 1;
         if (newX < 0) delta_x = -1;
         int delta_y = 1;
         if (newY < 0) delta_y = -1;
-        for (int i = newX + delta_x; i != newX ; i += delta_x) {
-            for (int j = newY + delta_y; j != newY; j += delta_y) {
-                char tile = (*head)->getTile(i, j);
-                if (tile != ' ' || tile != '_') return false;
+        for (int i = x1; i != x2; i += delta_x) {
+            int j = i - delta_x - x1 + y1 + delta_y;
+            char tile = (*head)->getTile(i, j);
+            std::cout << "i=" << i << " j=" << j <<std::endl;
+            if (tile != ' ' && tile != '_' && i != x1 && j != y1) {
+                std::cout << "here tile=" << tile << std::endl;
+                return false;
             }
         }
         this->setDead(x2, y2);
@@ -522,14 +527,14 @@ bool Game::kingValidMove(int x1, int y1, int x2, int y2, bool castle) {
             if ((*head)->getTile(i, y1) != ' ') return false;
         }
         (*head)->move(x2, y2, -1, -1);
-        (*head)->move(x1, y1, x2, y2);
+        (*head)->move(x1, y1, x2 - dir, y2);
         // if (this->isCheck(team)) {
         //     (*head)->move(x2, y2, x1, y1);
         //     (*head)->move(-1, -1, x2, y2);
         //     this->setAlive(x2, y2);
         //     return false;
         // }
-        (*head)->move(-1, -1, x1, y1);
+        (*head)->move(-1, -1, x1 + dir, y1);
         (*head)->setFirstMove(x2, y2);
         return true;
     }
@@ -552,7 +557,7 @@ bool Game::kingValidMove(int x1, int y1, int x2, int y2, bool castle) {
 
 bool Game::validMove (int x1, int y1, int x2, int y2) {
     if (0 > x1 || x1 > col || 0 > y1 || y1 > row || 0 > x2 || x2 > col || 0 > y2 || y2 > row) {
-        std::cout << "1\n";
+        std::cout << "Valid Move 1\n";
         return false;
     }
     char piece1 = (*head)->getTile(x1, y1);
@@ -567,6 +572,7 @@ bool Game::validMove (int x1, int y1, int x2, int y2) {
         return kingValidMove(x1, y1, x2, y2, true);
     }
     if ((team1 == team2) || (move % 2 == 0 && team1 != 'w') || (move % 2 == 1 && team1 != 'b'))  { // trying to move invalid piece
+        std::cout << "Valid Move 2" << (team1 == team2) << (move % 2 == 0 && team1 != 'w') << (move % 2 == 1 && team1 != 'b') << std::endl;
         return false;
     }
     char piece = (*head)->getTile(x1, y1);
@@ -589,6 +595,7 @@ bool Game::validMove (int x1, int y1, int x2, int y2) {
         return kingValidMove(x1, y1, x2, y2);
     }
     else {
+        std::cout << "Valid Move 3\n";
         return false;
     }
 }
@@ -707,14 +714,21 @@ char Game::playGame () {
                 }
             }
             else if (inp == "undo") {
-                if ((move + 1) % 2 == 0) {
+                if (stack.length() == 0) {
+                    std::cout << "No previous move" << std::endl;
+                    continue;
+                }
+                else if ((move + 1) % 2 == 0) {
                     std::cout << "undoing White's move" << std::endl;
                 }
                 else {
                     std::cout << "undoing Black's move" << std::endl;
+                    
                 }
                 std::pair<std::pair<int,int>, std::pair<int,int>> *oldMove = stack.pop();
                 (*head)->move((*oldMove).second.first, (*oldMove).second.second, (*oldMove).first.first, (*oldMove).first.second);
+                (*head)->setAlive((*oldMove).first.first, (*oldMove).first.second);
+                move++;
                 gm->displayBoard();
             }
             else if (inp == "--help") {
