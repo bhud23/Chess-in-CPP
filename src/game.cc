@@ -612,17 +612,27 @@ char Game::playGame () {
         } 
         if (std::cin >> inp) { /*
             if (this->isStalemate()) {
+                std::cout << "stalemate" << std::endl;
                 move = 0;
                 return 'd';
             }
             else if (this->isCheckmate('w')) {
+                std::cout << "Black checkmates White" << std::endl;
                 move = 0;
                 return 'b';
             }
             else if (this->isCheckmate('b')) {
+                std::cout << "White checkmates Black << std::endl;
                 move = 0;
                 return 'w';
-            } */
+            } 
+            else if (this->isCheck('w')){
+                std::cout << "Black checks White" << std::endl;
+            }
+            else if (this->isCheck('b')) {
+                std::cout << "White checks Black" << std::endl;
+            }
+            */
             if (inp == "move") {
                 std::pair<int, int> piece = player->getMove();
                 std::pair<int, int> newMove = player->getMove();
