@@ -421,14 +421,21 @@ bool Game::rookValidMove(int x1, int y1, int x2, int y2) {
     int newY = y2 - y1;
 
     if ((newX == 0 && newY != 0) || (newY == 0 && newX != 0)) {
-        int delta_x = 1;
-        int delta_y = 1;
+        int delta_x = -1;
+        int delta_y = -1;
         if (newX == 0) delta_x = 0;
-        if (newY == 0) delta_y = 0;
-        for (int i = newX + delta_x; i != newX ; i += delta_x) {
-            for (int j = newY + delta_y; j != newY; j += delta_y) {
-                char tile = (*head)->getTile(i, j);
-                if (tile != ' ' || tile != '_') return false;
+        else if (newY == 0) delta_y = 0;
+        if (newX > 0) delta_x = 1;
+        else if (newY > 0) delta_y = 1;
+        for (int l = 1; ; l++) {
+            int i = x1 + (l * delta_x);
+            int j = y1 + (l * delta_y);
+            if ((i == x2 && y1 == y2 ) || (j == y2 && x1 == x2)) break;
+            char tile = (*head)->getTile(i, j);
+            // std::cout << "x1=" << x1 << " y1=" << y1 << " x2=" << x2 << " y2=" << y2 << std::endl;
+            // std::cout << "i=" << i << " j=" << j << " dx=" << delta_x << " dy=" << delta_y << " " << (j == y2 && x1 == x2) << std::endl;
+            if ((tile != ' ' && tile != '_') && (i != x1 || j != y1)) {
+                return false;
             }
         }
         this->setDead(x2, y2);
