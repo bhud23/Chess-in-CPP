@@ -353,7 +353,6 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
     char team = (*head)->getTeam(x1, y1);
     int dir = 1;
     if (team == 'b') dir = -1;
-    std::cout << (*head)->getFirstMove(x1, y1) << " " << (x2 - x1 == 0) << " " << (y1 + dir + dir == y2) << std::endl;
     if ((x2 - x1 == 0) && (y1 + dir + dir == y2) && (*head)->getFirstMove(x1, y1)) { // double pawn first move
         std::cout << "here\n";
         this->setDead(x2, y2);
@@ -511,11 +510,27 @@ bool Game::queenValidMove(int x1, int y1, int x2, int y2) {
     return this->rookValidMove(x1, y1, x2, y2) || this->bishopValidMove(x1, y1, x2, y2);
     
 }
-bool Game::kingValidMove(int x1, int y1, int x2, int y2) {
+bool Game::kingValidMove(int x1, int y1, int x2, int y2, bool castle) {
     char team = (*head)->getTeam(x1, y1);
     int newX = x2 - x1;
     int newY = y2 - y1;
 
+    if (castle && (y1 == y2) && (*head)->getFirstMove(x1, y1) && (*head)->getFirstMove(x2, y2)){ // handles castling
+        int dir = -1;
+        if (newX < 0) dir = 1;
+        for (int i = x1; x1 != x2; i += dir){
+            if ((*head)->getTile(i, y1) != ' ') return false;
+        }
+        (*head)->move(x2, y2, -1, -1);
+        (*head)->move(x1, y1, x2, y2);
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            (*head)->move(-1, -1, x2, y2);
+            this->setAlive(x2, y2);
+            return false;
+        }
+        (*head)->move(-1, -1, x1, y1);
+    }
     if (newX < 0) newX *= -1;
     if (newY < 0) newY *= -1;
 
@@ -538,8 +553,22 @@ bool Game::validMove (int x1, int y1, int x2, int y2) {
         std::cout << "1\n";
         return false;
     }
-    char team1 = (*head)->getTeam(x1, y1);
-    char team2 = (*head)->getTeam(x2, y2);
+    char piece1 = (*head)->getTile(x1, y1);
+    char piece2 = (*head)->getTile(x2, y2);
+    char team1 = 'w';
+    char team2 = 'w';
+    if ('A' <= team1 && team1 <= 'Z'){
+        team1 = 'b';
+    }
+    if ('A' <= team2 && team2 <= 'Z') {
+        team2 = 'b';
+    }
+    if (piece1 == 'k' && piece2 == 'r'){
+        return kingValidMove(x1, y1, x2, y2, true);
+    }
+    else if (piece1 == 'K' && piece2 == 'R') {
+        return kingValidMove(x1, y1, x2, y2, true);
+    }
     if ((team1 == team2) || (move % 2 == 0 && team1 == 'b') || (move % 2 == 1 && team1 == 'w'))  {
         return false;
     }

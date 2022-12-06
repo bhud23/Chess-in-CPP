@@ -39,7 +39,7 @@ class Game {
         bool rookValidMove (int x1, int y1, int x2, int y2);
         bool bishopValidMove (int x1, int y1, int x2, int y2);
         bool knightValidMove (int x1, int y1, int x2, int y2);
-        bool kingValidMove (int x1, int y1, int x2, int y2);
+        bool kingValidMove (int x1, int y1, int x2, int y2, bool castle=false);
         bool queenValidMove (int x1, int y1, int x2, int y2);
     private: // helper functions
         char pieceAt (int x, int y);
