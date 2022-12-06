@@ -32,29 +32,41 @@ std::pair<int, int> Game::getCoords() {
 
 void Game::removePiece () {
     std::string inp;
-    if (std::cin >> inp) {
-                std::pair<int, int> coords = getCoords();
-                if (coords.first != -1 && coords.second != -1) {
-                    (*head)->setDead(coords.first, coords.second);
-                    char tile = this->pieceAt(coords.first, coords.second);
-                    if ('a' <= tile && tile <= 'z' && this->isCheck('b')) (*head)->setAlive (coords.first, coords.second);
-                    else if ('A' <= tile && tile <= 'Z' && this->isCheck('w')) (*head)->setAlive (coords.first, coords.second);
-                }
-                else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
-            }
-    else {
-        std::cout << "Fatal error" << std::endl;
+    std::pair<int, int> coords = getCoords();
+    if (coords.first != -1 && coords.second != -1) {
+        (*head)->setDead(coords.first, coords.second);
+        char tile = this->pieceAt(coords.first, coords.second);
+        if (tile == 'k') {
+            white_king.first = -1;
+            white_king.second = -1;
+        }
+        if (tile == 'K') {
+            black_king.first = -1;
+            black_king.second = -1;
+        }
+        if ('a' <= tile && tile <= 'z' && this->isCheck('w')) (*head)->setAlive (coords.first, coords.second);
+        else if ('A' <= tile && tile <= 'Z' && this->isCheck('b')) (*head)->setAlive (coords.first, coords.second);
     }
+    else std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
 }
 
 void Game::placePiece () {
     // big fat ugly function to create pieces
     std::string inp;
     if (std::cin >> inp) {
+        if (inp == "k" && (white_king.first != -1 && white_king.second != -1)) {
+            std::pair<int, int> coords = getCoords();
+            std::cout << "White king already placed" << std::endl;
+            return;
+        }
+        if (inp == "K" && (black_king.first != -1 && black_king.second != -1)) {
+            std::pair<int, int> coords = getCoords();
+            std::cout << "Black king already placed" << std::endl;
+            return;
+        }
         if (inp == "K") {
             std::pair<int, int> coords = getCoords();
             if (coords.first != -1 && coords.second != -1) {
-                std::cout << "x=" << coords.first << " y=" << coords.second << std::endl;
                 char tile = this->pieceAt(coords.first, coords.second);
                 if (tile == ' ' || tile == '_') {
                     *head = new King {*head, coords.first, coords.second, 'b'};
@@ -68,7 +80,7 @@ void Game::placePiece () {
                         this->black_king.second = coords.second;
                     }
                 }
-                else {std::cout << "A piece already occupies " << inp << std::endl;}
+                else {std::cout << "A piece already occupies this tile"  << std::endl;}
             }
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
@@ -88,7 +100,7 @@ void Game::placePiece () {
                         this->white_king.second = coords.second;
                     }
                 }
-                else {std::cout << "A piece already occupies " << inp << std::endl;}
+                else {std::cout << "A piece already occupies this tile"  << std::endl;}
             }
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
@@ -105,7 +117,7 @@ void Game::placePiece () {
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
                 }
-                else {std::cout << "A piece already occupies " << inp << std::endl;}
+                else {std::cout << "A piece already occupies this tile"  << std::endl;}
             }
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
@@ -121,7 +133,7 @@ void Game::placePiece () {
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
                 }
-                else {std::cout << "A piece already occupies " << inp << std::endl;}
+                else {std::cout << "A piece already occupies this tile"  << std::endl;}
             }
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
@@ -138,7 +150,7 @@ void Game::placePiece () {
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
                 }
-                else {std::cout << "A piece already occupies " << inp << std::endl;}
+                else {std::cout << "A piece already occupies this tile"  << std::endl;}
             }
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
@@ -154,7 +166,7 @@ void Game::placePiece () {
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
                 }
-                else {std::cout << "A piece already occupies " << inp << std::endl;}
+                else {std::cout << "A piece already occupies this tile"  << std::endl;}
             }
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
@@ -171,7 +183,7 @@ void Game::placePiece () {
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
                 }
-                else {std::cout << "A piece already occupies " << inp << std::endl;}
+                else {std::cout << "A piece already occupies this tile"  << std::endl;}
             }
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
@@ -187,7 +199,7 @@ void Game::placePiece () {
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
                 }
-                else {std::cout << "A piece already occupies " << inp << std::endl;}
+                else {std::cout << "A piece already occupies this tile"  << std::endl;}
             }
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
@@ -204,7 +216,7 @@ void Game::placePiece () {
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
                 }
-                else {std::cout << "A piece already occupies " << inp << std::endl;}
+                else {std::cout << "A piece already occupies this tile"  << std::endl;}
             }
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
@@ -220,7 +232,7 @@ void Game::placePiece () {
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
                 }
-                else {std::cout << "A piece already occupies " << inp << std::endl;}
+                else {std::cout << "A piece already occupies this tile"  << std::endl;}
             }
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
@@ -237,7 +249,7 @@ void Game::placePiece () {
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
                 }
-                else {std::cout << "A piece already occupies " << inp << std::endl;}
+                else {std::cout << "A piece already occupies this tile"  << std::endl;}
             }
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
@@ -253,7 +265,7 @@ void Game::placePiece () {
                         std::cout << "Cannot place piece that would put the king in check" << std::endl;
                     }
                 }
-                else {std::cout << "A piece already occupies " << inp << std::endl;}
+                else {std::cout << "A piece already occupies this tile"  << std::endl;}
             }
             else {std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;}
         }
@@ -274,9 +286,9 @@ void Game::defaultSetup () {
     *head = new Knight {*head, 6, 0, 'w'};
     *head = new Bishop {*head, 2, 0, 'w'};
     *head = new Bishop {*head, 5, 0, 'w'};
-    *head = new Queen {*head, 3, 0, 'w'};
-    *head = new King {*head, 4, 0, 'w'};
-    white_king.first = 4;
+    *head = new Queen {*head, 4, 0, 'w'};
+    *head = new King {*head, 3, 0, 'w'};
+    white_king.first = 3;
     white_king.second = 0;
     // setup black pieces
     for (int i = 0; i < 8; i++) {
@@ -297,6 +309,7 @@ void Game::defaultSetup () {
 }
 
 void Game::customSetup () {
+    gm->displayBoard();
     std::string inp;
     while (std::cin >> inp) {
         if (inp == "--help") {
@@ -320,10 +333,14 @@ void Game::customSetup () {
         else if (inp == "=") {
             if (std::cin >> inp) {
                 if (inp == "white") move = 0;
-                else move = 1;
+                else if (inp == "black") move = 1;
+                else {
+                    std::cout << inp << " not one of <white> or <black>" << std::endl;
+                }
             }
         }
         else if (inp == "done") {
+            std::cout << "Custom setup finished" << std::endl;
             if (black_king.first == -1 || black_king.second == -1) {
                 std::cout << "Cannot exit - Black King not placed" << std::endl;
                 gm->displayBoard();
@@ -356,29 +373,29 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
     if ((x2 - x1 == 0) && (y1 + dir + dir == y2) && (*head)->getFirstMove(x1, y1)) { // double pawn first mov
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2); 
-        // if (this->isCheck(team)) {
-        //     (*head)->move(x2, y2, x1, y1);
-        //     this->setAlive(x2, y2);
-        //     return false;
-        // }
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            this->setAlive(x2, y2);
+            return false;
+        }
     }
     else if (x2 - x1 == 0 && (y1 + dir == y2)) { // normal pawn move
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2); 
-        // if (this->isCheck(team)) {
-        //     (*head)->move(x2, y2, x1, y1);
-        //     this->setAlive(x2, y2);
-        //     return false;
-        // }
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            this->setAlive(x2, y2);
+            return false;
+        }
     }
     else if ((x2 - x1 == 1 || x2 - x1 == -1) && (y1 + dir == y2) && ((*head)->getTile(x2, y2) != ' ')) { // diagonal pawn move
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
-        // if (this->isCheck(team)) {
-        //     (*head)->move(x2, y2, x1, y1);
-        //     this->setAlive(x2, y2);
-        //     return false;
-        // }
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            this->setAlive(x2, y2);
+            return false;
+        }
     }
     else {
         return false;
@@ -440,11 +457,11 @@ bool Game::rookValidMove(int x1, int y1, int x2, int y2) {
         }
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
-        // if (this->isCheck(team)) {
-        //     (*head)->move(x2, y2, x1, y1);
-        //     this->setAlive(x2, y2);
-        //     return false;
-        // }
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            this->setAlive(x2, y2);
+            return false;
+        }
         (*head)->setFirstMove(x2, y2);
         return true;
     }
@@ -457,24 +474,24 @@ bool Game::knightValidMove(int x1, int y1, int x2, int y2) {
     if ((newX == 1 || newX == -1) && (newY == 2 || newY == -2)) {
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
-        // if (this->isCheck(team)) {
-        //     (*head)->move(x2, y2, x1, y1);
-        //     this->setAlive(x2, y2);
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            this->setAlive(x2, y2);
             
-        //     return false;
-        // }
+            return false;
+        }
         (*head)->setFirstMove(x2, y2);
         return true;
     }
     else if ((newX == 2 || newX == -2) && (newY == 1 || newY == -1)) {
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
-        // if (this->isCheck(team)) {
-        //     (*head)->move(x2, y2, x1, y1);
-        //     this->setAlive(x2, y2);
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            this->setAlive(x2, y2);
             
-        //     return false;
-        // }
+            return false;
+        }
         (*head)->setFirstMove(x2, y2);
         return true;
     }
@@ -500,20 +517,18 @@ bool Game::bishopValidMove(int x1, int y1, int x2, int y2) {
         for (int i = x1; i != x2; i += delta_x) {
             int j = i - delta_x - x1 + y1 + delta_y;
             char tile = (*head)->getTile(i, j);
-            std::cout << "i=" << i << " j=" << j <<std::endl;
             if (tile != ' ' && tile != '_' && i != x1 && j != y1) {
-                std::cout << "here tile=" << tile << std::endl;
                 return false;
             }
         }
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
-        // if (this->isCheck(team)) {
-        //     (*head)->move(x2, y2, x1, y1);
-        //     this->setAlive(x2, y2);
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            this->setAlive(x2, y2);
             
-        //     return false;
-        // }
+            return false;
+        }
         return true;
     }
 }
@@ -535,12 +550,12 @@ bool Game::kingValidMove(int x1, int y1, int x2, int y2, bool castle) {
         }
         (*head)->move(x2, y2, -1, -1);
         (*head)->move(x1, y1, x2 - dir, y2);
-        // if (this->isCheck(team)) {
-        //     (*head)->move(x2, y2, x1, y1);
-        //     (*head)->move(-1, -1, x2, y2);
-        //     this->setAlive(x2, y2);
-        //     return false;
-        // }
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            (*head)->move(-1, -1, x2, y2);
+            this->setAlive(x2, y2);
+            return false;
+        }
         (*head)->move(-1, -1, x1 + dir, y1);
         (*head)->setFirstMove(x2, y2);
         return true;
@@ -551,11 +566,11 @@ bool Game::kingValidMove(int x1, int y1, int x2, int y2, bool castle) {
     if ((newX == 0 || newX == 1) && (newY == 0 || newY == 1)) {
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
-        // if (this->isCheck(team)) {
-        //     (*head)->move(x2, y2, x1, y1);
-        //     this->setAlive(x2, y2);
-        //     return false;
-        // }
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            this->setAlive(x2, y2);
+            return false;
+        }
         (*head)->setFirstMove(x2, y2);
 	    return true;
     }
@@ -564,7 +579,7 @@ bool Game::kingValidMove(int x1, int y1, int x2, int y2, bool castle) {
 
 bool Game::validMove (int x1, int y1, int x2, int y2) {
     if (0 > x1 || x1 > col || 0 > y1 || y1 > row || 0 > x2 || x2 > col || 0 > y2 || y2 > row) {
-        std::cout << "Valid Move 1\n";
+        //std::cout << "Valid Move 1\n";
         return false;
     }
     char piece1 = (*head)->getTile(x1, y1);
@@ -579,7 +594,7 @@ bool Game::validMove (int x1, int y1, int x2, int y2) {
         return kingValidMove(x1, y1, x2, y2, true);
     }
     if ((team1 == team2) || (move % 2 == 0 && team1 != 'w') || (move % 2 == 1 && team1 != 'b'))  { // trying to move invalid piece
-        std::cout << "Valid Move 2" << (team1 == team2) << (move % 2 == 0 && team1 != 'w') << (move % 2 == 1 && team1 != 'b') << std::endl;
+        //std::cout << "Valid Move 2" << (team1 == team2) << (move % 2 == 0 && team1 != 'w') << (move % 2 == 1 && team1 != 'b') << std::endl;
         return false;
     }
     char piece = (*head)->getTile(x1, y1);
@@ -602,7 +617,7 @@ bool Game::validMove (int x1, int y1, int x2, int y2) {
         return kingValidMove(x1, y1, x2, y2);
     }
     else {
-        std::cout << "Valid Move 3\n";
+        //std::cout << "Valid Move 3\n";
         return false;
     }
 }
@@ -621,8 +636,11 @@ bool Game::isCheck (char team) {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
             char tile = (*head)->getTeam(j, i);
-            if (tile != ' ' && tile != team) {
-                if (this->validMove(j, i, x, y)) return true;
+            if (tile != ' ' && tile != '_' && tile != team) {
+                if (this->validMove(j, i, x, y)) {
+                    (*head)->move(x, y, j, i);
+                    return true;
+                }
             }
         }
     }
@@ -635,7 +653,10 @@ bool Game::isCheckmate (char team) {
             for (int k = 0; k < row; k++) {
                 for (int l = 0; l < col; l++) {
                     char tile = (*head)->getTeam(j, i);
-                    if (tile != ' ' && tile != team && this->validMove(j, i, l, k)) return false;
+                    if (tile != ' ' && tile != '_' && this->validMove(j, i, l, k)) {
+                        (*head)->move(l, k, j, i);
+                        return false;
+                    }
                 }
             }
         }
@@ -650,7 +671,10 @@ bool Game::isStalemate() {
             if (tile == ' ' || tile == '_') continue;
             for (int k = 0; k < row; k++) {
                 for (int l = 0; l < col; l++) {
-                    if (this->validMove(j, i, l, k)) return false;
+                    if (this->validMove(j, i, l, k)) {
+                        (*head)->move(l, k, j, i);
+                        return false;
+                    }
                 }
             }
         }
@@ -671,29 +695,28 @@ char Game::playGame () {
         	player = player2;
             std::cout << "Black's turn" << std::endl;
         } 
-        if (std::cin >> inp) { /*
+        if (std::cin >> inp) {
             if (this->isStalemate()) {
-                std::cout << "stalemate" << std::endl;
+                std::cout << "Stalemate!" << std::endl;
                 move = 0;
                 return 'd';
             }
-            else if (this->isCheckmate('w')) {
-                std::cout << "Black checkmates White" << std::endl;
+            if (this->isCheckmate('w')) {
+                std::cout << "Black checkmates White!" << std::endl;
                 move = 0;
                 return 'b';
             }
-            else if (this->isCheckmate('b')) {
-                std::cout << "White checkmates Black << std::endl;
+            if (this->isCheckmate('b')) {
+                std::cout << "White checkmates Black!" << std::endl;
                 move = 0;
                 return 'w';
             } 
-            else if (this->isCheck('w')){
-                std::cout << "Black checks White" << std::endl;
+            if (this->isCheck('w')){
+                std::cout << "Black checks White!" << std::endl;
             }
-            else if (this->isCheck('b')) {
-                std::cout << "White checks Black" << std::endl;
+            if (this->isCheck('b')) {
+                std::cout << "White checks Black!" << std::endl;
             }
-            */
             if (inp == "move") {
                 std::pair<int, int> piece = player->getMove();
                 std::pair<int, int> newMove = player->getMove();
