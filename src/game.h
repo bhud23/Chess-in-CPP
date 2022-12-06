@@ -27,6 +27,7 @@ class Game {
     std::pair<int, int> black_king;
     Player *player1;
     Player *player2;
+    std::ostream &out = std::cout;
     private: // for setting up board
         std::pair<int, int> getCoords();
         void placePiece ();

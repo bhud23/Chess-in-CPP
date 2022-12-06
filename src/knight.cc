@@ -23,7 +23,7 @@ void Knight::setDead (int x1, int y1) {
     else { next->setDead(x1, y1); }
 }
 void Knight::setAlive (int x1, int y1) {
-    if (x1 == x && y1 == y && alive) alive = true;
+    if (x1 == x && y1 == y) alive = true;
     else { next->setAlive(x1, y1); }
 }
 char Knight::getTile (int x1, int y1) {

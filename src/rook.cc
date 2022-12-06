@@ -28,7 +28,7 @@ void Rook::setAlive (int x1, int y1) {
 }
 char Rook::getTile (int x1, int y1) {
     if (x1 == x && y1 == y && team == 'w' && alive) return 'r';
-    else if (x1 == x && y1 == y && alive) return 'R';
+    else if (x1 == x && y1 == y) return 'R';
     else return next->getTile(x1, y1);
 }
 void Rook::setFirstMove (int x1, int y1) {

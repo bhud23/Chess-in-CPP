@@ -24,7 +24,7 @@ char Pawn::getTeam (int x1, int y1) {
     else return next->getTeam(x1, y1);
 }
 void Pawn::setDead (int x1, int y1) {
-    if (x1 == x && y1 == y && alive) alive = false;
+    if (x1 == x && y1 == y) alive = false;
     else { next->setDead(x1, y1); }
 }
 void Pawn::setAlive (int x1, int y1) {
