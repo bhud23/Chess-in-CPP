@@ -1,7 +1,7 @@
 #include "game.h"
 
 Game::Game (Board **b, GameManager *gm, Player *player1, Player *player2):
-    move{0}, head{b}, gm{gm}, white_king{-1, -1}, black_king{-1, -1}, player1{player1}, player2{player2} {}
+    move{0}, head{b}, gm{gm}, stack{}, white_king{-1, -1}, black_king{-1, -1}, player1{player1}, player2{player2} {}
 
 
 Game::~Game () {
@@ -415,6 +415,12 @@ bool Game::rookValidMove(int x1, int y1, int x2, int y2) {
         }
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            this->setAlive(x2, y2);
+            std::cout << "3\n";
+            return false;
+        }
         return true;
     }
     return false;
@@ -426,11 +432,23 @@ bool Game::knightValidMove(int x1, int y1, int x2, int y2) {
     if ((newX == 1 || newX == -1) && (newY == 2 || newY == -2)) {
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            this->setAlive(x2, y2);
+            std::cout << "3\n";
+            return false;
+        }
         return true;
     }
     else if ((newX == 2 || newX == -2) && (newY == 1 || newY == -1)) {
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            this->setAlive(x2, y2);
+            std::cout << "3\n";
+            return false;
+        }
         return true;
     }
     else return false;
@@ -458,6 +476,12 @@ bool Game::bishopValidMove(int x1, int y1, int x2, int y2) {
         }
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            this->setAlive(x2, y2);
+            std::cout << "3\n";
+            return false;
+        }
         return true;
     }
 }
@@ -477,6 +501,12 @@ bool Game::kingValidMove(int x1, int y1, int x2, int y2) {
     if ((newX == 0 || newX == 1) && (newY == 0 || newY == 1)) {
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            this->setAlive(x2, y2);
+            std::cout << "3\n";
+            return false;
+        }
 	return true;
     }
     else return false;
@@ -579,9 +609,9 @@ char Game::playGame () {
         else if (move % 2 == 1) {
         	player = player2;
             std::cout << "Black's turn" << std::endl;
-        }
-        if (std::cin >> inp) {
-            /* if (this->isStalemate()) {
+        } 
+        if (std::cin >> inp) { /*
+            if (this->isStalemate()) {
                 move = 0;
                 return 'd';
             }
@@ -602,6 +632,8 @@ char Game::playGame () {
                 }
                 else {
                     move++;
+                    std::pair<std::pair<int,int>, std::pair<int,int>> *fullMove = new std::pair<std::pair<int,int>, std::pair<int,int>> {piece, newMove};
+                    stack.push(fullMove);
                     gm->displayBoard();
                 }
             }
@@ -618,23 +650,22 @@ char Game::playGame () {
                 }
             }
             else if (inp == "undo") {
-                if (move % 2 == 0) {
+                if ((move + 1) % 2 == 0) {
                     std::cout << "undoing White's move" << std::endl;
-		    continue;
                 }
                 else {
                     std::cout << "undoing Black's move" << std::endl;
-		    continue;
                 }
+                std::pair<std::pair<int,int>, std::pair<int,int>> *oldMove = stack.pop();
+                (*head)->move((*oldMove).second.first, (*oldMove).second.second, (*oldMove).first.first, (*oldMove).first.second);
                 gm->displayBoard();
-                // undo the move
             }
             else if (inp == "--help") {
                 std::cout << "Commands:" << std::endl;
                 std::cout << "- move <coordinate> <coordinate>" << std::endl;
                 std::cout << "\twhere <coordinate> is composed of a letter a-h and number 1-8" << std::endl;
                 std::cout << " - resign" << std::endl;
-		continue;
+                std::cout << " - undo" << std::endl;
             }
             else {
                 std::cout << " Invalid input " << inp << " use --help for more options" << std::endl; 

@@ -10,6 +10,7 @@
 #include "king.h"
 #include "gamemanager.h"
 #include "player.h"
+#include "stack.h"
 
 #include <utility>
 #include <iostream>
@@ -21,6 +22,7 @@ class Game {
     int col = 7;
     Board **head;
     GameManager *gm;
+    Stack stack;
     std::pair<int, int> white_king;
     std::pair<int, int> black_king;
     Player *player1;
