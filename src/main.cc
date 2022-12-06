@@ -28,45 +28,51 @@ int main (int arc, char **argv) {
     int white_score = 0;
     int black_score = 0;
 
-    Board *head = new Blank{}; // like the canvas
-    GameManager *gm = new GameManager{&head}; // like the studio
-    Game game {&head, gm, nullptr, nullptr};
     std::string inp;
-    game.setPlayer1(new Human{});
-    game.setPlayer2(new Human{});
+    Board *head = nullptr;
+    GameManager *gm = nullptr;
+    Game *game = nullptr;
+    Observer *txt = nullptr;
+    //Observer *graph = nullptr;
 
-
-    Observer *txt = new TextDisplay {*gm, 8, 8, 8};
-    gm->attach(txt);
-    //Observer *graph = new GraphicDisplay {*gm, 8, 8};
-    //gm->attach(graph);
-    
     std::cout << "Welcome to Chess - the CS246 orignal game" << std::endl;
     std::cout << "Use the command --help at any time to display your current options" << std::endl;
     while (std::cin >> inp) {
-        // if move % 2 == 1, then it is whites turn, blacks turn otherwise
         if (inp == "game") {
             if (!setup) {
                 std::cout << "The game must be setup before continuing." << std::endl;
             }
             else {
-                char res = game.playGame();
+                char res = game->playGame();
                 if (res == 'w') {
                     white_score++;
                 }
                 else if (res == 'b') {
                     black_score++;
                 }
+                delete game;
+                setup = false;
+                std::cout << "Setup another game to continue playing UwU" << std::endl;
             }
         }
         else if (inp == "setup") {
+            head = new Blank{};
+            gm = new GameManager{&head};
+            game = new Game {&head, gm, nullptr, nullptr};
+            game->setPlayer1(new Human{});
+            game->setPlayer2(new Human{});
+            txt = new TextDisplay {*gm, 8, 8, 8};
+            gm->attach(txt);
+            //graph = new GraphicDisplay {*gm, 8, 8};
+            //gm->attach(graph);
+
 	        std::cin >> inp;
             if (inp == "default") {
-                game.defaultSetup();
+                game->defaultSetup();
                 setup = true;
             }
             else if (inp == "custom") {
-                game.customSetup();
+                game->customSetup();
                 setup = true;
             }
             else {

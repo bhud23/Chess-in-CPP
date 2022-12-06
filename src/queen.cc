@@ -31,9 +31,19 @@ char Queen::getTile (int x1, int y1 ) {
     else if (x1 == x && y1 == y && alive) return 'Q';
     else return next->getTile(x1, y1);
 }
-void Queen::setFirstMove (int x, int y) {
-    first_move = false;
+void Queen::setFirstMove (int x1, int y1) {
+    if (x == x1 && y == y1) {
+        first_move = false;
+    }
+    else {
+        return next->setFirstMove(x1, y1);
+    }
 }
-bool Queen::getFirstMove (int x, int y) {
-    return first_move;
+bool Queen::getFirstMove (int x1, int y1) {
+    if (x == x1 && y == y1) {
+        return first_move;
+    }
+    else {
+        return next->getFirstMove(x1, y1);
+    }
 }

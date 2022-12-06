@@ -353,35 +353,32 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
     char team = (*head)->getTeam(x1, y1);
     int dir = 1;
     if (team == 'b') dir = -1;
-    if ((x2 - x1 == 0) && (y1 + dir + dir == y2) && (*head)->getFirstMove(x1, y1)) { // double pawn first move
-        std::cout << "here\n";
+    if ((x2 - x1 == 0) && (y1 + dir + dir == y2) && (*head)->getFirstMove(x1, y1)) { // double pawn first mov
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2); 
-        if (this->isCheck(team)) {
-            (*head)->move(x2, y2, x1, y1);
-            this->setAlive(x2, y2);
-            return false;
-        }
+        // if (this->isCheck(team)) {
+        //     (*head)->move(x2, y2, x1, y1);
+        //     this->setAlive(x2, y2);
+        //     return false;
+        // }
     }
     else if (x2 - x1 == 0 && (y1 + dir == y2)) { // normal pawn move
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2); 
-        if (this->isCheck(team)) {
-            (*head)->move(x2, y2, x1, y1);
-            this->setAlive(x2, y2);
-            
-            return false;
-        }
+        // if (this->isCheck(team)) {
+        //     (*head)->move(x2, y2, x1, y1);
+        //     this->setAlive(x2, y2);
+        //     return false;
+        // }
     }
     else if ((x2 - x1 == 1 || x2 - x1 == -1) && (y1 + dir == y2) && ((*head)->getTile(x2, y2) != ' ')) { // diagonal pawn move
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
-        if (this->isCheck(team)) {
-            (*head)->move(x2, y2, x1, y1);
-            this->setAlive(x2, y2);
-            
-            return false;
-        }
+        // if (this->isCheck(team)) {
+        //     (*head)->move(x2, y2, x1, y1);
+        //     this->setAlive(x2, y2);
+        //     return false;
+        // }
     }
     else {
         return false;
@@ -414,6 +411,7 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
             }
         }
     }
+    (*head)->setFirstMove(x2, y2);
     return true;
 }
 
@@ -435,12 +433,12 @@ bool Game::rookValidMove(int x1, int y1, int x2, int y2) {
         }
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
-        if (this->isCheck(team)) {
-            (*head)->move(x2, y2, x1, y1);
-            this->setAlive(x2, y2);
-            
-            return false;
-        }
+        // if (this->isCheck(team)) {
+        //     (*head)->move(x2, y2, x1, y1);
+        //     this->setAlive(x2, y2);
+        //     return false;
+        // }
+        (*head)->setFirstMove(x2, y2);
         return true;
     }
     return false;
@@ -452,23 +450,25 @@ bool Game::knightValidMove(int x1, int y1, int x2, int y2) {
     if ((newX == 1 || newX == -1) && (newY == 2 || newY == -2)) {
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
-        if (this->isCheck(team)) {
-            (*head)->move(x2, y2, x1, y1);
-            this->setAlive(x2, y2);
+        // if (this->isCheck(team)) {
+        //     (*head)->move(x2, y2, x1, y1);
+        //     this->setAlive(x2, y2);
             
-            return false;
-        }
+        //     return false;
+        // }
+        (*head)->setFirstMove(x2, y2);
         return true;
     }
     else if ((newX == 2 || newX == -2) && (newY == 1 || newY == -1)) {
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
-        if (this->isCheck(team)) {
-            (*head)->move(x2, y2, x1, y1);
-            this->setAlive(x2, y2);
+        // if (this->isCheck(team)) {
+        //     (*head)->move(x2, y2, x1, y1);
+        //     this->setAlive(x2, y2);
             
-            return false;
-        }
+        //     return false;
+        // }
+        (*head)->setFirstMove(x2, y2);
         return true;
     }
     else return false;
@@ -496,12 +496,12 @@ bool Game::bishopValidMove(int x1, int y1, int x2, int y2) {
         }
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
-        if (this->isCheck(team)) {
-            (*head)->move(x2, y2, x1, y1);
-            this->setAlive(x2, y2);
+        // if (this->isCheck(team)) {
+        //     (*head)->move(x2, y2, x1, y1);
+        //     this->setAlive(x2, y2);
             
-            return false;
-        }
+        //     return false;
+        // }
         return true;
     }
 }
@@ -523,13 +523,15 @@ bool Game::kingValidMove(int x1, int y1, int x2, int y2, bool castle) {
         }
         (*head)->move(x2, y2, -1, -1);
         (*head)->move(x1, y1, x2, y2);
-        if (this->isCheck(team)) {
-            (*head)->move(x2, y2, x1, y1);
-            (*head)->move(-1, -1, x2, y2);
-            this->setAlive(x2, y2);
-            return false;
-        }
+        // if (this->isCheck(team)) {
+        //     (*head)->move(x2, y2, x1, y1);
+        //     (*head)->move(-1, -1, x2, y2);
+        //     this->setAlive(x2, y2);
+        //     return false;
+        // }
         (*head)->move(-1, -1, x1, y1);
+        (*head)->setFirstMove(x2, y2);
+        return true;
     }
     if (newX < 0) newX *= -1;
     if (newY < 0) newY *= -1;
@@ -537,13 +539,13 @@ bool Game::kingValidMove(int x1, int y1, int x2, int y2, bool castle) {
     if ((newX == 0 || newX == 1) && (newY == 0 || newY == 1)) {
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2);
-        if (this->isCheck(team)) {
-            (*head)->move(x2, y2, x1, y1);
-            this->setAlive(x2, y2);
-            
-            return false;
-        }
-	return true;
+        // if (this->isCheck(team)) {
+        //     (*head)->move(x2, y2, x1, y1);
+        //     this->setAlive(x2, y2);
+        //     return false;
+        // }
+        (*head)->setFirstMove(x2, y2);
+	    return true;
     }
     else return false;
 }
@@ -555,21 +557,16 @@ bool Game::validMove (int x1, int y1, int x2, int y2) {
     }
     char piece1 = (*head)->getTile(x1, y1);
     char piece2 = (*head)->getTile(x2, y2);
-    char team1 = 'w';
-    char team2 = 'w';
-    if ('A' <= team1 && team1 <= 'Z'){
-        team1 = 'b';
-    }
-    if ('A' <= team2 && team2 <= 'Z') {
-        team2 = 'b';
-    }
+    char team1 = (*head)->getTeam(x1, y1);
+    char team2 = (*head)->getTeam(x2, y2);
+
     if (piece1 == 'k' && piece2 == 'r'){
         return kingValidMove(x1, y1, x2, y2, true);
     }
     else if (piece1 == 'K' && piece2 == 'R') {
         return kingValidMove(x1, y1, x2, y2, true);
     }
-    if ((team1 == team2) || (move % 2 == 0 && team1 == 'b') || (move % 2 == 1 && team1 == 'w'))  {
+    if ((team1 == team2) || (move % 2 == 0 && team1 != 'w') || (move % 2 == 1 && team1 != 'b'))  { // trying to move invalid piece
         return false;
     }
     char piece = (*head)->getTile(x1, y1);
