@@ -16,7 +16,7 @@ class TextDisplay : public Observer {
     TextDisplay (GameManager &game, int row, int col, int sidenums);
     ~TextDisplay () = default;
     private:
-    void display() override;
+        void display() override;
 };
 
 

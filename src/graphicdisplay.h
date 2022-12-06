@@ -15,7 +15,7 @@ class GraphicDisplay : public Observer {
         GraphicDisplay (GameManager &game, int width, int height);
         ~GraphicDisplay () = default;
     private:
-	void display () override;
+	    void display () override;
 };
 
 #endif
