@@ -32,6 +32,8 @@ int main (int arc, char **argv) {
     GameManager *gm = new GameManager{&head}; // like the studio
     Game game {&head, gm, nullptr, nullptr};
     std::string inp;
+    game.setPlayer1(new Human{});
+    game.setPlayer2(new Human{});
 
 
     Observer *txt = new TextDisplay {*gm, 8, 8, 8};
@@ -47,36 +49,29 @@ int main (int arc, char **argv) {
             if (!setup) {
                 std::cout << "The game must be setup before continuing." << std::endl;
             }
-	    else {
-		game.setPlayer1(new Human{});
-		game.setPlayer2(new Human{});
-		char res = game.playGame();
-		if (res == 'w') {
-			white_score++;
-			std::cout << "White wins" << std::endl;
-		}
-		else if (res == 'b') {
-			black_score++;
-			std::cout << "Black wins" << std::endl;
-		}
-		else {
-			std::cout << "Draw" << std::endl;
-		}
-	    }
+            else {
+                char res = game.playGame();
+                if (res == 'w') {
+                    white_score++;
+                }
+                else if (res == 'b') {
+                    black_score++;
+                }
+            }
         }
         else if (inp == "setup") {
 	        std::cin >> inp;
-		if (inp == "default") {
-			game.defaultSetup();
-            setup = true;
-		}
-		else if (inp == "custom") {
-			game.customSetup();
-            setup = true;
-		}
-		else {
-			std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
-		}	
+            if (inp == "default") {
+                game.defaultSetup();
+                setup = true;
+            }
+            else if (inp == "custom") {
+                game.customSetup();
+                setup = true;
+            }
+            else {
+                std::cout << "Invalid command " << inp << " use --help for more options" << std::endl;
+            }	
         }
         else if (inp == "--help") {
             std::cout << "Commands:" << std::endl;

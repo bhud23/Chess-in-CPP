@@ -353,7 +353,17 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
     char team = (*head)->getTeam(x1, y1);
     int dir = 1;
     if (team == 'b') dir = -1;
-    if (x2 - x1 == 0 && (y1 + dir == y2)) { // || x2 - x1 == 1 || x2 - x1 == -1)
+    if (x2 - x1 == 0 && (y1 + dir == y2)) { // normal pawn move
+        this->setDead(x2, y2);
+        (*head)->move(x1, y1, x2, y2); 
+        if (this->isCheck(team)) {
+            (*head)->move(x2, y2, x1, y1);
+            this->setAlive(x2, y2);
+            std::cout << "3\n";
+            return false;
+        }
+    }
+    else if ((x2 - x1 == 1 || x2 - x1 == -1) && (y1 + dir == y2) && ((*head)->getTile(x2, y2) != ' ')) { // diagonal pawn move
         this->setDead(x2, y2);
         (*head)->move(x1, y1, x2, y2); 
         if (this->isCheck(team)) {
