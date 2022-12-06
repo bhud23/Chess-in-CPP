@@ -31,3 +31,9 @@ char Rook::getTile (int x1, int y1) {
     else if (x1 == x && y1 == y && alive) return 'R';
     else return next->getTile(x1, y1);
 }
+void Rook::setFirstMove (int x, int y) {
+    first_move = false;
+}
+bool Rook::getFirstMove (int x, int y) {
+    return first_move;
+}

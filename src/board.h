@@ -10,6 +10,8 @@ class Board {
         virtual void setDead (int x, int y) = 0;
         virtual void setAlive (int x, int y) = 0; 
         virtual char getTile (int x, int y) = 0;
+        virtual void setFirstMove (int x, int y) = 0;
+        virtual bool getFirstMove (int x, int y) = 0;
         virtual ~Board () = default;
 };
 

@@ -31,3 +31,10 @@ char Knight::getTile (int x1, int y1) {
     else if (x1 == x && y1 == y && alive) return 'N';
     else return next->getTile(x1, y1);
 }
+void Knight::setFirstMove (int x, int y) {
+    first_move = false;
+}
+
+bool Knight::getFirstMove (int x, int y) {
+    return first_move;
+}

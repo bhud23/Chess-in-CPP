@@ -32,3 +32,9 @@ char Bishop::getTile (int x1, int y1) {
     else if (x1 == x && y1 == y && alive) return 'B';
     else return next->getTile(x1, y1);
 }
+void Bishop::setFirstMove (int x, int y) {
+    first_move = false;
+}
+bool Bishop::getFirstMove (int x, int y) {
+    return first_move;
+}
