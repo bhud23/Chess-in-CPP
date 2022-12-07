@@ -12,7 +12,7 @@
 #include "queen.h"
 #include "king.h"
 #include "observer.h"
-//#include "graphicdisplay.h"
+#include "graphicdisplay.h"
 #include "textdisplay.h"
 #include "player.h"
 #include "human.h"
