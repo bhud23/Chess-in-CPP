@@ -371,7 +371,6 @@ void Game::setDead (int x1, int y1) {
 }
 
 bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
-    out << "pawn valid move x1=" << x1 << " y1=" << y1 << " x2=" << x2 << " y2=" << y2 << std::endl;
     char team = (*head)->getTeam(x1, y1);
     char targ = (*head)->getTile(x2, y2);
     int dir = 1;
@@ -622,7 +621,6 @@ bool Game::kingValidMove(int x1, int y1, int x2, int y2, bool castle) {
 
 bool Game::validMove (int x1, int y1, int x2, int y2) {
     if (0 > x1 || x1 > col || 0 > y1 || y1 > row || 0 > x2 || x2 > col || 0 > y2 || y2 > row) {
-        out << "Valid move 1\n";
         return false;
     }
     char piece1 = (*head)->getTile(x1, y1);
@@ -636,8 +634,7 @@ bool Game::validMove (int x1, int y1, int x2, int y2) {
     else if (piece1 == 'K' && piece2 == 'R') {
         return kingValidMove(x1, y1, x2, y2, true);
     }
-    if (team1 == team2)  { // trying to move invalid piece ) || (move % 2 == 0 && team1 != 'w') || (move % 2 == 1 && team1 != 'b')
-        out << "Valid move 2\n";
+    if ((team1 == team2) || (move % 2 == 0 && team1 != 'w') || (move % 2 == 1 && team1 != 'b'))  {
         return false;
     }
     char piece = (*head)->getTile(x1, y1);
@@ -660,7 +657,6 @@ bool Game::validMove (int x1, int y1, int x2, int y2) {
         return kingValidMove(x1, y1, x2, y2);
     }
     else {
-        out << "Valid move 3\n";
         return false;
     }
 }
@@ -698,12 +694,14 @@ bool Game::isCheck (char team) {
 }
 
 bool Game::isStalemate(char team) {
+    return false;
     if (team == 'w') move = 0;
     else if (team == 'b') move = 1;
     for (int i = 0; i < row; i++){
         for (int j = 0; j < col; j++){
             for (int k = 0; k < row; k++){
                 for (int l  = 0; l < col; l++){
+                    out << "i=" << i << " j=" << j << " k=" << k << " l=" << l << std::endl;
                     char tile = (*head)->getTile(l, k);
                     if (tile != ' ' && tile != ' ' && tile == team) {
                         if (this->validMove(l, k, j, i)) {
@@ -718,7 +716,7 @@ bool Game::isStalemate(char team) {
                             move--;
                         }
                     }
-                }
+                }   
             }
         }
     }

@@ -12,6 +12,6 @@ std::pair<int, int> Human::getMove () {
     }
     else {
     	std::cout << "Could not interpret " << inp << std::endl;
-    }
+    }tile != ' '
     return res;
 }

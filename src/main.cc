@@ -63,8 +63,8 @@ int main (int arc, char **argv) {
             game->setPlayer2(new Human{});
             txt = new TextDisplay {*gm, 8, 8, 8};
             gm->attach(txt);
-            //graph = new GraphicDisplay {*gm, 8, 8};
-            //gm->attach(graph);
+            graph = new GraphicDisplay {*gm, 8, 8};
+            gm->attach(graph);
 
 	        std::cin >> inp;
             if (inp == "default") {
