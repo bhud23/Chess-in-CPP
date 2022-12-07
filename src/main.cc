@@ -33,7 +33,7 @@ int main (int arc, char **argv) {
     GameManager *gm = nullptr;
     Game *game = nullptr;
     Observer *txt = nullptr;
-    //Observer *graph = nullptr;
+    Observer *graph = nullptr;
 
     std::cout << "Welcome to Chess - the CS246 orignal game" << std::endl;
     std::cout << "Use the command --help at any time to display your current options" << std::endl;
