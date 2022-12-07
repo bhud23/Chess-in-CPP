@@ -18,8 +18,8 @@
 
 class Game {
     int move;
-    int row = 7;
-    int col = 7;
+    int row = 8;
+    int col = 8;
     Board **head;
     GameManager *gm;
     Stack stack;
@@ -47,7 +47,7 @@ class Game {
         std::pair<int, int> kingCoords (char team);
         bool isCheck (char team);
         bool isCheckmate (char team);
-        bool isStalemate ();
+        bool isStalemate (char team);
         bool validMove(int x1, int y1, int x2, int y2);
     public:
         Game (Board **b, GameManager *gm, Player *player1, Player *player2);

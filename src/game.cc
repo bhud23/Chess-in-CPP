@@ -387,7 +387,7 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
         }
         if (targ == 'k' || targ == 'K'){
             (*head)->move(x2, y2, x1, y1);
-            (*head)->setAlive(x2, y2);
+            this->setAlive(x2, y2);
             return true;
         }
     }
@@ -401,7 +401,7 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
         }
         if (targ == 'k' || targ == 'K'){
             (*head)->move(x2, y2, x1, y1);
-            (*head)->setAlive(x2, y2);
+            this->setAlive(x2, y2);
             return true;
         }
     }
@@ -415,7 +415,7 @@ bool Game::pawnValidMove(int x1, int y1, int x2, int y2) {
         }
         if (targ == 'k' || targ == 'K'){
             (*head)->move(x2, y2, x1, y1);
-            (*head)->setAlive(x2, y2);
+            this->setAlive(x2, y2);
             return true;
         }
     }
@@ -526,7 +526,7 @@ bool Game::knightValidMove(int x1, int y1, int x2, int y2) {
         }
         if (targ == 'k' || targ == 'K'){
             (*head)->move(x2, y2, x1, y1);
-            (*head)->setAlive(x2, y2);
+            this->setAlive(x2, y2);
             return true;
         }
         (*head)->setFirstMove(x2, y2);
@@ -569,9 +569,10 @@ bool Game::bishopValidMove(int x1, int y1, int x2, int y2) {
         }
         if (targ == 'k' || targ == 'K'){
             (*head)->move(x2, y2, x1, y1);
-            (*head)->setAlive(x2, y2);
+            this->setAlive(x2, y2);
             return true;
         }
+        (*head)->setFirstMove(x2, y2);
         return true;
     }
 }
@@ -622,7 +623,6 @@ bool Game::kingValidMove(int x1, int y1, int x2, int y2, bool castle) {
 
 bool Game::validMove (int x1, int y1, int x2, int y2) {
     if (0 > x1 || x1 > col || 0 > y1 || y1 > row || 0 > x2 || x2 > col || 0 > y2 || y2 > row) {
-        //out << "Valid Move 1\n";
         return false;
     }
     char piece1 = (*head)->getTile(x1, y1);
@@ -637,7 +637,6 @@ bool Game::validMove (int x1, int y1, int x2, int y2) {
         return kingValidMove(x1, y1, x2, y2, true);
     }
     if ((team1 == team2) || (move % 2 == 0 && team1 != 'w') || (move % 2 == 1 && team1 != 'b'))  { // trying to move invalid piece
-        //out << "Valid Move 2" << (team1 == team2) << (move % 2 == 0 && team1 != 'w') << (move % 2 == 1 && team1 != 'b') << std::endl;
         return false;
     }
     char piece = (*head)->getTile(x1, y1);
@@ -660,7 +659,6 @@ bool Game::validMove (int x1, int y1, int x2, int y2) {
         return kingValidMove(x1, y1, x2, y2);
     }
     else {
-        //out << "Valid Move 3\n";
         return false;
     }
 }
@@ -668,7 +666,7 @@ bool Game::validMove (int x1, int y1, int x2, int y2) {
 bool Game::isCheck (char team) {
     int x = -1;
     int y = -1;
-    if (team == 'b') {
+    if (team == 'w') {
         x = white_king.first;
         y = white_king.second;
     }
@@ -679,51 +677,38 @@ bool Game::isCheck (char team) {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
             char tile = (*head)->getTeam(j, i);
-            if (tile != ' ' && tile != '_') {
+            if (tile != ' ' && tile != '_' && tile != team) {
+                move++;
                 if (this->validMove(j, i, x, y)) {
-                    (*head)->move(x, y, j, i);
-                    (*head)->setAlive(x, y);
+                    move--;
                     return true;
                 }
+                move--;
             }
         }
     }
     return false;
 }
 
-bool Game::isCheckmate (char team) {
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < col; j++) {
-            for (int k = 0; k < row; k++) {
-                for (int l = 0; l < col; l++) {
-                    char tile = (*head)->getTeam(j, i);
-                    if (tile != ' ' && tile != '_' && this->validMove(j, i, l, k)) {
-                        (*head)->move(l, k, j, i);
-                        return false;
+bool Game::isStalemate(char team) {
+    for (int i = 0; i < row; i++){
+        for (int j = 0; j < col; j++){
+            for (int k = 0; k < row; k++){
+                for (int l  = 0; l < col; l++){
+                    char tile = (*head)->getTile(l, k);
+                    if (tile != ' ' && tile != ' ' && tile == team) {
+                        if (this->validMove(l, k, j, i)) return false;
                     }
                 }
             }
         }
     }
+    if (this->validMove(1, 0, 2, 0)) return false;
     return true;
 }
 
-bool Game::isStalemate() {
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < col; j++) {
-            char tile = (*head)->getTile(j, i);
-            if (tile == ' ' || tile == '_') continue;
-            for (int k = 0; k < row; k++) {
-                for (int l = 0; l < col; l++) {
-                    if (this->validMove(j, i, l, k)) {
-                        (*head)->move(l, k, j, i);
-                        return false;
-                    }
-                }
-            }
-        }
-    }
-    return true;
+bool Game::isCheckmate (char team) {
+    return isCheck(team) && isStalemate(team);
 }
 
 char Game::playGame () {
@@ -740,27 +725,6 @@ char Game::playGame () {
             out << "Black's turn" << std::endl;
         } 
         if (std::cin >> inp) {
-            if (this->isCheckmate('w')) {
-                out << "Black checkmates White!" << std::endl;
-                move = 0;
-                return 'b';
-            }
-            else if (this->isCheckmate('b')) {
-                out << "White checkmates Black!" << std::endl;
-                move = 0;
-                return 'w';
-            }
-            else if (this->isStalemate()) {
-                out << "Stalemate!" << std::endl;
-                move = 0;
-                return 'd';
-            }
-            else if (this->isCheck('w')){
-                out << "Black checks White!" << std::endl;
-            }
-            else if (this->isCheck('b')) {
-                out << "White checks Black!" << std::endl;
-            }
             if (inp == "move") {
                 std::pair<int, int> piece = player->getMove();
                 std::pair<int, int> newMove = player->getMove();
@@ -773,6 +737,32 @@ char Game::playGame () {
                     std::pair<std::pair<int,int>, std::pair<int,int>> *fullMove = new std::pair<std::pair<int,int>, std::pair<int,int>> {piece, newMove};
                     stack.push(fullMove);
                     gm->displayBoard();
+                    if (this->isCheckmate('w')) {
+                        out << "Black checkmates White!" << std::endl;
+                        move = 0;
+                        return 'b';
+                    }
+                    else if (this->isCheckmate('b')) {
+                        out << "White checkmates Black!" << std::endl;
+                        move = 0;
+                        return 'w';
+                    }
+                    else if (this->isCheck('w')){
+                        out << "Black checks White!" << std::endl;
+                    }
+                    else if (this->isCheck('b')) {
+                        out << "White checks Black!" << std::endl;
+                    }
+                    else if (this->isStalemate('w')) {
+                        out << "Stalemate on White move!" << std::endl;
+                        move = 0;
+                        return 'd';
+                    }
+                    else if (this->isStalemate('b')) {
+                        out << "Stalemate on Black move!" << std::endl;
+                        move = 0;
+                        return 'd';
+                    }
                 }
             }
             else if (inp == "resign") {
