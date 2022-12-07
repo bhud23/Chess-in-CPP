@@ -12,4 +12,5 @@ src/*.o
 src/*.d
 *.swp
 src/chess*
-
+src/cat.txt
+src/cat2.txt
